@@ -6,7 +6,7 @@ class ControllerBien{
     public static function readAll() {
         $tab_b = ModelBien::selectAll(); // stocke tout
         $view = "list";
-        $pageTitle = "Listes des biens de MonSuperVoisin";
+        $pageTitle = "Listes des biens";
         $controller ="bien";
         require_once File::build_path(array("view","view.php"));
     }

@@ -1,6 +1,8 @@
 <?php
 require_once File::build_path(array("model", "ModelService.php"));
 require_once File::build_path(array("controller", "Dispatcher.php"));
+require_once File::build_path(array("lib","Security.php"));
+require_once File::build_path(array("lib","Session.php"));
 
 class ControllerService{
     public static function readAll() {
@@ -12,7 +14,7 @@ class ControllerService{
     }
     
     public static function read() {
-        $s = ModelService::select(Dispatcher::myGet('id'));
+        $s = ModelService::select(Dispatcher::myGet('idService'));
         if ($s != false) {
             $view = "commande";
             $pageTitle = "Service en detail";
@@ -38,7 +40,7 @@ class ControllerService{
     }
     
     public static function update() {
-        $v = ModelService::select(Dispatcher::myGet('id'));
+        $v = ModelService::select(Dispatcher::myGet('idService'));
         if ($v != false) {
             $view = "update";
             $pageTitle = "Modification";
