@@ -2,7 +2,7 @@
 require_once File::build_path(array("model", "ModelService.php"));
 require_once File::build_path(array("controller", "Dispatcher.php"));
 
-class ControllerBien{
+class ControllerService{
     public static function readAll() {
         $tab_s = ModelService::selectAll(); // stocke tout
         $view = "list";
