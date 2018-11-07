@@ -10,20 +10,41 @@
 		// ATTRIBUTS
                 
                 private $idBien;
+                private $titre;
+                private $description;
+                private $tarif;
+                private $motClef;
+                private $estValide;
                 private $lienPhoto;
                 private $prixNeuf;
                 private $estDispo;
 
 		// ACCESSEURS EN ECRITURE/LECTURE
-                
+
                 public function getIdBien() {
                     return $this->idBien;
                 }
 
-                public function setIdBien($idBien) {
-                    $this->idBien = $idBien;
+                public function getTitre() {
+                    return $this->titre;
                 }
-                   
+
+                public function getDescription() {
+                    return $this->description;
+                }
+
+                public function getTarif() {
+                    return $this->tarif;
+                }
+
+                public function getMotClef() {
+                    return $this->motClef;
+                }
+
+                public function getEstValide() {
+                    return $this->estValide;
+                }
+
                 public function getLienPhoto() {
                     return $this->lienPhoto;
                 }
@@ -34,6 +55,30 @@
 
                 public function getEstDispo() {
                     return $this->estDispo;
+                }
+
+                public function setIdBien($idBien) {
+                    $this->idBien = $idBien;
+                }
+
+                public function setTitre($titre) {
+                    $this->titre = $titre;
+                }
+
+                public function setDescription($description) {
+                    $this->description = $description;
+                }
+
+                public function setTarif($tarif) {
+                    $this->tarif = $tarif;
+                }
+
+                public function setMotClef($motClef) {
+                    $this->motClef = $motClef;
+                }
+
+                public function setEstValide($estValide) {
+                    $this->estValide = $estValide;
                 }
 
                 public function setLienPhoto($lienPhoto) {
@@ -48,7 +93,7 @@
                     $this->estDispo = $estDispo;
                 }
 
-                
+                                
 		// METHODES
 
 		// CONSTRUCTEUR(S)
@@ -57,7 +102,11 @@
 		{
                     if(!is_null($titre) && !is_null($description) && !is_null($tarif) && !is_null($motClef) && !is_null($estValide) && !is_null($lienPhoto) && !is_null($prixNeuf) && !is_null($estDispo))
                         {
-                            parent::__construct($titre, $description, $tarif, $motClef, $estValide);
+                            $this->titre = $titre;
+                            $this->description = $description;
+                            $this->tarif = $tarif;
+                            $this->motClef = $motClef;
+                            $this->estValide = $estValide;
                             $this->lienPhoto = $lienPhoto;
                             $this->prixNeuf = $prixNeuf;
                             $this->estDispo = $estDispo;
