@@ -2,7 +2,7 @@
   class Dispatcher {
     
     
-    public function myGet($nomvar){
+    public static function myGet($nomvar){
       
       if(isset($_GET[$nomvar])){
           return $_GET[$nomvar];
@@ -14,5 +14,4 @@
     }
     
   }
-  
-// On ne ferme pas la balise php car la classe est completée et fermée plus tard dans le routeur
+  ?>

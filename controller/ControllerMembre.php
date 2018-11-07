@@ -101,9 +101,9 @@ class ControllerMembre{
     }
     
     public static function read() {
-        if(Session::is_user(Dispatcher::myGet('login'))||Session::is_admin())
+        if(Session::is_user($_GET['login'])||Session::is_admin())
         {
-		    $login = htmlspecialchars(Dispatcher::myGet('login'));
+	    $login = htmlspecialchars(Dispatcher::myGet('login'));
             $u = ModelMembre::select($login);
             if ($u != false) {
                 $view = "detail";
@@ -123,7 +123,7 @@ class ControllerMembre{
         else
         {
           
-            $view = "connect";
+            $view = "notAdmin";
             $pageTitle = "Connexion à MonSuperVoisin";
             $controller="membre";
             require_once File::build_path(array("view","view.php"));

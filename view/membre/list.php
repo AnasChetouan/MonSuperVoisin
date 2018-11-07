@@ -1,5 +1,4 @@
 
-
 <div class="produits">
     
     <?php
@@ -29,9 +28,6 @@
             }
             echo '</div>';
             echo '</a>';
-        } 
+        }
     ?>
 </div>
-
-
-

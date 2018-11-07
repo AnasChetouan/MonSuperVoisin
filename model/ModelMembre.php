@@ -4,7 +4,7 @@
 
 	class ModelMembre extends Model {
 		protected static $object = 'Membre';
-		protected static $primary = 'idMembre';
+		protected static $primary = 'login';
 		protected static $name = 'nom';
 
 		// ATTRIBUTS
