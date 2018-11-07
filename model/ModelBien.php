@@ -8,78 +8,61 @@
 		protected static $name = 'nom';
 
 		// ATTRIBUTS
-
-		private $idBien;
-		private $nom;
-		private $prixNeuf;
-		private $lienPhoto;
-		private $estValide;
-		private $motClef;
-		private $estDispo;
+                
+                private $idBien;
+                private $lienPhoto;
+                private $prixNeuf;
+                private $estDispo;
 
 		// ACCESSEURS EN ECRITURE/LECTURE
+                
+                public function getIdBien() {
+                    return $this->idBien;
+                }
 
-		public function getIdBien() {
-			return $idBien;
-		}
+                public function setIdBien($idBien) {
+                    $this->idBien = $idBien;
+                }
+                   
+                public function getLienPhoto() {
+                    return $this->lienPhoto;
+                }
 
-		public function setIdBien($idBien) {
-			$this->idBien = $idBien;
-		}
+                public function getPrixNeuf() {
+                    return $this->prixNeuf;
+                }
 
-		public function getNom() {
-			return $nom;
-		}
+                public function getEstDispo() {
+                    return $this->estDispo;
+                }
 
-		public function setNom($nom) {
-			$this->nom = $nom;
-		}
+                public function setLienPhoto($lienPhoto) {
+                    $this->lienPhoto = $lienPhoto;
+                }
 
-		public function getPrixNeuf() {
-			return $prixNeuf;
-		}
+                public function setPrixNeuf($prixNeuf) {
+                    $this->prixNeuf = $prixNeuf;
+                }
 
-		public function setPrixNeuf($prixNeuf) {
-			$this->prixNeuf = $prixNeuf;
-		}
+                public function setEstDispo($estDispo) {
+                    $this->estDispo = $estDispo;
+                }
 
-		public function getLienPhoto() {
-			return $lienPhoto;
-		}
-
-		public function setLienPhoto($lienPhoto) {
-			$this->lienPhoto = $lienPhoto;
-		}
-		public function getEstValide() {
-			return $estValide;
-		}
-
-		public function setEstValide($estValide) {
-			$this->estValide = $estValide;
-		}
-
-		public function getMotClef() {
-			return $motClef;
-		}
-
-		public function setMotClef($motClef) {
-			$this->motClef = $motClef;
-		}
-
+                
 		// METHODES
 
 		// CONSTRUCTEUR(S)
-
-		public function __construct ($nom, $prixNeuf, $lienPhoto, $estValide, $motClef, $estDispo){
-			$this->nom = $nom;
-			$this->prixNeuf = $prixNeuf;
-			$this->lienPhoto = $lienPhoto;
-			$this->estValide = $estValide;
-			$this->motClef = $motClef;
-			$this->estDispo = $estDispo;
-
-		}
-
-}
+                
+                public function __construct ($titre = NULL, $description = NULL, $tarif = NULL, $motClef = NULL, $estValide = NULL, $lienPhoto = NULL, $prixNeuf = NULL, $estDispo = NULL)
+		{
+                    if(!is_null($titre) && !is_null($description) && !is_null($tarif) && !is_null($motClef) && !is_null($estValide) && !is_null($lienPhoto) && !is_null($prixNeuf) && !is_null($estDispo))
+                        {
+                            parent::__construct($titre, $description, $tarif, $motClef, $estValide);
+                            $this->lienPhoto = $lienPhoto;
+                            $this->prixNeuf = $prixNeuf;
+                            $this->estDispo = $estDispo;
+                        }
+                }
+        }
 
  ?>
