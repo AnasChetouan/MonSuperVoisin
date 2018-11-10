@@ -6,7 +6,7 @@
         $method = "get";
     }
 ?>
-<form method="<?=$method?>" action="index.php">
+<form method="<?$method?>" action="index.php">
     <fieldset>
         <?php if(isset($functionCaller)){
                 if($functionCaller=='connect'){
@@ -14,7 +14,7 @@
         }
         }
         ?>
-        <input type="hidden" name="controller" value="utilisateur">
+        <input type="hidden" name="controller" value="membre">
         <input type="hidden" name="action" value="connected">
         <p>
             <label for="log_id">Login :</label> 

@@ -203,7 +203,7 @@
                         
 		}
                 
-                 public function checkPassword($login,$mot_de_passe_chiffre){
+                 public static function checkPassword($login,$mot_de_passe_chiffre){
             $sql = "SELECT login,mdp from Membre WHERE login=:login_tag AND mdp=:mdp_tag";
             $req_prep = Model::$pdo->prepare($sql);
             $values = array(

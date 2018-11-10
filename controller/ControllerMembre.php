@@ -38,10 +38,10 @@ class ControllerMembre{
     
     public static function connected(){
         if(!is_null(Dispatcher::myGet('mdp'))&& !is_null(Dispatcher::myGet('login'))){
-            $mdp_chiffre=Security::chiffrer(htmlspecialchars(Dispatcher::myGet('mdp')));
+            $mdp_chiffre=Dispatcher::myGet('mdp');//Security::chiffrer(htmlspecialchars(Dispatcher::myGet('mdp')));
             if(ModelMembre::checkPassword(htmlspecialchars(Dispatcher::myGet('login')),$mdp_chiffre)==true){//on vérifie si le couple login/mdp est présent dans la bdd      
                 $u = ModelMembre::select(Dispatcher::myGet('login'));
-                if($u->getNonce()==NULL){
+                if($u->getNonce()==0){
                     $_SESSION['login']=Dispatcher::myGet('login');        
                     if(ModelMembre::adminOrNot(Dispatcher::myGet('login'),$mdp_chiffre)==true){ //on vérifie si l'membre qui vient de se connecter est admin ou pas
                         $_SESSION['admin'] = true;
@@ -94,6 +94,7 @@ class ControllerMembre{
         } else {
             $message = "Il y a eu une erreur au niveau de la déconnexion veuillez nous en excuser !";
             $view = 'error';
+            $pageTitle="Deconnecté";
             $controller="membre";
             $pb = "connexion";
             require_once File::build_path(array("view","view.php"));

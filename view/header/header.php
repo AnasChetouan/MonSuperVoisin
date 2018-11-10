@@ -1,47 +1,32 @@
-<nav>
-
-
+<nav id = menu>
 				<ul>
 
-					<li><a href="#">Vélos</a>
+					<li><a href="#">Biens</a>
 						<ul>
-							<li><a href="#">Bmx</a></li>
-							<li><a href="#">All Mountain</a></li>
-							<li><a href="#">Vélos de route</a></li>
-							<li><a href="#">DH</a></li>
+							<li><a href="#">Trouver un bien</a></li>
 							
 						</ul>
 					</li>
 		
-					<li><a href="#">Equipements</a>
+					<li><a href="#">Services</a>
 						<ul>
-							<li><a href="#">Pantalon</a></li>
-							<li><a href="#">Casque</a></li>
-							<li><a href="#">Vestes</a></li>
-							<li><a href="#">Gants</a></li>
+							<li><a href="#">Trouver un service</a></li>
 						</ul>
 					
 					</li>
-					<li><a href="#">Pièces détachées</a>
-						<ul>
-							<li><a href="#">Pneus</a></li>
-							<li><a href="#">Potences</a></li>
-							<li><a href="#">Direction</a></li>
-							<li><a href="#">Freins</a></li>
-						
-						
-						</ul>
-			
-					</li>
-		
-		
-					<li><a href="#">Marques</a>
-						<ul>
-							<li><a href="#">Abus</a></li>
-							<li><a href="#">Endura</a></li>
-							<li><a href="#">Shimano</a></li>
-							<li><a href="#">UVEX</a></li>
-						</ul>
+					<li>
+                                            <?php 
+                                            if((!isset($_SESSION['login']))){
+                                                echo '<a href="index.php?controller=membre&action=connect">Connexion</a>';
+                                            }else echo '<a href="index.php?controller=membre&action=read&login='.$_SESSION['login'].'">Mon Profil </a>';
+                                            ?>
+                                                <?php 
+                                                if((isset($_SESSION['login']))){
+                                                    echo '<ul id="list_menu">';
+						    echo '<li><a href="index.php?controller=membre&action=deconnect">Deconnexion</a></li>';
+                                                    echo '</ul>';
+                                                }
+                                                ?>
 					</li>
 	
 					<li><a href="#">Contact</a></li>
@@ -50,3 +35,4 @@
 
 
 			</nav>
+<br>
