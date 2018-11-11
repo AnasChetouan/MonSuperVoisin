@@ -59,5 +59,47 @@ class ControllerBien{
 	    $controller ="bien";
 	    File::build_path(array('view','view.php'));
 	}
+
+    public static function create(){
+        $motClef = Dispatcher::myGet('motClef');
+        $titre = Dispatcher::myGet('titre');
+        $description = Dispatcher::myGet('description');
+        $prixNeuf = Dispatcher::myGet('prixNeuf');
+        $i = "1";// à modif plus tarf
+
+        if (!($motClef === "null")){
+            // Testons si le fichier a bien été envoyé et s'il n'y a pas d'erreur
+            if (isset($_FILES['photo']) AND $_FILES['photo']['error'] == 0)
+            {
+                // Testons si le fichier n'est pas trop gros
+                if ($_FILES['photo']['size'] <= 1000000)
+                {
+                        // Testons si l'extension est autorisée
+                        $infosfichier = pathinfo($_FILES['photo']['name']);
+                        $extension_upload = $infosfichier['extension'];
+                        $extensions_autorisees = array('jpg', 'jpeg', 'gif', 'png');
+                        if (in_array($extension_upload, $extensions_autorisees))
+                        {
+                                // On peut valider le fichier et le stocker définitivement
+                                $nomPhoto = $i.".".$extension_upload;
+                                move_uploaded_file($_FILES['photo']['tmp_name'], 'uploads/' . basename($nomPhoto));
+                                echo "L'envoi a bien été effectué !";
+                        }
+                        else{
+                            echo "Extension non autorisée !";
+                        }
+                }
+                else{
+                    echo "Max 1Mo !";
+                }
+            }
+            else{
+                echo "Une erreur s'est déroulée lors de l'envoi du fichier, merci de ré-essayer";
+            }
+        }
+        else{
+            echo "Vous n'avez pas choisi la catégorie du bien";
+        }
+    }
         
 }
