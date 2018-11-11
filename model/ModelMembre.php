@@ -176,8 +176,8 @@
                         $solde = NULL, $nonce = NULL)
 		{
                     if(!is_null($login) && !is_null($nom) && !is_null($prenom)
-                            && !is_null($adresse) && !is_null($mail) && 
-                            !is_null($mdp) && !is_null($ville) && !isnull($telephone)
+                            && !is_null($adresse) && !is_null($mail)
+                            && !is_null($mdp) && !is_null($ville) && !is_null($telephone)
                             && !is_null($note) && !is_null($admin) && !is_null($nbConso)
                             && !is_null($nbPropo) && !is_null($codePostal)
                             && !is_null($dateInscription) && !is_null($solde)
@@ -234,6 +234,15 @@
                 return true;
             }
             return false;
+    }
+    
+    public static function validate($login){ 
+        $sql = "UPDATE Membre SET nonce = 0 WHERE login=:login_tag";
+            $req_prep = Model::$pdo->prepare($sql);
+            $values = array(
+                "login_tag" => $login,
+            );
+            $req_prep->execute($values);
     }
     
 }

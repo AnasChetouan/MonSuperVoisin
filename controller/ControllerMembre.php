@@ -38,7 +38,7 @@ class ControllerMembre{
     
     public static function connected(){
         if(!is_null(Dispatcher::myGet('mdp'))&& !is_null(Dispatcher::myGet('login'))){
-            $mdp_chiffre=Dispatcher::myGet('mdp');//Security::chiffrer(htmlspecialchars(Dispatcher::myGet('mdp')));
+            $mdp_chiffre= Security::chiffrer(htmlspecialchars(Dispatcher::myGet('mdp'))); //Dispatcher::myGet('mdp');
             if(ModelMembre::checkPassword(htmlspecialchars(Dispatcher::myGet('login')),$mdp_chiffre)==true){//on vérifie si le couple login/mdp est présent dans la bdd      
                 $u = ModelMembre::select(Dispatcher::myGet('login'));
                 if($u->getNonce()==0){
@@ -51,7 +51,7 @@ class ControllerMembre{
                     self::read();
                 }else{
                     $view = "error";
-                    $message = 'Compte non confirmé veuillez confirmer votre compte ! '; // $message est une variable qu'on transmet a error.php pour gerer les erreurs
+                    $message = 'Compte non confirmé, nos administrateurs sont sur le coup ! '; // $message est une variable qu'on transmet a error.php pour gerer les erreurs
                     $controller="membre";
                     $pageTitle="Compte non confirmé";
                     $pb = "connexion";// $pb est une variable qui permet de gerer le retour en arièrre (sur la view error.php)
@@ -169,7 +169,7 @@ class ControllerMembre{
 
     public static function created() {
         $mdp = htmlspecialchars(Dispatcher::myGet('mdp'));
-        if(filter_var(Dispatcher::myGet('email').'@yopmail.com', FILTER_VALIDATE_EMAIL)){
+        
             if(strlen(Dispatcher::myGet('mdp')) >= 6)
             {
                 if(Dispatcher::myGet('mdp') == Dispatcher::myGet('mdp2')){
@@ -182,20 +182,23 @@ class ControllerMembre{
                         $pb="mdp";
                     }else{
                     $mdp_chiffre = Security::chiffrer(Dispatcher::myGet('mdp'));
-                    $nonce_aleatoire = Security::generateRandomHex();
-                    $u = new ModelMembre(Dispatcher::myGet('login'), $mdp_chiffre, Dispatcher::myGet('nom'), Dispatcher::myGet('prenom'), Dispatcher::myGet('email').'@yopmail.com',0,$nonce_aleatoire);// le 0 est la valeur de admin ce qui équivaut à false en booléan
+                    //$nonce_aleatoire = Security::generateRandomHex();
+                    //$u = new ModelMembre(Dispatcher::myGet('login'), $mdp_chiffre, Dispatcher::myGet('nom'), Dispatcher::myGet('prenom'), Dispatcher::myGet('email').'@yopmail.com',0,$nonce_aleatoire);// le 0 est la valeur de admin ce qui équivaut à false en booléan
+                    
+                        $date = date('Y-m-d');
+                        
+                        $u = new ModelMembre(Dispatcher::myGet('login'),
+                            Dispatcher::myGet('nom'), Dispatcher::myGet('prenom'),
+                            Dispatcher::myGet('adresse'),Dispatcher::myGet('mail'),
+                            $mdp_chiffre,Dispatcher::myGet('ville'),
+                            Dispatcher::myGet('telephone'),0,0,0,0,Dispatcher::myGet('codePostal'),
+                            $date,0,1);
+                        
                     if($u->save()) {
-                        if(mail(Dispatcher::myGet('email').'@yopmail.com','Compte MonSuperVoisin',$mail,$headers)){
                             $view = "created";
                             $pageTitle = "Membre ajouté";
                             $controller="membre";
                             $tab_u = ModelMembre::selectAll();
-                        }else{
-                            $view = "error";
-                            $message = "Le mail de validation de compte n'a pas pu être envoyé";
-                            $pageTitle = "Mail non envoyé";
-                            $controller = "membre";
-                        }  
                     }
                     else {
                         $message = "Ce login est déjà utilisé par un de nos membres";
@@ -222,49 +225,15 @@ class ControllerMembre{
                 $pb = "mdp";
                 $controller="membre";
             }
-        }
-        else{
-            $view = "error";
-            $pageTitle="Erreur email";
-            $controller = "membre";
-            $pb = "mdp";
-            
-        }
+        
+        
         require_once File::build_path(array("view","view.php"));
     }
     
     public static function validate() {
-        $log = Dispatcher::myGet('login');
-        $nonce = Dispatcher::myGet('nonce');
-        $u = ModelMembre::select($log);
-        if($u!=false){
-            if($nonce==$u->getNonce()){
-                $data = array(
-                "login" => $log,
-                "mdp" => $u->getMdp(),
-                "nom" => $u->getNom(),
-                "prenom" => $u->getPrenom(),
-                "admin" => $u->getAdmin(),
-                "nonce" => NULL
-                );
-                $u->update($data);
-                $view="compte_active";
-                $controller="membre";
-                $pageTitle="Compte activé";
-                require_once File::build_path(array("view","view.php"));
-            }else{
-                $view="not_confirm";
-                $controller="membre";
-                $pageTitle="Compte non confirmé";
-                require_once File::build_path(array("view","view.php"));
-            }
-        }else{
-            $view="error";
-            $controller="membre";
-            $message="Il n'existe pas d'membre ayant ce login";
-            $pageTitle="Erreur login";
-            require_once File::build_path(array("view","view.php"));
-        }
+        $login = Dispatcher::myGet('login');
+        ModelMembre::validate($login);
+        ControllerMembre::readAll();
     }
     
     

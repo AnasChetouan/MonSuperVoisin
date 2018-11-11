@@ -158,7 +158,47 @@ class Model {
         return true;
     }
 
-    //function save a faire
+    public function save() {
+
+        $table_name = static::$object;
+        
+
+        $columnStr = "";
+        $valueStr = "";
+        $values = array();
+
+        $reflect = new ReflectionObject($this);
+       
+        
+        foreach ($reflect->getProperties(ReflectionProperty::IS_PRIVATE) as $prop) {
+            $col=$prop->getName();   
+            $columnStr.="$col, ";
+            $valueStr.=":$col, ";
+            $get = "get".ucfirst($col);
+            $values[$col]=$this->$get();
+        }
+        
+
+        $columnStr = substr($columnStr, 0, -2);
+        $valueStr = substr($valueStr, 0, -2);
+        
+        try {
+            $sql = "INSERT INTO $table_name ($columnStr) VALUES ($valueStr)";
+            $req_prep = Model::$pdo->prepare($sql);
+            $req_prep->execute($values);
+        
+        } catch (PDOException $e) {
+            if($e->getCode()==23000)
+                return false;
+            if (Conf::isDebug()) {
+                echo $e->getMessage();
+            } else {
+                echo 'Une erreur est survenue <a href="index.php"> retour a la page d\'accueil </a>';
+            }
+            die();
+        }
+        return true;
+    }
 }
 
 Model::Init();

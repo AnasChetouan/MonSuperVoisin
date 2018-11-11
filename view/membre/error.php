@@ -10,23 +10,19 @@
     {
       case "mdp":
         $action = "create";
-        $control = "utilisateur";
-        break;
-      case "panier":
-        $action = "readPanier";
-         $control = "utilisateur";
+        $control = "membre";
         break;
       case "update":
         $action = "update";
-         $control = "utilisateur";
+         $control = "membre";
         break;
       case "connexion":
         $action = "connect"; 
-        $control = "utilisateur";
+        $control = "membre";
         break;
     }
    
     ?>
-    <!-- <a href="index.php?controller=<?php echo $control; ?>&action=<?php echo $action; ?>"> Retour vers la page précédente </a> -->
+    <a href="index.php?controller=<?php echo $control; ?>&action=<?php echo $action; ?>"> Retour vers la page précédente </a>
   </div>
   
