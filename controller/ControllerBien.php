@@ -37,7 +37,7 @@ class ControllerBien{
         require_once File::build_path(array("view","view.php"));
     }
     
-    public static function update() {
+    /*public static function update() {
         $v = ModelBien::select(Dispatcher::myGet('id'));
         if ($v != false) {
             $view = "update";
@@ -51,16 +51,27 @@ class ControllerBien{
         }
         $functionCaller = "update";
         require_once File::build_path(array("view","view.php"));
-    }
+    }*/
     
 	public static function error(){
 	    $view = 'error';
 	    $pageTitle = 'Erreur';
 	    $controller ="bien";
-	    File::build_path(array('view','view.php'));
+	    require_once File::build_path(array('view','view.php'));
 	}
 
     public static function create(){
+    	$view = 'update';
+    	$pageTitle = 'Proposer un bien';
+    	$controller = 'bien';
+    	require_once File::build_path(array('view','view.php'));
+    }
+
+    public static function created(){
+    	$view = 'created';
+    	$pageTitle = 'Bien crée';
+    	$controller = 'bien';
+
         $motClef = Dispatcher::myGet('motClef');
         $titre = Dispatcher::myGet('titre');
         $description = Dispatcher::myGet('description');
@@ -72,7 +83,7 @@ class ControllerBien{
             if (isset($_FILES['photo']) AND $_FILES['photo']['error'] == 0)
             {
                 // Testons si le fichier n'est pas trop gros
-                if ($_FILES['photo']['size'] <= 1000000)
+                if ($_FILES['photo']['size'] <= 2000000)
                 {
                         // Testons si l'extension est autorisée
                         $infosfichier = pathinfo($_FILES['photo']['name']);
@@ -83,23 +94,43 @@ class ControllerBien{
                                 // On peut valider le fichier et le stocker définitivement
                                 $nomPhoto = $i.".".$extension_upload;
                                 move_uploaded_file($_FILES['photo']['tmp_name'], 'uploads/' . basename($nomPhoto));
-                                echo "L'envoi a bien été effectué !";
+                                //echo "L'envoi a bien été effectué !";
                         }
                         else{
-                            echo "Extension non autorisée !";
+                            $message = "L'extension du fichier que vous avez envoyé n'est pas autorisée ! (Rappel, les extensions autorisées sont : jpg, jpeg, gif, png)";
+		                    $view = "error";
+		                    $pb = "extension";
+		                    $pageTitle = "Erreur extension fichier";
+		                    $controller = "bien";
                         }
                 }
                 else{
-                    echo "Max 1Mo !";
+                    $message = "L'image que vous avez envoyée est trop volumineuse ! (Maximum autorisé : 2Mo)";
+		            $view = "error";
+		            $pb = "taille";
+		            $pageTitle = "Erreur taille fichier";
+		            $controller = "bien";
                 }
             }
             else{
-                echo "Une erreur s'est déroulée lors de l'envoi du fichier, merci de ré-essayer";
+                $message = "Une erreur est apparue lors de l'envoi du fichier, veuillez ré-essayer.";
+		        $view = "error";
+		        $pb = "erreur_envoi";
+		        $pageTitle = "Erreur envoi fichier";
+		        $controller = "bien";
             }
         }
         else{
             echo "Vous n'avez pas choisi la catégorie du bien";
+            $message = "La catégorie du bien n'a pas été définie !";
+		    $view = "error";
+		    $pb = "catégorie";
+		    $pageTitle = "Erreur catégorie bien";
+		    $controller = "bien";
         }
+
+        $tab_b = ModelBien::selectAll();
+        require_once File::build_path(array("view","view.php"));
     }
         
 }
