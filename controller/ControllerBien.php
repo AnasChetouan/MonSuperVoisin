@@ -121,12 +121,11 @@ class ControllerBien{
             }
         }
         else{
-            echo "Vous n'avez pas choisi la catégorie du bien";
             $message = "La catégorie du bien n'a pas été définie !";
-		    $view = "error";
-		    $pb = "catégorie";
-		    $pageTitle = "Erreur catégorie bien";
-		    $controller = "bien";
+	    $view = "error";
+	    $pb = "catégorie";
+            $pageTitle = "Erreur catégorie bien";
+            $controller = "bien";
         }
 
         $tab_b = ModelBien::selectAll();
