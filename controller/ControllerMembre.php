@@ -160,7 +160,7 @@ class ControllerMembre{
     
     public static function create() {
         $view = "update";
-        $pageTitle = "Creation d'membre";
+        $pageTitle = "Creation de membre";
         $u = new ModelMembre();
         $functionCaller = "create";
         $controller="membre";
@@ -236,6 +236,11 @@ class ControllerMembre{
         ControllerMembre::readAll();
     }
     
+    public static function banTempo() {
+        $login = Dispatcher::myGet('login');
+        ModelMembre::banTempo($login);
+        ControllerMembre::readAll();
+    }
     
 
     public static function update() { 

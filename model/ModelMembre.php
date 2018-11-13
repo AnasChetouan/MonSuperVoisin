@@ -245,6 +245,15 @@
             $req_prep->execute($values);
     }
     
+    public static function banTempo($login){ 
+        $sql = "UPDATE Membre SET nonce = 1 WHERE login=:login_tag";
+            $req_prep = Model::$pdo->prepare($sql);
+            $values = array(
+                "login_tag" => $login,
+            );
+            $req_prep->execute($values);
+    }
+    
 }
 
  ?>
