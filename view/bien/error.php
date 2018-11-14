@@ -30,6 +30,6 @@
     }
    
     ?>
-    <a href="index.php?controller=<?php echo $controller; ?>&action=<?php echo $action; ?>"> Retour vers la page précédente </a>
+    <a href="index.php?controller=<?php echo $controller; ?>&action=<?php echo $action; ?>"> Retour vers le formulaire </a>
   </div>
   

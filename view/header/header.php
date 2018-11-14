@@ -4,6 +4,12 @@
 					<li><a href="#">Biens</a>
 						<ul>
 							<li><a href="#">Trouver un bien</a></li>
+							<?php
+							if((isset($_SESSION['login']))){
+                                echo '<ul id="list_menu">' . '<a href="index.php?controller=bien&action=create">Proposer un bien</a>'
+                                                        . '</ul>';
+                                                    }
+							?>
 							
 						</ul>
 					</li>
