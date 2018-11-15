@@ -27,9 +27,18 @@
         $action = "create";
         $controller = "bien";
         break;
+    
+       case "prix":
+        $action = "create";
+        $controller = "bien";
+        break;
+    
+      case "errorRead":
+          $action = "readAll";
+          $controller = "bien";
     }
    
     ?>
-    <a href="index.php?controller=<?php echo $controller; ?>&action=<?php echo $action; ?>"> Retour vers le formulaire </a>
+    <a href="index.php?controller=<?php echo $controller; ?>&action=<?php echo $action; ?>"> Retour vers la page précédente </a>
   </div>
   

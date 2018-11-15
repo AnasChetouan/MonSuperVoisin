@@ -1,4 +1,13 @@
+<?php
+
+$formTitle="Proposer un bien";
+
+?>
+
+
 <form action="index.php" method="post" enctype="multipart/form-data">
+     <fieldset>
+         <legend><?=$formTitle?></legend>
     <input type='hidden' name='controller' value='Bien'>
     <input type='hidden' name='action' value='created'>
 
@@ -6,7 +15,7 @@
                             <!-- Catégories inspirées du site "leboncoin" -->
                             <label for="motClef"> Catégorie du bien : </label> 
                             <select name="motClef" id="motClef">
-                                <option value="null">Choissisez la catégorie</option>
+                                <option  value="null">Choissisez la catégorie</option>
                                 <optgroup label ="Multimedia">
                                     <option value="informatique">Informatique</option>
                                     <option value="console-jv">Console & Jeux vidéos</option>
@@ -62,19 +71,21 @@
                         </div> 
 
                         <div>
-                            <label for="description">Description du bien :</label><textarea name="description" rows="8" cols="45" required></textarea>
+                            <label for="description">Description :</label><textarea name="description" rows="8" cols="45" required></textarea>
                         </div> 
                         
                         <div>
-                            Prix neuf du bien :
+                            Prix neuf :
                             <input type="text" name="prixNeuf" required /> €
                         </div> 
 
+  
                         <div>
                             Photo du bien :<br />
                             <input type="file" name="photo" required /><br />
                         </div> 
                         
                     <input type="submit" value="Valider" />
-                        
-</form>
+                    
+    </fieldset>
+</form>            
