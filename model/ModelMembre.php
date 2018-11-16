@@ -254,6 +254,18 @@
             $req_prep->execute($values);
     }
     
+    public static function getLoginById($id){ 
+        $sql = "SELECT login FROM Membre WHERE idMembre=:id";
+            $req_prep = Model::$pdo->prepare($sql);
+            $values = array(
+                "id" => $id,
+            );
+            $req_prep->execute($values);
+            $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelMembre');
+            $tab= $req_prep->fetch();
+            return $tab->getLogin();
+    }
+    
 }
 
  ?>

@@ -112,20 +112,6 @@
                             $this->estDispo = $estDispo;
                         }
                 }
-                
-                   public function updateLienPhoto($extension){
-                     $req = Model::$pdo->query("SELECT idBien FROM Bien WHERE lienPhoto = 'temp'");
-                     while($listeId = $req->fetch()){
-                         $sql = "UPDATE Bien SET lienPhoto =:new_lien WHERE idBien=:id_p";
-                         $req_prep = Model::$pdo->prepare($sql);
-                         $values = array(
-                           "id_p" => $listeId['idBien'],
-                           "new_lien" => "uploads/".$listeId['idBien'].".".$extension,
-                        );
-                        $req_prep->execute($values);
-                     }
-                     return $values["new_lien"];
-                }
         }
 
  ?>

@@ -1,8 +1,11 @@
 <?php
 require_once File::build_path(array("model","ModelMembre.php"));
+require_once File::build_path(array("model","ModelCommentaire.php"));
 require_once File::build_path(array("lib","Security.php"));
 require_once File::build_path(array("controller","Dispatcher.php"));
 require_once File::build_path(array("lib","Session.php"));
+require_once File::build_path(array("controller","ControllerCommentaire.php"));
+
 class ControllerMembre{
   
   protected static $controller = "membre";
@@ -106,6 +109,8 @@ class ControllerMembre{
         {
 	    $login = htmlspecialchars(Dispatcher::myGet('login'));
             $u = ModelMembre::select($login);
+            $loginU = Dispatcher::myGet('idMembre');
+            $tab = ModelCommentaire::selectAllCommByLoginU($loginU);
             if ($u != false) {
                 $view = "detail";
                 $pageTitle = "Membre en detail";
