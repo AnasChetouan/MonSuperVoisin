@@ -30,6 +30,10 @@ require_once File::build_path(array("controller","ControllerCommentaire.php"));
 				
 				<?php
                                 if(!empty(Dispatcher::myGet('idMembre'))){
+                                    
+                                    //echo '<a href="index.php?controller=Commentaire&action=create"> <button>Ajouter un commentaire</button> </a> </br>';
+                                        
+                                    
                                     echo '<h2> Liste des commentaires :</h2>';
 				if(Session::is_connected() ){
 					if (empty($tab)){
@@ -50,7 +54,6 @@ require_once File::build_path(array("controller","ControllerCommentaire.php"));
           
 					}
                                         
-                                        echo '<a href="index.php?controller=Commentaire&action=create"> <button>Ajouter un commentaire</button> </a>';
                                         
 					}
 				}else{

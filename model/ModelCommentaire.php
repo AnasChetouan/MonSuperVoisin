@@ -75,7 +75,7 @@
 			  }*/
 			  
 			  public function __construct($l = NULL, $a = NULL, $e = NULL, $ip = NULL, $im = NULL) {
-				  if (!is_null($l) && !is_null($a) && !is_null($e) && !is_null($iss)  && !is_null($ip) && !is_null($im)) {
+				  if (!is_null($l) && !is_null($a) && !is_null($e) && !is_null($ip) && !is_null($im)) {
    					$this->loginU = $l;
     					$this->appreciation = $a;
     					$this->etoile = $e;
@@ -99,7 +99,7 @@
         
         public static function selectAllCommByLoginU($loginU){
                 $sql = "SELECT * FROM Commentaire WHERE loginU=:login";
-               $req_prep = Model::$pdo->prepare($sql);
+                $req_prep = Model::$pdo->prepare($sql);
                 $values = array(
                     "login" => $loginU
                 );
@@ -110,12 +110,29 @@
                 return $tab;
         }
         
+        
         public static function getNoteMoyenne($loginU){
             
             $sql = "SELECT AVG(etoile) FROM Commentaire WHERE loginU=:login";
             $req_prep = Model::$pdo->prepare($sql);
                 $values = array(
                     "login" => $loginU
+                );
+                $req_prep->execute($values);
+    
+                //$req_prep->setFetchMode(PDO::FETCH_NUM);
+                $rep= $req_prep->fetch(PDO::FETCH_NUM);
+                //print_r($rep);
+                return $rep[0];
+                //return $tab;
+        }
+        
+        public static function getNoteMoyenneByIdProduit($idProduit){
+            
+            $sql = "SELECT AVG(etoile) FROM Commentaire WHERE idProduit=:idProduit";
+            $req_prep = Model::$pdo->prepare($sql);
+                $values = array(
+                    "idProduit" => $idProduit
                 );
                 $req_prep->execute($values);
     

@@ -92,6 +92,7 @@ class ControllerMembre{
         if(!isset($_SESSION['login'])){
           
            $view = 'deconnected';
+           $pageTitle="Deconnecté";
           $controller="membre";
             require_once File::build_path(array("view","view.php"));
         } else {
@@ -105,7 +106,7 @@ class ControllerMembre{
     }
     
     public static function read() {
-        if(Session::is_user($_GET['login'])||Session::is_admin())
+        if(!empty($_SESSION['login']))
         {
 	    $login = htmlspecialchars(Dispatcher::myGet('login'));
             $u = ModelMembre::select($login);
@@ -129,9 +130,11 @@ class ControllerMembre{
         else
         {
           
-            $view = "notAdmin";
-            $pageTitle = "Connexion à MonSuperVoisin";
+            $message = "Cette page n'est accessible qu'aux utilisateurs connectés";
+            $view = "error";
+            $pageTitle = "Erreur";
             $controller="membre";
+            $pb = "connexion";
             require_once File::build_path(array("view","view.php"));
        
         }

@@ -40,11 +40,12 @@ class ControllerCommentaire {
     
    
     
-    /*
+    
     
     
     public static function create() {
-        $view = "create";
+        $b = ModelBien::select(Dispatcher::myGet('idProduit'));
+        $view = "update";
         $pageTitle = "Création d'un commentaire";
         $controller="commentaire";
         $c = new ModelCommentaire();
@@ -53,38 +54,22 @@ class ControllerCommentaire {
     }
 
     public static function created() {
-        $c = new ModelCommentaire($_SESSION['login'], Dispatcher::myGet('appreciation'), Dispatcher::myGet('comm'), Dispatcher::myGet('SousCategorie'),Dispatcher::myGet('idP'));
+        $c = new ModelCommentaire(Dispatcher::myGet('idmembre'), Dispatcher::myGet('appreciation'), Dispatcher::myGet('etoile'), Dispatcher::myGet('idP'),ModelMembre::getIdByLogin($_SESSION['login']));
         if($c->save()) {
             $idP = Dispatcher::myGet('idP');
-            switch($c->getIdSousCategorie()){
-                case "Velo":
-                    $view2 = "velo";
-                    $tab_v = ModelVelo::selectAll();
-                    $objet = "le vélo";
-                    break;
-                case "Accessoire":
-                    $view2 = "accessoire";
-                    $tab_a = ModelAccessoire::selectAll();
-                    $objet = "l'accessoire";
-                    break;
-                case "PieceDetache":
-                    $view2 = "piecedetache";
-                    $tab_p = ModelPieceDetache::selectAll();
-                    $objet = "la pièce détachée";
-                    break;
-            }
-            $view = "created";
-            $pageTitle = "Commentaire ajoutée";
-            $controller="commentaire";
-            $tab_c = ModelCommentaire::selectAll();
+            $view = "detail";
+            $pageTitle = "Bien en detail";
+            $controller ="bien";
+            $b = ModelBien::select($idP);
         }
         else {
             $view = "errorCreate";
             $pageTitle = "Erreur Doublon";
-            $controller="ccommentaire";
+            $controller="commentaire";
         }
         require_once File::build_path(array("view","view.php"));
     }
+    /*
 
     public static function delete() {
         $c = ModelCommentaire::select(Dispatcher::myGet('idC'));

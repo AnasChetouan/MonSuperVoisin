@@ -1,7 +1,9 @@
 <?php
 require_once File::build_path(array("model", "ModelBien.php"));
+require_once File::build_path(array("model", "ModelCommentaire.php"));
+require_once File::build_path(array("model", "ModelService.php"));
+require_once File::build_path(array("model", "ModelMembre.php"));
 require_once File::build_path(array("controller", "Dispatcher.php"));
-
 class ControllerBien{
     public static function readAll() {
         $tab_b = ModelBien::selectAll(); // stocke tout
@@ -17,6 +19,7 @@ class ControllerBien{
             $view = "detail";
             $pageTitle = "Bien en detail";
             $controller ="bien";
+            $tab = ModelCommentaire::selectAllCommByIdProduit(Dispatcher::myGet('id'));
         }
         else {
             $pb = "errorRead";
@@ -28,7 +31,6 @@ class ControllerBien{
         require_once File::build_path(array("view","view.php"));
     
     }
-
     public static function delete() {
         ModelBien::delete(Dispatcher::myGet('id'));
         $id = (Dispatcher::myGet('id'));
@@ -61,24 +63,20 @@ class ControllerBien{
 	    $controller ="bien";
 	    require_once File::build_path(array('view','view.php'));
 	}
-
     public static function create(){
     	$view = 'update';
     	$pageTitle = 'Proposer un bien';
     	$controller = 'bien';
     	require_once File::build_path(array('view','view.php'));
     }
-
     public static function created(){
     	$view = 'created';
     	$pageTitle = 'Bien crée';
     	$controller = 'bien';
-
         $motClef = htmlspecialchars(Dispatcher::myGet('motClef'));
         $titre = htmlspecialchars(Dispatcher::myGet('titre'));
         $description = htmlspecialchars(Dispatcher::myGet('description'));
         $prixNeuf = htmlspecialchars(Dispatcher::myGet('prixNeuf'));
-
         if (!($motClef === "null")){
             if(is_numeric($prixNeuf)){
                 // Testons si le fichier a bien été envoyé et s'il n'y a pas d'erreur
@@ -98,7 +96,7 @@ class ControllerBien{
                                         $tarif = $prixNeuf/200; // Formule de passage du prix neuf au tarif de location / jour
                                                                 // à modifier si besoin
                                         
-                                        $b = new ModelBien($titre, $description, $tarif, $motClef, 0, "temp", $prixNeuf, 1); // ...
+                                        $b = new ModelBien($titre, $description, $tarif, $motClef, 0, "temp", $prixNeuf, 1, ModelMembre::getIdByLogin($_SESSION['login'])); // ...
                                         $b->save();
                                         move_uploaded_file($_FILES['photo']['tmp_name'], 'uploads/' . basename($b->updateLienPhoto($extension_upload)));
                                         $view = "created";

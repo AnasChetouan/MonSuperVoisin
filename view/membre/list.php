@@ -31,14 +31,12 @@
                 
             }
             echo '<br/> <p>'.'<b>'.$loginHTML.'</b>'.'<br/>  </p>';
-            //echo intval(ModelCommentaire::getNoteMoyenne($idMembre));
-            if(intval(ModelCommentaire::getNoteMoyenne($idMembre)) == 0){
-                echo' <img src="style/img/star.jpg" alt="Star" style="width:10%;height:10%">';
-            }else{
-            for ($i = 0; $i< intval(ModelCommentaire::getNoteMoyenne($idMembre)); $i++) {
-                echo' <img src="style/img/star.jpg" alt="Star" style="width:10%;height:10%">';
-            }
-            }
+            for ($i = 0; $i< 5 ; $i++) {
+                if($i < intval(ModelCommentaire::getNoteMoyenne($idMembre))){
+                echo' <img src="style/img/star.png" alt="Star" style="width:10%;height:10%">';
+                }
+                else echo' <img src="style/img/star2.png" alt="Star" style="width:10%;height:10%">';
+                }
             
             echo '</div>';
             echo '</a>';
