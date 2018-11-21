@@ -10,6 +10,7 @@ class ControllerBien{
         $view = "list";
         $pageTitle = "Listes des biens";
         $controller ="bien";
+        $tab = ModelCommentaire::selectAllCommByIdProduit(Dispatcher::myGet('id'));
         require_once File::build_path(array("view","view.php"));
     }
     

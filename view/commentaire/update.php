@@ -1,6 +1,6 @@
 <?php
 $idProduit = ($b->getIdBien());
-$idProprio = ($b->getIdProrio());
+$idProprio = ($b->getIdProprio());
 
 
 switch ($functionCaller) {
