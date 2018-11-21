@@ -8,6 +8,7 @@ require_once File::build_path(array("controller","ControllerCommentaire.php"));
   $loginURL = rawurlencode($u->getLogin());
   $emailHTML = htmlspecialchars($u->getmail());
   $adminHTML = htmlspecialchars($u->getAdmin());
+  $cagnotte = $u->getSolde();
   
   if($u->getAdmin()){
     $reponse = 'Oui';
@@ -21,6 +22,7 @@ require_once File::build_path(array("controller","ControllerCommentaire.php"));
            Nom : '.$nomHTML . '<br>
            Email : ' . $emailHTML .'<br>
            Administrateur : ' . $reponse .'<br> 
+           Cagnotte : ' . $cagnotte .'<b> €</b> <br>
            <a href="index.php?controller=membre&action=readAll"> Retour </a>
         </p>';
  /*<a href="index.php?controller=membre&action=delete&login='.$loginURL.'" title="Supprimer">'.'</a><br>

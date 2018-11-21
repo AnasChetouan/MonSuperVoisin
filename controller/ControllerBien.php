@@ -4,13 +4,13 @@ require_once File::build_path(array("model", "ModelCommentaire.php"));
 require_once File::build_path(array("model", "ModelService.php"));
 require_once File::build_path(array("model", "ModelMembre.php"));
 require_once File::build_path(array("controller", "Dispatcher.php"));
+
 class ControllerBien{
     public static function readAll() {
         $tab_b = ModelBien::selectAll(); // stocke tout
         $view = "list";
         $pageTitle = "Listes des biens";
         $controller ="bien";
-        $tab = ModelCommentaire::selectAllCommByIdProduit(Dispatcher::myGet('id'));
         require_once File::build_path(array("view","view.php"));
     }
     
@@ -33,8 +33,12 @@ class ControllerBien{
     
     }
     public static function delete() {
-        ModelBien::delete(Dispatcher::myGet('id'));
-        $id = (Dispatcher::myGet('id'));
+    	$id = (Dispatcher::myGet('id'));
+    	$b = ModelBien::select($id);
+    	unlink($b->getLienPhoto()); // On supprime la photo associée au bien avant de retirer le bien de la BDD
+    	
+        ModelBien::delete($id);
+        
         $tab_b = ModelBien::selectAll();
         $view = "deleted";
         $pageTitle = "Bien supprimé";
