@@ -16,6 +16,7 @@
                 private $prixNeuf;
                 private $estDispo;
                 private $idProprio;
+
 		// ACCESSEURS EN ECRITURE/LECTURE
                 public function getIdBien() {
                     return $this->idBien;
@@ -78,7 +79,6 @@
                     $this->idProrio = $idProrio;
                 }
                                 
-		// METHODES
 		// CONSTRUCTEUR(S)
                 
                 public function __construct ($titre = NULL, $description = NULL, $tarif = NULL, $motClef = NULL, $estValide = NULL, $lienPhoto = NULL, $prixNeuf = NULL, $estDispo = NULL, $idProprio = NULL)
@@ -96,6 +96,8 @@
                             $this->idProprio = $idProprio;
                         }
                 }
+
+        // METHODES
                 
                    public function updateLienPhoto($extension){
                      $req = Model::$pdo->query("SELECT idBien FROM Bien WHERE lienPhoto = 'temp'");

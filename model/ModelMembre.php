@@ -10,7 +10,7 @@
 		// ATTRIBUTS
 
 		private $idMembre;
-                private $login;
+        private $login;
 		private $nom;
 		private $prenom;
 		private $adresse;

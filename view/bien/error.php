@@ -36,6 +36,10 @@
       case "errorRead":
           $action = "readAll";
           $controller = "bien";
+
+      case "update":
+          $action = "readAll";
+          $controller = "bien";
     }
    
     ?>

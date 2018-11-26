@@ -68,9 +68,43 @@ class ControllerBien{
 	    $controller ="bien";
 	    require_once File::build_path(array('view','view.php'));
 	}
+
+    public static function update(){
+        if(isset($_SESSION['login'])){
+            $idBien = (Dispatcher::myGet('id'));
+            $b = ModelBien::select($idBien);
+            if($b != false){
+            $idProprio = $b->getIdProprio(); // A FINIR
+                if($idProprio = ModelMembre::getIdByLogin($_SESSION['login'])){
+                    // Si l'id du proprio du bien est la même que celle du membre connecté
+                    // Donc on vérifie que c'est bien le proprio qui veut modifier son bien
+                    $functionCaller = "update";
+                    $view = "update";
+                    $pageTitle = "Modification";
+                    $controller="bien";
+                }
+            }
+            else {
+                $view = "error";
+                $message = "Nous n'avons pas pu trouver ce bien !";
+                $pageTitle = "Erreur";
+                $controller="bien";
+                $pb = "update";
+                }
+        }
+        else{ // On lui demande de se connecter si jamais il ne l'est pas déjà 
+            $view="connect";  
+            $controller="membre";
+            $pageTitle = "Page de connexion";
+        }
+        
+        require_once File::build_path(array("view","view.php"));
+
+    }
     public static function create(){
     	$view = 'update';
     	$pageTitle = 'Proposer un bien';
+        $functionCaller = "create";
     	$controller = 'bien';
     	require_once File::build_path(array('view','view.php'));
     }

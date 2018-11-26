@@ -2,6 +2,19 @@
 
 $formTitle="Proposer un bien";
 
+switch ($functionCaller) {
+    case "create":
+        $formTitle="Créer";
+        $hiddenValue="created";
+        $attribut = " ";
+        break;
+    case "update":
+        $formTitle="Modifier";
+        $hiddenValue="updated";
+        $attribut="readonly";
+        break;
+}
+
 ?>
 
 
@@ -9,7 +22,7 @@ $formTitle="Proposer un bien";
      <fieldset>
          <legend><?=$formTitle?></legend>
     <input type='hidden' name='controller' value='Bien'>
-    <input type='hidden' name='action' value='created'>
+    <input type='hidden' name='action' value='<?=$hiddenValue?>'>
 
                         <div> 
                             <!-- Catégories inspirées du site "leboncoin" -->

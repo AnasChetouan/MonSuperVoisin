@@ -16,6 +16,7 @@
               Montant prix d\'achat neuf : <b> ' . $prixNeuf . '</b> € <br>
               Prix d\'emprunt à la journée : <b>'.$tarif . ' </b> € <br> <br>';
               if (isset($_SESSION['login']) && $_SESSION['login'] == ModelMembre::getLoginById($idProprio)){
+                  echo '</br><a href="index.php?controller=bien&action=update&id='.$idBien.'"> <button>Modifier mon post</button> </a> </br>';
                   echo '</br><a href="index.php?controller=bien&action=delete&id='.$idBien.'"> <button>Supprimer mon post</button> </a> </br>';
               }
               echo '</br><a href="index.php?controller=bien&action=readAll"> Retour </a>';
