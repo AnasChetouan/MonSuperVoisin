@@ -9,6 +9,7 @@
   $prixNeuf = ($b->getPrixNeuf());
   $idBien = ($b->getIdBien());
   $idProprio = ($b->getIdProprio());
+  $estDispo = htmlspecialchars($b->getEstDispo());
     echo '
            <p><b> Titre : </b> '.$titreHTML . '<br> <br>'
              .'<img src='.$lienPhoto.' alt="photo bien" height="25%" width="25%" > <br> <br>'.
