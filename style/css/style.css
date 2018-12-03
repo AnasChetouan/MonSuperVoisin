@@ -19,9 +19,94 @@ nav ul{
   padding:0;
 }
 
+nav > ul{
+  margin: 0px;
+  padding: 0px;
+}
+
+nav > ul::after{
+  content: "";
+  display: block;
+  clear: both;
+}
+
+nav > ul > li{
+  float: left;
+  position: relative;
+}
+
 nav li{
-  position:relative;
-  float:left;
+  list-style-type: none; 
+}
+
+nav{
+  width: 100%;
+  background-color: #424558;
+}
+
+nav a{
+  display: inline-block;
+  text-decoration: none;
+}
+
+nav > ul > li > a{
+  padding: 20px 30px;
+  color: #FFF;
+}
+
+.submenu{
+  display: none;
+}
+
+nav li:hover .submenu{
+  display: inline-block;
+  position: absolute;
+  top: 100%;
+  left: 0px;
+  padding: 0px;
+  z-index: 100000;
+}
+
+.submenu li{
+  border-bottom : 1px solid #CCC;
+}
+
+.submenu li a{
+  padding: 15px 30px;
+  font-size: 13px;
+  color:#222538;
+  width: 270px;
+}
+
+.menu-biens:hover{
+
+}
+
+.menu-services:hover{
+  
+}
+
+.menu-connexion:hover{
+  
+}
+
+.menu-inscription:hover{
+  
+}
+
+.menu-biens:hover{
+  
+}
+
+.menu-profil:hover{
+  
+}
+
+.menu-biens:hover{
+  
+}
+
+.menu-contact:hover{
   
 }
 
@@ -112,11 +197,13 @@ margin:0;
 }
 
 body {
-  margin:0;
-background-image: url('../img/voisins.jpg');
+  font-family: 'Source code pro', Calibri, serif;
+  padding: 0px;
+  margin: 0px;
+  background-image: url('../img/voisins.jpg');
   background-position: center center;
-    background-size: cover;
-    background-attachment: fixed;
+  background-size: cover;
+  background-attachment: fixed;
     
     
 }
