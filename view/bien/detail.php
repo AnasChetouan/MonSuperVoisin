@@ -27,6 +27,34 @@
     }                               
 
    ?>
+<?php
+$formTitle="CrÃ©er";
+$hiddenValue="created";
+$affId = "hidden";
+$visible = "position:absolute;visibility:hidden;";
+$date = date('Y-m-d');
+
+if($estDispo == 1 && (isset($_SESSION['login'])) && ($_SESSION['login'] != ModelMembre::getLoginById($idProprio))){
+    echo '</br>';
+echo '<form method="get" action="index.php">
+    <fieldset>
+        <legend>Reserver</legend>
+        <input type="hidden" name="controller" value="emprunt">
+        <input type="hidden" name="action" value="'.$hiddenValue.'">
+        <input type="hidden" name="idP" value="'.$idBien.'">
+        <input type="hidden" name="idmembre" value="'.$idProprio.'">
+        <input type="hidden" name="estBien" value="1">
+        Du :
+        <input type="date" name="dateDebut" min="'.$date.'" value="'.$date.'" required><br>
+        Au :
+        <input type="date" name="dateFin" min="'.$date.'" required><br>
+        <p>
+            <input type="submit" value="Reserver" />
+        </p>
+    </fieldset>
+</form>';
+}
+?>
 <div id="bloc_all_comm">
 				
 				<?php
