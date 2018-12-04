@@ -278,6 +278,17 @@
             return $tab->getIdMembre();
     }
     
+        public static function getSoldeByLogin($login){ 
+            $sql = "SELECT solde FROM Membre WHERE login=:login";
+            $req_prep = Model::$pdo->prepare($sql);
+            $values = array(
+                "login" => $login,
+            );
+            $req_prep->execute($values);
+            $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelMembre');
+            $tab= $req_prep->fetch();
+            return $tab->getSolde();
+        }
 }
 
  ?>
