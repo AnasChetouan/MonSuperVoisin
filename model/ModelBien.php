@@ -112,5 +112,23 @@
                      }
                      return $values["new_lien"];
                 }
+                 public static function pasDispo($idB){ 
+                $sql = "UPDATE Bien SET estDispo = 0 WHERE idBien=:idB_tag";
+                $req_prep = Model::$pdo->prepare($sql);
+                $values = array(
+                "idB_tag" => $idB,
+                );
+                $req_prep->execute($values);
+                }
+                
+                public static function updateDispo(){
+                    $login = "";
+                 $sql = "UPDATE Bien B SET estDispo = 1 WHERE NOT EXISTS( SELECT * FROM Emprunt WHERE idBien = B.idBien )";
+                 $req_prep = Model::$pdo->prepare($sql);
+                 $values = array(
+                    "login_tag" => $login,
+                 );
+                 $req_prep->execute($values);
+                }
         }
  ?>

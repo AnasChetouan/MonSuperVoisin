@@ -87,8 +87,18 @@
                                     $this->dateFin = $dF;
 					}
 			  }
-        
-        
-        
+                          
+                public static function actualiserEmprunt(){
+                 $timeZone = 'Europe/Paris';
+                 $now = date_create()->format('Y-m-d H:i:s');
+                 //echo $now;
+                 $sql = "DELETE FROM Emprunt WHERE dateFin<:now ";
+                 $req_prep = Model::$pdo->prepare($sql);
+                 $values = array(
+                    "now" => $now
+                );
+                $req_prep->execute($values);
+                ModelBien::updateDispo();    
+                }
     }
 ?>
