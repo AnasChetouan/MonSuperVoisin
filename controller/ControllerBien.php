@@ -2,12 +2,14 @@
 require_once File::build_path(array("model", "ModelBien.php"));
 require_once File::build_path(array("model", "ModelCommentaire.php"));
 require_once File::build_path(array("model", "ModelService.php"));
+require_once File::build_path(array("model", "ModelEmprunt.php"));
 require_once File::build_path(array("model", "ModelMembre.php"));
 require_once File::build_path(array("controller", "Dispatcher.php"));
 
 class ControllerBien{
     public static function readAll() {
         $tab_b = ModelBien::selectAll(); // stocke tout
+        ModelEmprunt::actualiserEmprunt();
         $view = "list";
         $pageTitle = "Listes des biens";
         $controller ="bien";
