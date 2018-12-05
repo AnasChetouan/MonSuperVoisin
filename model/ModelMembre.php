@@ -210,7 +210,7 @@
                 "login_tag" => $login,
                 "mdp_tag" => $mot_de_passe_chiffre
                          );
-            $req_prep->execute($values); // problème à cette ligne lorsqu'on essaye de se connecter
+            $req_prep->execute($values);
             $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelMembre');
             $tab= $req_prep->fetchAll();
 
@@ -288,6 +288,16 @@
             $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelMembre');
             $tab= $req_prep->fetch();
             return $tab->getSolde();
+        }
+        
+        public static function gestionCagnote($solde,$id){
+        $sql = "UPDATE Membre SET solde=:solde_tag WHERE idMembre=:id_tag";
+            $req_prep = Model::$pdo->prepare($sql);
+            $values = array(
+                "id_tag" => $id,
+                "solde_tag" => $solde,
+            );
+            $req_prep->execute($values);
         }
 }
 
