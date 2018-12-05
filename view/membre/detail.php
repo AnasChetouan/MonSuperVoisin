@@ -18,11 +18,11 @@ require_once File::build_path(array("controller","ControllerCommentaire.php"));
   }
  echo '
         <p>Utilisateur de login <b>'. $loginHTML .'</b><br>
-           Prénom : '.$prenomHTML. '<br>
+           Pr�nom : '.$prenomHTML. '<br>
            Nom : '.$nomHTML . '<br>
            Email : ' . $emailHTML .'<br>
            Administrateur : ' . $reponse .'<br> 
-           Cagnotte : ' . $cagnotte .'<b> €</b> <br>
+           Cagnotte : ' . $cagnotte .'<b> </b> <br>
            <a href="index.php?controller=membre&action=readAll"> Retour </a>
         </p>';
  /*<a href="index.php?controller=membre&action=delete&login='.$loginURL.'" title="Supprimer">'.'</a><br>
