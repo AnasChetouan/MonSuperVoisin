@@ -112,7 +112,7 @@ class ControllerBien{
     }
     public static function created(){
     	$view = 'created';
-    	$pageTitle = 'Bien cr√©e';
+    	$pageTitle = 'Bien crÈe';
     	$controller = 'bien';
         $motClef = htmlspecialchars(Dispatcher::myGet('motClef'));
         $titre = htmlspecialchars(Dispatcher::myGet('titre'));
@@ -141,12 +141,12 @@ class ControllerBien{
                                         $b->save();
                                         move_uploaded_file($_FILES['photo']['tmp_name'], 'uploads/' . basename($b->updateLienPhoto($extension_upload)));
                                         $view = "created";
-                                        $pageTitle = "Bien ajout√©";
+                                        $pageTitle = "Bien ajoutÈ";
                                         $controller="bien";
                                         $tab_b = ModelBien::selectAll();
                                 }
                                 else{
-                                    $message = "L'extension du fichier que vous avez envoy√© n'est pas autoris√©e ! \n (Rappel, les extensions autoris√©es sont : jpg, jpeg, gif, png)";
+                                    $message = "L'extension du fichier que vous avez envoyÈ n'est pas autorisÈe ! \n (Rappel, les extensions autoris√©es sont : jpg, jpeg, gif, png)";
                                             $view = "error";
                                             $pb = "extension";
                                             $pageTitle = "Erreur extension fichier";
@@ -183,7 +183,7 @@ class ControllerBien{
                 }
             }
             else{
-            $message = "Le prix a √©t√© mal d√©fini !";
+            $message = "Le prix a ÈT2 mal dÈfini !";
             $view = "error";
             $pb = "prix";
             $pageTitle = "Erreur prix bien";
@@ -191,10 +191,10 @@ class ControllerBien{
             }
         }
         else{
-            $message = "La cat√©gorie du bien n'a pas √©t√© d√©finie !";
+            $message = "La catÈgorie du bien n'a pas ÈtÈ dÈfinie !";
             $view = "error";
-            $pb = "cat√©gorie";
-            $pageTitle = "Erreur cat√©gorie bien";
+            $pb = "catÈgorie";
+            $pageTitle = "Erreur catÈgorie bien";
             $controller = "bien";
         }
         require_once File::build_path(array("view","view.php"));

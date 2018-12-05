@@ -112,6 +112,8 @@ class ControllerMembre{
             $u = ModelMembre::select($login);
             $loginU = Dispatcher::myGet('idMembre');
             $tab = ModelCommentaire::selectAllCommByLoginU($loginU);
+            $tab_e = ModelEmprunt::readAllBienDonneById(ModelMembre::getIdByLogin(Dispatcher::myGet('login')));           
+            $tab_d = ModelEmprunt::readAllBienEmprunteById(ModelMembre::getIdByLogin(Dispatcher::myGet('login')));
             if ($u != false) {
                 $view = "detail";
                 $pageTitle = "Membre en detail";
@@ -119,7 +121,7 @@ class ControllerMembre{
                 
             }
             else {
-                $message = "Nous n'avons pas rÃ©ussi a trouver le dÃ©tail de votre compte !";
+                $message = "Nous n'avons pas réussi a trouver le détail de votre compte !";
                 $view = "error";
                 $pageTitle = "Erreur";
                 $controller="membre";
@@ -130,7 +132,7 @@ class ControllerMembre{
         else
         {
           
-            $message = "Cette page n'est accessible qu'aux utilisateurs connectÃ©s";
+            $message = "Cette page n'est accessible qu'aux utilisateurs connectés";
             $view = "error";
             $pageTitle = "Erreur";
             $controller="membre";
@@ -147,7 +149,7 @@ class ControllerMembre{
             $login = htmlspecialchars(Dispatcher::myGet('login'));
             $tab_u = ModelMembre::selectAll();
             $view = "deleted";
-            $pageTitle = "Membre SupprimÃ©";
+            $pageTitle = "Membre Supprimé";
             $controller="membre";
             if(Session::is_user(Dispatcher::myGet('login'))){
                 $_SESSION = array();
@@ -204,12 +206,12 @@ class ControllerMembre{
                         
                     if($u->save()) {
                             $view = "created";
-                            $pageTitle = "Membre ajoutÃ©";
+                            $pageTitle = "Membre ajouté";
                             $controller="membre";
                             $tab_u = ModelMembre::selectAll();
                     }
                     else {
-                        $message = "Ce login est dÃ©jÃ  utilisÃ© par un de nos membres";
+                        $message = "Ce login est déja  utilisé par un de nos membres";
                         $view = "error";
                         $pb = "mdp";
                         $pageTitle = "Erreur Doublon";
@@ -218,16 +220,16 @@ class ControllerMembre{
                 }
                 }
                 else{
-                    $message = "Vos mots de passe ne sont pas les mÃªmes";
+                    $message = "Vos mots de passe ne sont pas les mêmes";
                     $view = "error";
                     $pb = "mdp";
-                    $pageTitle = "Erreur crÃ©ation membre(mdp)";
+                    $pageTitle = "Erreur création membre(mdp)";
                     $controller = "membre";
                   
                 }
             }
             else{
-                $message = "Votre mot de passe est infÃ©rieur a 6 caractÃ¨res";
+                $message = "Votre mot de passe est inferieur a 6 caractères";
                 $view = "error";
                 $pageTitle = "mdp<6";
                 $pb = "mdp";
@@ -250,6 +252,9 @@ class ControllerMembre{
         ControllerMembre::readAll();
     }
     
+    public static function gestionCagnote(){
+        
+    }
 
     public static function update() { 
         if(!is_null(Dispatcher::myGet('login'))){

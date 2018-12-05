@@ -33,18 +33,32 @@ class ControllerEmprunt {
     }
 
     public static function created() {
-        $c = new ModelEmprunt(ModelMembre::getIdByLogin($_SESSION['login']),Dispatcher::myGet('idmembre'),Dispatcher::myGet('idP'),Dispatcher::myGet('estBien'),Dispatcher::myGet('dateDebut'),Dispatcher::myGet('dateFin'));
+        $idP = Dispatcher::myGet('idP');
+        $tarif = Dispatcher::myGet('tarif');
+        $cagnote = Dispatcher::myGet('cagnote');
+        if ((intval($cagnote) - intval($tarif)) > 0 ){
+        $c = new ModelEmprunt(ModelMembre::getIdByLogin($_SESSION['login']),Dispatcher::myGet('idmembre'),$idP,Dispatcher::myGet('estBien'),Dispatcher::myGet('dateDebut'),Dispatcher::myGet('dateFin'));
         if($c->save()) {
-            $idP = Dispatcher::myGet('idP');
-            $view = "detail";
-            $pageTitle = "Bien en detail";
-            $controller ="bien";
+            $view = "created";
+            $pageTitle = "emprunt ajouté";
+            $controller="emprunt";
             ModelBien::pasDispo($idP);
-            $b = ModelBien::select($idP);
+            $nouvelleCagnote1 = (intval($cagnote) - intval($tarif));
+            echo $nouvelleCagnote1;
+            ModelMembre::gestionCagnote($nouvelleCagnote1,ModelMembre::getIdByLogin($_SESSION['login']));
+            ModelMembre::gestionCagnote(intval((ModelMembre::getSoldeByLogin(ModelMembre::getLoginById(Dispatcher::myGet('idmembre')))) + intval($tarif)),Dispatcher::myGet('idmembre'));
+            $tab_b = ModelBien::selectAll();
     }
         else {
             $view = "errorCreate";
             $pageTitle = "Erreur Doublon";
+            $controller="emprunt";
+        }
+        require_once File::build_path(array("view","view.php"));
+    }
+    else {
+            $view = "errorCreate";
+            $pageTitle = "Erreur Cagnote";
             $controller="emprunt";
         }
         require_once File::build_path(array("view","view.php"));
