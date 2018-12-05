@@ -26,7 +26,7 @@
             }
             
             //echo '<br/> <p>'.'<b>'.$descHTML.'</b>'.'<br/>  </p>';
-            echo 'PropriÃ©taire : '.$loginProprio;
+            echo 'Propri�taire : '.$loginProprio;
             echo '<br/>'.'<br/>'.'<a href="index.php?controller=bien&action=read&id='.$idBien.'"> Detail objet </a>';
             echo '</div>';
             echo '</a>';

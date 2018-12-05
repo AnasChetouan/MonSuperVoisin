@@ -30,7 +30,7 @@
 
 <?php
 
-    $cagnote = ModelMembre::getSoldeByLogin($_SESSION['login']);
+   
 $formTitle="Creer";
 $hiddenValue="created";
 $affId = "hidden";
@@ -38,6 +38,7 @@ $visible = "position:absolute;visibility:hidden;";
 $date = date('Y-m-d');
 
 if($estDispo == 1 && (isset($_SESSION['login'])) && ($_SESSION['login'] != ModelMembre::getLoginById($idProprio))){
+     $cagnote = ModelMembre::getSoldeByLogin($_SESSION['login']);
     echo '</br>';
 echo '<form method="get" action="index.php">
     <fieldset>
@@ -52,6 +53,8 @@ else{
         <input type="hidden" name="action" value="'.$hiddenValue.'">
         <input type="hidden" name="idP" value="'.$idBien.'">
         <input type="hidden" name="idmembre" value="'.$idProprio.'">
+        <input type="hidden" name="cagnote" value="'.$cagnote.'">
+        <input type="hidden" name="tarif" value="'.$tarif.'">
         <input type="hidden" name="estBien" value="1">
         Du :
         <input type="date" name="dateDebut" min="'.$date.'" value="'.$date.'" required><br>
