@@ -18,26 +18,16 @@ require_once File::build_path(array("controller","ControllerCommentaire.php"));
   }
  echo '
         <p>Utilisateur de login <b>'. $loginHTML .'</b><br>
-           Pr�nom : '.$prenomHTML. '<br>
+           Prénom : '.$prenomHTML. '<br>
            Nom : '.$nomHTML . '<br>
            Email : ' . $emailHTML .'<br>
            Administrateur : ' . $reponse .'<br> 
-           Cagnotte : ' . $cagnotte .'<b> </b> <br>
+           Cagnotte : ' . $cagnotte .'<b> €</b> <br>
            <a href="index.php?controller=membre&action=readAll"> Retour </a>
         </p>';
  /*<a href="index.php?controller=membre&action=delete&login='.$loginURL.'" title="Supprimer">'.'</a><br>
             <a href="index.php?controller=membre&action=update&login='.$loginURL.'" title="Modifier">'.'</a> */
 ?>
-
-    <?php 
-    if(ucfirst($loginHTML) == ucfirst($_SESSION['login'])){
-        echo '</br>';
-        echo '<a href="index.php?controller=membre&action=update&login='.$loginURL.'" title="Modifier">'.'<button>Mofifier mon profil</button></a>';
-        echo '</br>';
-        echo '<a href="index.php?controller=emprunt&action=listeEmpruntByMembre&login='.$loginURL.'" title="liste emprunts">'.'<button>Voir ma liste d emprunts</button></a>';
-    }
-            ?>
-
 <div id="bloc_all_comm">
 				
 				<?php
@@ -66,9 +56,10 @@ require_once File::build_path(array("controller","ControllerCommentaire.php"));
           
 					}
                                         
+                                        
 					}
 				}else{
-					echo '<p> Les commentaires sont visible seulement si vous etes connect�s </p>';
+					echo '<p> Les commentaires sont visible seulement si vous êtes connecté </p>';
 				}
                                 }
 					

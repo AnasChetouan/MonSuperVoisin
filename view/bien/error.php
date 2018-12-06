@@ -19,7 +19,7 @@
         break;
 
       case "erreur_envoi":
-        $action = "create";
+        $action = "readAll";
         $controller = "bien";
         break;
 
@@ -38,6 +38,10 @@
           $controller = "bien";
 
       case "update":
+          $action = "readAll";
+          $controller = "bien";
+          
+      case "autorisation":
           $action = "readAll";
           $controller = "bien";
     }
