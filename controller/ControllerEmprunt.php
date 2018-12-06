@@ -37,7 +37,8 @@ class ControllerEmprunt {
         $tarif = Dispatcher::myGet('tarif');
         $cagnote = Dispatcher::myGet('cagnote');
         if ((intval($cagnote) - intval($tarif)) > 0 ){
-        $c = new ModelEmprunt(ModelMembre::getIdByLogin($_SESSION['login']),Dispatcher::myGet('idmembre'),$idP,Dispatcher::myGet('estBien'),Dispatcher::myGet('dateDebut'),Dispatcher::myGet('dateFin'));
+            
+        $c = new ModelEmprunt(Dispatcher::myGet('idmembre'),ModelMembre::getIdByLogin($_SESSION['login']),$idP,Dispatcher::myGet('estBien'),Dispatcher::myGet('dateDebut'),Dispatcher::myGet('dateFin'));
         if($c->save()) {
             $view = "created";
             $pageTitle = "emprunt ajouté";
@@ -69,10 +70,24 @@ class ControllerEmprunt {
 	    $view = 'error';
 	    $pageTitle = 'Erreur';
 	    $controller="emprunt";
-	    File::build_path(array('view','view.php'));
+	    require_once File::build_path(array('view','view.php'));
 	}
 	
-	
+	public static function listeEmpruntByMembre(){
+            $login = htmlspecialchars(Dispatcher::myGet('login'));
+            $u = ModelMembre::select($login);
+            $id = $u->getIdMembre();
+            $tab_d = ModelEmprunt::readAllBienDonneById($id);           
+            $tab_e = ModelEmprunt::readAllBienEmprunteById($id);
+            $view = 'list';
+	    $pageTitle = 'Liste des emprunts';
+	    $controller="emprunt";
+	    require_once File::build_path(array('view','view.php'));
+        }
+        
+        public static function deleteAllEmpruntsbyMembre(){
+            
+        }
 	
 	}
 
