@@ -12,7 +12,7 @@
 		<main>
 	<?php
 
-$filepath = File::build_path(array('view', $controller, $view.'.php')); //static::$controller est la variable $controller déclarer au debut de chaque classe
+$filepath = File::build_path(array('view', $controller, $view.'.php')); //static::$controller est la variable $controller déclarée au debut de chaque classe
 require $filepath;
 ?>
 

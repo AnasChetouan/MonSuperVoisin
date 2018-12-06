@@ -10,7 +10,7 @@
 		// ATTRIBUTS
 
 		private $idMembre;
-                private $login;
+        private $login;
 		private $nom;
 		private $prenom;
 		private $adresse;
@@ -18,7 +18,10 @@
 		private $mdp;
 		private $ville;
 		private $telephone;
+		private $note;
 		private $admin;
+		private $nbConso;
+		private $nbPropo;
 		private $codePostal;
 		private $dateInscription;
 		private $solde;
@@ -99,6 +102,10 @@
 			$this->telephone = $telephone;
 		}
 
+		public function getNote() {
+			return $this->note;
+		}
+
 		public function setNote($note) {
 			$this->note = $note;
 		}
@@ -109,6 +116,22 @@
 
 		public function setAdmin($admin) {
 			$this->admin = $admin;
+		}
+
+		public function getNbConso() {
+			return $this->nbConso;
+		}
+
+		public function setNbConso($nbConso) {
+			$this->nbConso = $nbConso;
+		}
+
+		public function getNbPropo() {
+			return $this->nbPropo;
+		}
+
+		public function setNbPropo($nbPropo) {
+			$this->nbPropo = $nbPropo;
 		}
 
 		public function getCodePostal() {
@@ -155,7 +178,8 @@
                     if(!is_null($login) && !is_null($nom) && !is_null($prenom)
                             && !is_null($adresse) && !is_null($mail)
                             && !is_null($mdp) && !is_null($ville) && !is_null($telephone)
-                            && !is_null($admin) && !is_null($codePostal)
+                            && !is_null($note) && !is_null($admin) && !is_null($nbConso)
+                            && !is_null($nbPropo) && !is_null($codePostal)
                             && !is_null($dateInscription) && !is_null($solde)
                             && !is_null($nonce)){
                         
@@ -167,7 +191,10 @@
 			$this->mdp = $mdp;
 			$this->ville = $ville;
 			$this->telephone = $telephone;
+			$this->note = $note;
 			$this->admin = $admin;
+			$this->nbConso = $nbConso;
+			$this->nbPropo = $nbPropo;
 			$this->codePostal = $codePostal;
 			$this->dateInscription = $dateInscription;
 			$this->solde = $solde;
@@ -183,7 +210,7 @@
                 "login_tag" => $login,
                 "mdp_tag" => $mot_de_passe_chiffre
                          );
-            $req_prep->execute($values);
+            $req_prep->execute($values); // problème à cette ligne lorsqu'on essaye de se connecter
             $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelMembre');
             $tab= $req_prep->fetchAll();
 
@@ -239,7 +266,7 @@
             return $tab->getLogin();
     }
     
-    public static function getIdByLogin($login){
+    public static function getIdByLogin($login){ 
         $sql = "SELECT idMembre FROM Membre WHERE login=:login";
             $req_prep = Model::$pdo->prepare($sql);
             $values = array(
@@ -251,27 +278,6 @@
             return $tab->getIdMembre();
     }
     
-        public static function getSoldeByLogin($login){ 
-            $sql = "SELECT solde FROM Membre WHERE login=:login";
-            $req_prep = Model::$pdo->prepare($sql);
-            $values = array(
-                "login" => $login,
-            );
-            $req_prep->execute($values);
-            $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelMembre');
-            $tab= $req_prep->fetch();
-            return $tab->getSolde();
-        }
-        
-        public static function gestionCagnote($solde,$id){
-        $sql = "UPDATE Membre SET solde=:solde_tag WHERE idMembre=:id_tag";
-            $req_prep = Model::$pdo->prepare($sql);
-            $values = array(
-                "id_tag" => $id,
-                "solde_tag" => $solde,
-            );
-            $req_prep->execute($values);
-        }
 }
 
  ?>

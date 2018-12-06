@@ -1,46 +1,47 @@
-<nav id = menu>
+<nav id =menu>
 				<ul>
 
-					<li><a href="#">Biens</a>
-						<ul>
+					<li class="menu-biens"><a href="#">Biens</a>
+						<ul class="submenu">
 							<li><a href="index.php?controller=bien&action=readAll">Trouver un bien</a></li>
 							<?php
-							if((isset($_SESSION['login']))){
-                                echo '<ul id="list_menu">' . '<a href="index.php?controller=bien&action=create">Proposer un bien</a>'
-                                                        . '</ul>';
-                                                    }
-							?>
-							
+							if((isset($_SESSION['login'])))
+                                echo '<li><a href="index.php?controller=bien&action=create">Proposer un bien</a></li>';
+							?>		
 						</ul>
 					</li>
 		
-					<li><a href="#">Services</a>
-						<ul>
+					<li class="menu-services"><a href="#">Services</a>
+						<ul class="submenu">
 							<li><a href="#">Trouver un service</a></li>
 						</ul>
 					
 					</li>
-					<li>
-                                            <?php 
-                                            if((!isset($_SESSION['login']))){
-                                                echo '<a href="index.php?controller=membre&action=connect">Connexion</a>'
-                                                .'<ul id="list_menu">' . '<a href="index.php?controller=membre&action=create">Iscription</a>'
-                                                        . '</ul>';
-                                            }else echo '<a href="index.php?controller=membre&action=read&login='.$_SESSION['login'].'">Mon Profil </a>';
-                                            ?>
-                                                <?php 
-                                                if((isset($_SESSION['login']))){
-                                                    echo '<ul id="list_menu">';
-						    echo '<li><a href="index.php?controller=membre&action=deconnect">Deconnexion</a></li>';
-                                                    echo '</ul>';
-                                                }
-                                                ?>
-					</li>
+
+					<?php 
+					if((!isset($_SESSION['login']))){
+						echo '<li class="menu-connexion"><a href="index.php?controller=membre&action=connect">S\'identifier</a></li>'
+						 .'<li class ="menu-inscription"><a href="index.php?controller=membre&action=create">S\'inscrire</a></li>';
+                                            }
+                    else{
+                    	echo "<li class='menu-profil'><a href='#'>".$_SESSION['login'];
+                    	if (Session::is_admin()){
+                        	echo ' (Admin)';
+                        }
+                        echo "</a>";
+                    	echo "<ul class='submenu'>";
+						echo '<li><a href="index.php?controller=membre&action=read&login='.$_SESSION['login'].'">Mon profil</a></li>';
+						echo '<li><a href="index.php?controller=membre&action=deconnect">Se déconnecter</a></li>';
+                        echo '</ul>';
+                    	echo '</li>';
+                    }
+                    ?>
 	
-					<li><a href="#">Contact</a></li>
+					<li class="menu-contact"><a href="#">Contact</a></li>
 
 				</ul>
 
 
-			</nav>
+</nav>
+
 <br>

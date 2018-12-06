@@ -54,15 +54,15 @@ class ControllerMembre{
                     self::read();
                 }else{
                     $view = "error";
-                    $message = 'Compte non confirmÈ, nos administrateurs sont sur le coup ! '; // $message est une variable qu'on transmet a error.php pour gerer les erreurs
+                    $message = 'Compte non confirm√©, nos administrateurs sont sur le coup ! '; // $message est une variable qu'on transmet a error.php pour gerer les erreurs
                     $controller="membre";
-                    $pageTitle="Compte non confirmÈ";
+                    $pageTitle="Compte non confirm√©";
                     $pb = "connexion";// $pb est une variable qui permet de gerer le retour en ari√®rre (sur la view error.php)
                     require_once File::build_path(array("view","view.php"));
                 }
             
             }else{
-                    $message = "Votre compte n'existe pas ! Veuillez rÈessayer !";
+                    $message = "Votre compte n\'existe pas ! Veuillez r√©essayer !";
                     $view="error";
                     $controller="membre";
                     $pageTitle="Compte inexistant";
@@ -92,13 +92,13 @@ class ControllerMembre{
         if(!isset($_SESSION['login'])){
           
            $view = 'deconnected';
-           $pageTitle="DeconnectÈ";
+           $pageTitle="Deconnect√©";
           $controller="membre";
             require_once File::build_path(array("view","view.php"));
         } else {
-            $message = "Il y a eu une erreur au niveau de la dÈconnexion veuillez nous en excuser !";
+            $message = "Il y a eu une erreur au niveau de la d√©connexion veuillez nous en excuser !";
             $view = 'error';
-            $pageTitle="DeconnectÈ";
+            $pageTitle="Deconnect√©";
             $controller="membre";
             $pb = "connexion";
             require_once File::build_path(array("view","view.php"));
@@ -112,9 +112,6 @@ class ControllerMembre{
             $u = ModelMembre::select($login);
             $loginU = Dispatcher::myGet('idMembre');
             $tab = ModelCommentaire::selectAllCommByLoginU($loginU);
-            $id = $u->getIdMembre();
-            $tab_e = ModelEmprunt::readAllBienDonneById($id);           
-            //$tab_d = ModelEmprunt::readAllBienEmprunteById(ModelMembre::getIdByLogin(Dispatcher::myGet('login')));
             if ($u != false) {
                 $view = "detail";
                 $pageTitle = "Membre en detail";
@@ -122,7 +119,7 @@ class ControllerMembre{
                 
             }
             else {
-                $message = "Nous n'avons pas rÈussi a trouver le dÈtail de votre compte !";
+                $message = "Nous n'avons pas r√©ussi a trouver le d√©tail de votre compte !";
                 $view = "error";
                 $pageTitle = "Erreur";
                 $controller="membre";
@@ -133,7 +130,7 @@ class ControllerMembre{
         else
         {
           
-            $message = "Cette page n'est accessible qu'aux utilisateurs connectÈs";
+            $message = "Cette page n'est accessible qu'aux utilisateurs connect√©s";
             $view = "error";
             $pageTitle = "Erreur";
             $controller="membre";
@@ -150,7 +147,7 @@ class ControllerMembre{
             $login = htmlspecialchars(Dispatcher::myGet('login'));
             $tab_u = ModelMembre::selectAll();
             $view = "deleted";
-            $pageTitle = "Membre SupprimÈ";
+            $pageTitle = "Membre Supprim√©";
             $controller="membre";
             if(Session::is_user(Dispatcher::myGet('login'))){
                 $_SESSION = array();
@@ -207,12 +204,12 @@ class ControllerMembre{
                         
                     if($u->save()) {
                             $view = "created";
-                            $pageTitle = "Membre ajoutÈ";
+                            $pageTitle = "Membre ajout√©";
                             $controller="membre";
                             $tab_u = ModelMembre::selectAll();
                     }
                     else {
-                        $message = "Ce login est dÈja† utilisÈ par un de nos membres";
+                        $message = "Ce login est d√©j√† utilis√© par un de nos membres";
                         $view = "error";
                         $pb = "mdp";
                         $pageTitle = "Erreur Doublon";
@@ -221,16 +218,16 @@ class ControllerMembre{
                 }
                 }
                 else{
-                    $message = "Vos mots de passe ne sont pas les mÍmes";
+                    $message = "Vos mots de passe ne sont pas les m√™mes";
                     $view = "error";
                     $pb = "mdp";
-                    $pageTitle = "Erreur crÈation membre(mdp)";
+                    $pageTitle = "Erreur cr√©ation membre(mdp)";
                     $controller = "membre";
                   
                 }
             }
             else{
-                $message = "Votre mot de passe est inferieur a 6 caractËres";
+                $message = "Votre mot de passe est inf√©rieur a 6 caract√®res";
                 $view = "error";
                 $pageTitle = "mdp<6";
                 $pb = "mdp";
@@ -253,12 +250,10 @@ class ControllerMembre{
         ControllerMembre::readAll();
     }
     
-    public static function gestionCagnote(){
-        
-    }
 
     public static function update() { 
-        if(!is_null(Dispatcher::myGet('login'))){ //si la personne effectuant l'action est un admin ou l'membre dont il veut modifier les parametres alors on va vers la page update.php
+        if(!is_null(Dispatcher::myGet('login'))){
+            if(Session::is_admin()||Session::is_user(Dispatcher::myGet('login'))){ //si la personne effectuant l'action est un admin ou l'membre dont il veut modifier les parametres alors on va vers la page update.php
                 $u = ModelMembre::select(Dispatcher::myGet('login'));
                 if ($u != false) {
                     $view = "update";
@@ -282,7 +277,12 @@ class ControllerMembre{
                 }
                       
             }
-            
+            else{ //sinon on lui demande de se connecter
+                $view="connect";  
+                $controller="membre";
+               require_once File::build_path(array("view","view.php"));
+            }
+        } 
         else {
                 $view="connect";  
                 $controller="membre";
@@ -295,78 +295,42 @@ class ControllerMembre{
     
 
     public static function updated() {
-        if(strlen(Dispatcher::myGet('mdp')) >= 6){
-                if(Dispatcher::myGet('mdp') == Dispatcher::myGet('mdp2')){
-                    if(!preg_match("/(([a-z][0-9])|([0-9][a-z])|[A-Z][0-9]|([0-9][A-Z]))/",Dispatcher::myGet('mdp')))
-                    {
-                        $message = "- Le mot de passe doit comporter des lettres et des chiffres.<br/>";
-                        $view="error";
-                        $controller="membre";
-                        $pageTitle="Erreur mot de passe";
-                        $pb="mdp";
-                    }else{
-                        $mdp_chiffre = Security::chiffrer(Dispatcher::myGet('mdp'));
-                        $u = ModelMembre::select(Dispatcher::myGet('login'));
-                        if(Session::is_admin()){
-                            if(Dispatcher::myGet('admin')=="oui"){
-                                $valeur = 1; 
-                            }else{
-                                $valeur = 0;
-                            }
-                        }else{
-                            $valeur = 0;
-                        }
-                        $nonce = 1;
-                        if($u != false) {
-                            $data = array(
-                                "login" => Dispatcher::myGet('login'),
-                                "nom" => Dispatcher::myGet('nom'),
-                                "prenom" => Dispatcher::myGet('prenom'),
-                                "mail" => Dispatcher::myGet('mail'),
-                                "telephone" => Dispatcher::myGet('telephone'),
-                                "adresse" => Dispatcher::myGet('adresse'),
-                                "ville" => Dispatcher::myGet('ville'),
-                                "codePostal" => Dispatcher::myGet('codePostal'),
-                                "mdp" => $mdp_chiffre,
-                                "admin" => $valeur,
-                                "nonce" => $nonce
-                        );
-                        $u->update($data);
-
-                        $login = htmlspecialchars(Dispatcher::myGet('login'));
-                        $tab_u = ModelMembre::selectAll();
-                        $view = "updated";
-                        $pageTitle = "Membre ModifiÈ";
-                        $controller="membre";
-                    }
-                    else {
-                    $view = "error";
-                    $message= "Nous avons eu une erreur lors de la crÈation ou la modification du compte";
-                    $pageTitle = "Erreur update";
-                    $controller="membre";
-                    $pb ="update";
-                    }
-                require_once File::build_path(array("view","view.php"));
-                }
+        $mdp_chiffre = Security::chiffrer(Dispatcher::myGet('mdp'));
+        $u = ModelMembre::select(Dispatcher::myGet('login'));
+        if(Session::is_admin()){
+            if(Dispatcher::myGet('admin')=="oui"){ //si le checkbox du formulaire de modification est coch√© alors l'membre vis√© devient admin ()
+            // a voir s'il faut pas mettre l'√©criture num√©rique de bool (1 pour true 0 pour false) car le type boolean (tinynumber) dans mysql est param√©tr√© comme √ßa
+                    $valeur = true; 
+                }else{
+                    $valeur = false;
             }
-                else{
-                    $message = "Vos mots de passe ne sont pas les mÍmes";
-                    $view = "error";
-                    $pb = "mdp";
-                    $pageTitle = "Erreur crÈation membre(mdp)";
-                    $controller = "membre";
-                  
-                }
+        }else{
+            $valeur = false;
         }
-            else{
-                $message = "Votre mot de passe est inferieur a 6 caractËres";
-                $view = "error";
-                $pageTitle = "mdp<6";
-                $pb = "mdp";
-                $controller="membre";
-            }
-            require_once File::build_path(array("view","view.php"));
+        if($u != false) {
+            $data = array(
+                "login" => Dispatcher::myGet('login'),
+                "mdp" => $mdp_chiffre,
+                "nom" => Dispatcher::myGet('nom'),
+                "prenom" => Dispatcher::myGet('prenom'),
+                "admin" => $valeur
+            );
+            $u->update($data);
+
+            $login = htmlspecialchars(Dispatcher::myGet('login'));
+            $tab_u = ModelMembre::selectAll();
+            $view = "updated";
+            $pageTitle = "Membre Modifi√©";
+            $controller="membre";
+        }
+        else {
+            $view = "error";
+            $message= "Nous avons eu une erreur lors de la cr√©ation ou la modification du compte";
+            $pageTitle = "Erreur update";
+            $controller="membre";
+            $pb ="update";
+        }
+        require_once File::build_path(array("view","view.php"));
     }
-    
     
 }
