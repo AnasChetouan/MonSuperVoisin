@@ -102,7 +102,7 @@
                 
                 public static function readAllBienDonneById($id){
                     //echo $id;
-                    /*$sql = Model::$pdo->query("SELECT * FROM Emprunt WHERE idProposant=:id");
+                    $sql = ("SELECT * FROM Emprunt WHERE idProposant=:id");
                     $req_prep = Model::$pdo->prepare($sql);
                     $values = array(
                         "id" => $id,
@@ -110,13 +110,12 @@
                     $req_prep->execute($values);
                     $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelEmprunt');
                     $tab= $req_prep->fetchAll();
-                    return $tab; */
+                    return $tab;
                 }
                 
                 public static function readAllBienEmprunteById($id){
                      //echo $id;
-                     /*
-                    $sql = Model::$pdo->query("SELECT * FROM Emprunt WHERE idAcceptant=:id");
+                    $sql = ("SELECT * FROM Emprunt WHERE idAcceptant=:id");
                     $req_prep = Model::$pdo->prepare($sql);
                     $values = array(
                         "id" => $id,
@@ -124,7 +123,7 @@
                     $req_prep->execute($values);
                     $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelEmprunt');
                     $tab= $req_prep->fetchAll();
-                    return $tab;  */
+                    return $tab;
                 }
                 
     }

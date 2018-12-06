@@ -151,7 +151,7 @@ class Model {
             if (Conf::isDebug()) {
                 echo $e->getMessage();
             } else {
-                echo 'Une erreur est survenue <a href="index.php"> retour a la page d\'accueil </a>';
+                echo "Une erreur est survenue <a href='index.php'> retour a la page d'accueil </a>";
             }
             die();
         }
