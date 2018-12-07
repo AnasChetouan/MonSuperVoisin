@@ -2,9 +2,16 @@
 
 $formTitle="Proposer un bien";
 
+$idBien = htmlspecialchars($b->getIdBien());
+$titre = htmlspecialchars($b->getTitre());
+$categorie = htmlspecialchars($b->getMotClef());
+$description = htmlspecialchars($b->getDescription());
+$prixneuf = htmlspecialchars($b->getPrixNeuf());
+
+
 switch ($functionCaller) {
     case "create":
-        $formTitle="Cr√©er";
+        $formTitle="CrÈer";
         $hiddenValue="created";
         $attribut = " ";
         break;
@@ -14,21 +21,28 @@ switch ($functionCaller) {
         $attribut="readonly";
         break;
 }
+if(Conf::getDebug()==false){
+    $method = "post";
+}else{
+    $method = "get";
+}
 
 ?>
 
 
-<form action="index.php" method="post" enctype="multipart/form-data">
+
+
+<form action="index.php" method="<?=$method?>" enctype="multipart/form-data">
      <fieldset>
          <legend><?=$formTitle?></legend>
     <input type='hidden' name='controller' value='Bien'>
     <input type='hidden' name='action' value='<?=$hiddenValue?>'>
-
-                        <div> 
+    <input type='hidden' name='idBien' value='<?=$idBien?>'>
+                      <div> 
                             <!-- Cat√©gories inspir√©es du site "leboncoin" -->
-                            <label for="motClef"> Cat√©gorie du bien : </label> 
+                            <label for="motClef"> CatÈgorie du bien : </label> 
                             <select name="motClef" id="motClef">
-                                <option  value="null">Choissisez la cat√©gorie</option>
+                                <option  value="<?=$categorie?>"><?php if($functionCaller == "update")echo $categorie; else echo "Choisir une catÈgorie";?></option>
                                 <optgroup label ="Multimedia">
                                     <option value="informatique">Informatique</option>
                                     <option value="console-jv">Console & Jeux vid√©os</option>
@@ -76,29 +90,31 @@ switch ($functionCaller) {
                                     <option value="autres">Autres</option>
                                 </optgroup>
                             </select>
-                        </div>   
-
+                        </div>
                         <div>
                             Titre de l'annonce :
-                            <input type="text" name="titre" required />
+                            <input type="text" name="titre" value="<?=$titre?>" required />
                         </div> 
 
                         <div>
-                            <label for="description">Description :</label><textarea name="description" rows="8" cols="45" required></textarea>
+                            <label for="description">Description :</label><textarea name="description" rows="8" cols="45" required><?php echo $description?></textarea>
                         </div> 
                         
                         <div>
                             Prix neuf :
-                            <input type="text" name="prixNeuf" required /> ‚Ç¨
+                            <input type="text" name="prixNeuf" value="<?=$prixneuf?>" required /> Ä
                         </div> 
 
-  
+                <?php if($functionCaller == "create"){
+                    echo '
                         <div>
                             Photo du bien :<br />
                             <input type="file" name="photo" required /><br />
-                        </div> 
-                        
+                        </div>'; 
+                        }
+                        ?>
                     <input type="submit" value="Valider" />
+                
                     
     </fieldset>
 </form>            
