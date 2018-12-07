@@ -28,7 +28,7 @@
             
             // <p>'.'<b>'.$descHTML.'</b>'.'<br/>  </p>';
             echo 'Propriétaire : '.$loginProprio;
-            echo '<br/>'.'<br/>'.'<a href="index.php?controller=bien&action=read&id='.$idBien.'"><button> Detail objet </button></a>';
+            echo '<br/>'.'<br/>'.'<a href="index.php?controller=bien&action=read&idBien='.$idBien.'"><button> Detail objet </button></a>';
             echo '</div>';
             echo '</a>';
             }

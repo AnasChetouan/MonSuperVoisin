@@ -29,12 +29,12 @@ class ControllerBien{
     }
     
     public static function read() {
-        $b = ModelBien::select(Dispatcher::myGet('id'));
+        $b = ModelBien::select(Dispatcher::myGet('idBien'));
         if ($b != false) {
             $view = "detail";
             $pageTitle = "Bien en detail";
             $controller ="bien";
-            $tab = ModelCommentaire::selectAllCommByIdProduit(Dispatcher::myGet('id'));
+            $tab = ModelCommentaire::selectAllCommByIdProduit(Dispatcher::myGet('idBien'));
         }
         else {
             $pb = "errorRead";
@@ -47,7 +47,7 @@ class ControllerBien{
     
     }
     public static function delete() {
-    	$id = (Dispatcher::myGet('id'));
+    	$id = (Dispatcher::myGet('idBien'));
     	$b = ModelBien::select($id);
     	unlink($b->getLienPhoto()); // On supprime la photo associée au bien avant de retirer le bien de la BDD
     	
@@ -164,7 +164,7 @@ class ControllerBien{
     
     public static function update(){
         if(isset($_SESSION['login'])){
-            $idBien = Dispatcher::myGet('id');
+            $idBien = Dispatcher::myGet('idBien');
             $b = ModelBien::select($idBien);
             if($b != false){
             $idProprio = $b->getIdProprio(); // A FINIR

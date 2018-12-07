@@ -21,18 +21,18 @@ switch ($functionCaller) {
         $attribut="readonly";
         break;
 }
-if(Conf::getDebug()==false){
+/*if(Conf::getDebug()==false){
     $method = "post";
 }else{
     $method = "get";
-}
+}*/
 
 ?>
 
 
 
 
-<form action="index.php" method="<?=$method?>" enctype="multipart/form-data">
+<form action="index.php" method="post" enctype="multipart/form-data">
      <fieldset>
          <legend><?=$formTitle?></legend>
     <input type='hidden' name='controller' value='Bien'>
