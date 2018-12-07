@@ -24,7 +24,7 @@ switch($adminHTML){
 
 switch ($functionCaller) {
     case "create":
-        $formTitle="CrÃ©er";
+        $formTitle="Créer";
         $hiddenValue="created";
         $attribut = " ";
         break;
@@ -40,7 +40,7 @@ if($functionCaller!="update"||$admin!="oui"){ //si l'action n'est pas de modifie
 }
 if(isset($admin)){
     if($admin=="oui"){
-        $formTitle= $formTitle." un client";
+        $formTitle= $formTitle."un client";
     }else if($functionCaller=="update"){
         $formTitle="Modifier son compte";
     }
@@ -69,42 +69,24 @@ if(Conf::getDebug()==false){
             <label for="login_id">Login :</label> <span>*</span>
             <input type="text" name="login" id="login_id" value="<?=$loginHTML?>" placeholder="Exemple : jSmith" required <?php echo $attribut ;?>/>
         </p>
-        <?php
-        if($functionCaller=="create"){
-             echo ' 
+        
             
         <p>
             <label for="mdp_id">Mot de passe :</label> <span>*</span>
-            <input type="password" name="mdp" id="mdp_id" value="'.$mdpHTML.'" required />
+            <input type="password" name="mdp" id="mdp_id"  required />
         </p>
         <p>
             <label for="mdp2_id">Validation du mot de passe (retaper le):</label> <span>*</span>
-            <input type="password" name="mdp2" id="mdp2_id" value="'.$mdpHTML.'" required />
+            <input type="password" name="mdp2" id="mdp2_id"  required />
         </p>
         
-            ';
-        }
-            else if($functionCaller=="update"&&Session::is_user($loginHTML)){
-               echo ' 
-            
-        <p>
-            <label for="mdp_id">Mot de passe :</label> <span>*</span>
-            <input type="password" name="mdp" id="mdp_id" value="'.$mdpHTML.'" required />
-        </p>
-        <p>
-            <label for="mdp2_id">Validation du mot de passe (retapez le):</label> <span>*</span>
-            <input type="password" name="mdp2" id="mdp2_id" value="'.$mdpHTML.'" required />
-        </p>
-        
-            ';}
-        ?>
         <p>
             <label for="name_id">Nom :</label> <span>*</span>
             <input type="text" name="nom" id="name_id" pattern="[a-zA-Z\ ]*" value="<?=$nomHTML?>" placeholder="Votre nom" required/>
         </p>
         <p>
-            <label for="prenom_id">PrÃ©nom :</label> <span>*</span>
-            <input type="text" name="prenom" id="prenom_id" pattern="[a-zA-Z\ ]*" value="<?=$prenomHTML?>" placeholder="Votre prÃ©nom" required/>
+            <label for="prenom_id">Prénom :</label> <span>*</span>
+            <input type="text" name="prenom" id="prenom_id" pattern="[a-zA-Z\ ]*" value="<?=$prenomHTML?>" placeholder="Votre prénom" required/>
         </p>
         
         <?php if($functionCaller=="update"){ $typeInput="mail";}else{$typeInput="text";} ?>
