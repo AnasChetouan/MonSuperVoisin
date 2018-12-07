@@ -8,6 +8,7 @@ require_once File::build_path(array("controller", "Dispatcher.php"));
 class ControllerBien{
     public static function readAll() {
         $tab_b = ModelBien::selectAll(); // stocke tout
+	ModelEmprunt::actualiserEmprunt();
         $view = "list";
         $pageTitle = "Listes des biens";
         $controller ="bien";
