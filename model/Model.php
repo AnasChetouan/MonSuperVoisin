@@ -131,15 +131,17 @@ class Model {
 
         $table_name = static::$object;
         $primary_key = static::$primary;
-
+        //echo $primary_key;
+        //echo $table_name;
+        
         $values = array();
         $set="";
-
+        //print_r($data);
+        
         foreach ($data as $key=>$value) {
             $set.="$key=:$key, ";
             $values[$key]=$value;
         }
-
         $set = substr($set, 0, -2);
         
         try {
