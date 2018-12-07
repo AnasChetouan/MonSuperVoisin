@@ -16,6 +16,18 @@ class ControllerBien{
         require_once File::build_path(array("view","view.php"));
     }
     
+    public static function validate() {
+        $idBien = Dispatcher::myGet('idBien');
+        ModelBien::validate($idBien);
+        ControllerMembre::gestionAnnonces();
+    }
+    
+    public static function desactiver() {
+        $idBien = Dispatcher::myGet('idBien');
+        ModelBien::desactiver($idBien);
+        ControllerMembre::gestionAnnonces();
+    }
+    
     public static function read() {
         $b = ModelBien::select(Dispatcher::myGet('id'));
         if ($b != false) {

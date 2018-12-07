@@ -131,5 +131,23 @@
                  );
                  $req_prep->execute($values);
                 }
+                
+                public static function validate($idBien){ 
+                $sql = "UPDATE Bien SET estValide = 0 WHERE idBien=:id_tag";
+                $req_prep = Model::$pdo->prepare($sql);
+                $values = array(
+                "id_tag" => $idBien,
+                );
+                $req_prep->execute($values);
+                }
+    
+                public static function desactiver($idBien){ 
+                $sql = "UPDATE Bien SET estValide = 1 WHERE idBien=:id_tag";
+                $req_prep = Model::$pdo->prepare($sql);
+                $values = array(
+                "id_tag" => $idBien,
+                );
+                $req_prep->execute($values);
+                }
         }
  ?>

@@ -253,9 +253,6 @@ class ControllerMembre{
         ControllerMembre::readAll();
     }
     
-    public static function gestionCagnote(){
-        
-    }
 
     public static function update() { 
         if(!is_null(Dispatcher::myGet('login'))){ //si la personne effectuant l'action est un admin ou l'membre dont il veut modifier les parametres alors on va vers la page update.php
@@ -368,5 +365,12 @@ class ControllerMembre{
             require_once File::build_path(array("view","view.php"));
     }
     
+    public static function gestionAnnonces(){
+        $tab_b = ModelBien::selectAll();
+        $view = "listAnnonces";
+        $pageTitle = "Liste des Annonces";
+        $controller="membre";
+        require_once File::build_path(array("view","view.php"));
+    }
     
 }
