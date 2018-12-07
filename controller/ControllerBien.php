@@ -133,7 +133,7 @@ class ControllerBien{
                 }
             }
             else{
-            $message = "Le prix a été mal défini !";
+            $message = "Le prix a �t� mal défini !";
             $view = "error";
             $pb = "prix";
             $pageTitle = "Erreur prix bien";
@@ -191,34 +191,31 @@ class ControllerBien{
     }
     
     public static function updated() {
-        $motClef = htmlspecialchars(Dispatcher::myGet('motClef'));
-        $titre = htmlspecialchars(Dispatcher::myGet('titre'));
-        $description = htmlspecialchars(Dispatcher::myGet('description'));
-        $prixNeuf = htmlspecialchars(Dispatcher::myGet('prixNeuf'));
-        if (!($motClef === "null")){
-            if(is_numeric($prixNeuf)){
-	            $tarif = $prixNeuf/200; // Formule de passage du prix neuf au tarif de location / jour
-	                                                                // à modifier si besoin                         
-	            $idBien = Dispatcher::myGet('id');
-	            $b = ModelBien::select($idBien);
-	            if($b != false) {
-	            	$dt = array(
-		                "motClef" => Dispatcher::myGet('motClef')
-		            );
-	            	print_r($b);
-	                print_r($dt);
-
-	                $b->update($dt);
-
-	                echo "ok";
-	                                            
+        if (Dispatcher::myGet('motClef') != "null"){
+            if(is_numeric(Dispatcher::myGet('prixNeuf'))){
+	            $tarif = Dispatcher::myGet('prixNeuf')/200; // Formule de passage du prix neuf au tarif de location / jour
+	            // à modifier si besoin       
+                    $b = ModelBien::select(Dispatcher::myGet('idBien'));
+                    //print_r($b);
+                    if($b != false) {
+                            $data = array(
+                                "idBien" => Dispatcher::myGet('idBien'),
+                                "titre" => Dispatcher::myGet('titre'),
+                                "motClef" => Dispatcher::myGet('motClef'),
+                                "description" => htmlspecialchars(Dispatcher::myGet('description')),
+                                "prixNeuf" => Dispatcher::myGet('prixNeuf'),
+                                "tarif" => $tarif
+                        );
+                        //print_r($data);  
+                        $b->update($data);
+                  
 	                $controller="bien";
 	                $view = "updated";
-	                $pageTitle = "Bien modifié";
-	               // $idProprio = $b->getIdProprio();
+	                $pageTitle = "Bien modifi�";
+	                $idProprio = $b->getIdProprio();
 	                $tab_b = ModelBien::selectAll();
 	                
-	            }
+	            } 
 	            else {
 	            	$view = "error";
 	                $message= "Nous avons eu une erreur lors de la modification du bien";
@@ -226,7 +223,6 @@ class ControllerBien{
 	                $controller="bien";
 	                $pb ="update";
 	            }
-
 	        }
 
             else{
@@ -245,7 +241,6 @@ class ControllerBien{
             $pageTitle = "Erreur catégorie bien";
             $controller = "bien";
         }
-
         require_once File::build_path(array("view","view.php"));
 
     }
