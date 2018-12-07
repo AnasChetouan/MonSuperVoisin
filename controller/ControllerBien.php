@@ -197,11 +197,13 @@ class ControllerBien{
 	            // à modifier si besoin       
                     $b = ModelBien::select(Dispatcher::myGet('idBien'));
                     //print_r($b);
+                    $estDispo = 0;
                     if($b != false) {
                             $data = array(
                                 "idBien" => Dispatcher::myGet('idBien'),
                                 "titre" => Dispatcher::myGet('titre'),
                                 "motClef" => Dispatcher::myGet('motClef'),
+                                "estDispo" => $estDispo,
                                 "description" => htmlspecialchars(Dispatcher::myGet('description')),
                                 "prixNeuf" => Dispatcher::myGet('prixNeuf'),
                                 "tarif" => $tarif
