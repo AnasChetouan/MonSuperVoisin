@@ -21,7 +21,7 @@
             else {
                 echo 'Suppression  <a href="index.php?controller=Bien&action=delete&idBien='.$idBien.'"><img src="style/img/icone_deconnect.png" alt="supression du Bien" style="width:10%;height:10%"></a>';
                 echo '</br>';
-                if($estValide==1){
+                if($estValide==0){
                 echo 'Validation  <a href="index.php?controller=bien&action=validate&idBien='.$idBien.'"><img src="style/img/validate.jpg" alt="validation annonce" style="width:10%;height:10%"></a>';
                 }
                 else echo 'Validation <a href="index.php?controller=bien&action=desactiver&idBien='.$idBien.'"><img src="style/img/ban.jpg" alt="Bannissement tempo annonce" style="width:10%;height:10%"></a>';

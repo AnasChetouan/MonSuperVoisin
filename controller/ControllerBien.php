@@ -55,7 +55,7 @@ class ControllerBien{
         
         $tab_b = ModelBien::selectAll();
         $view = "deleted";
-        $pageTitle = "Bien supprimÃ©";
+        $pageTitle = "Bien supprimé";
         $controller ="bien";
         require_once File::build_path(array("view","view.php"));
     }
@@ -82,7 +82,7 @@ class ControllerBien{
         $prixNeuf = htmlspecialchars(Dispatcher::myGet('prixNeuf'));
         if (!($motClef === "null")){
             if(is_numeric($prixNeuf)){
-                // Testons si le fichier a bien Ã©tÃ© envoyÃ© et s'il n'y a pas d'erreur
+                // Testons si le fichier a bien éré envoyé et s'il n'y a pas d'erreur
                 if (isset($_FILES['photo']) AND $_FILES['photo']['error'] == 0)
                 {
                     // Testons si le fichier n'est pas trop gros
@@ -97,18 +97,18 @@ class ControllerBien{
                                 {
                       
                                         $tarif = $prixNeuf/200; // Formule de passage du prix neuf au tarif de location / jour
-                                                                // Ã  modifier si besoin
+                                                                // A modifier si besoin
                                         
                                         $b = new ModelBien($titre, $description, $tarif, $motClef, 0, "temp", $prixNeuf, 1, ModelMembre::getIdByLogin($_SESSION['login'])); // ...
                                         $b->save();
                                         move_uploaded_file($_FILES['photo']['tmp_name'], 'uploads/' . basename($b->updateLienPhoto($extension_upload)));
                                         $view = "created";
-                                        $pageTitle = "Bien ajoutÃ©";
+                                        $pageTitle = "Bien ajouté";
                                         $controller="bien";
                                         $tab_b = ModelBien::selectAll();
                                 }
                                 else{
-                                    $message = "L'extension du fichier que vous avez envoyÃ© n'est pas autorisÃ©e ! \n (Rappel, les extensions autorisÃ©es sont : jpg, jpeg, gif, png)";
+                                    $message = "L'extension du fichier que vous avez envoyÃ© n'est pas autorisée ! \n (Rappel, les extensions autorisÃ©es sont : jpg, jpeg, gif, png)";
                                             $view = "error";
                                             $pb = "extension";
                                             $pageTitle = "Erreur extension fichier";
@@ -124,7 +124,7 @@ class ControllerBien{
                             }
                     }
                     else{
-                        $message = "L'image que vous avez envoyÃ©e est trop volumineuse ! (Maximum autorisÃ© : 1.5Mo)";
+                        $message = "L'image que vous avez envoyÃ©e est trop volumineuse ! (Maximum autorisé : 1.5Mo)";
                                 $view = "error";
                                 $pb = "taille";
                                 $pageTitle = "Erreur taille fichier";
@@ -145,7 +145,7 @@ class ControllerBien{
                 }
             }
             else{
-            $message = "Le prix a été mal dÃ©fini !";
+            $message = "Le prix a été mal défini !";
             $view = "error";
             $pb = "prix";
             $pageTitle = "Erreur prix bien";
@@ -153,10 +153,10 @@ class ControllerBien{
             }
         }
         else{
-            $message = "La catÃ©gorie du bien n'a pas Ã©tÃ© dÃ©finie !";
+            $message = "La catégorie du bien n'a pas été définie !";
             $view = "error";
-            $pb = "catÃ©gorie";
-            $pageTitle = "Erreur catÃ©gorie bien";
+            $pb = "categorie";
+            $pageTitle = "Erreur catégorie bien";
             $controller = "bien";
         }
         require_once File::build_path(array("view","view.php"));
@@ -170,7 +170,7 @@ class ControllerBien{
             $idProprio = $b->getIdProprio(); // A FINIR
                 if($idProprio == ModelMembre::getIdByLogin($_SESSION['login']) || Session::is_admin()){
                     // Si l'id du proprio du bien est la mÃªme que celle du membre connectÃ©
-                    // Donc on vÃ©rifie que c'est bien le proprio qui veut modifier son bien
+                    // Donc on vérifie que c'est bien le proprio qui veut modifier son bien
                     $functionCaller = "update";
                     $view = "update";
                     $pageTitle = "Modification";
@@ -178,7 +178,7 @@ class ControllerBien{
                 }
                 else{
                     $view = "error";
-                    $message = "Vous n'Ãªtes pas autorisÃ© Ã  modifier ce bien !";
+                    $message = "Vous n'êtes pas autorisé à modifier ce bien !";
                     $pageTitle = "Erreur modificaiton";
                     $controller="bien";
                     $pb = "autorisation";
@@ -209,13 +209,21 @@ class ControllerBien{
 	            // Ã  modifier si besoin       
                     $b = ModelBien::select(Dispatcher::myGet('idBien'));
                     //print_r($b);
-                    $estDispo = 0;
+                    $estDispo = $b->getEstDispo();
+                    if (Session::is_admin()){ // Si c'est un admin qui modifie, on valide directement
+                        $estValide = 1;
+                    }
+                    else
+                    {
+                        $estValide = 0;
+                    }
                     if($b != false) {
                             $data = array(
                                 "idBien" => Dispatcher::myGet('idBien'),
                                 "titre" => Dispatcher::myGet('titre'),
                                 "motClef" => Dispatcher::myGet('motClef'),
                                 "estDispo" => $estDispo,
+                                "estValide" => $estValide,
                                 "description" => htmlspecialchars(Dispatcher::myGet('description')),
                                 "prixNeuf" => Dispatcher::myGet('prixNeuf'),
                                 "tarif" => $tarif

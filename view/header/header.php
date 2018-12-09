@@ -13,7 +13,11 @@
 		
 					<li class="menu-services"><a href="#">Services</a>
 						<ul class="submenu">
-							<li><a href="#">Trouver un service</a></li>
+							<li><a href="index.php?controller=service&action=readAll">Trouver un service</a></li>
+							<?php
+							if((isset($_SESSION['login'])))
+                                echo '<li><a href="index.php?controller=service&action=create">Proposer un service</a></li>';
+							?>	
 						</ul>
 					
 					</li>

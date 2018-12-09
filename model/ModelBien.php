@@ -4,6 +4,7 @@
 		protected static $object = 'Bien';
 		protected static $primary = 'idBien';
 		protected static $name = 'nom';
+        
 		// ATTRIBUTS
                 
                 private $idBien;
@@ -75,8 +76,8 @@
                 public function setEstDispo($estDispo) {
                     $this->estDispo = $estDispo;
                 }
-                public function setIdProprio($idProrio) {
-                    $this->idProrio = $idProrio;
+                public function setIdProprio($idProprio) {
+                    $this->idProprio = $idProprio;
                 }
                                 
 		// CONSTRUCTEUR(S)
@@ -133,7 +134,7 @@
                 }
                 
                 public static function validate($idBien){ 
-                $sql = "UPDATE Bien SET estValide = 0 WHERE idBien=:id_tag";
+                $sql = "UPDATE Bien SET estValide = 1 WHERE idBien=:id_tag";
                 $req_prep = Model::$pdo->prepare($sql);
                 $values = array(
                 "id_tag" => $idBien,
@@ -142,7 +143,7 @@
                 }
     
                 public static function desactiver($idBien){ 
-                $sql = "UPDATE Bien SET estValide = 1 WHERE idBien=:id_tag";
+                $sql = "UPDATE Bien SET estValide = 0 WHERE idBien=:id_tag";
                 $req_prep = Model::$pdo->prepare($sql);
                 $values = array(
                 "id_tag" => $idBien,

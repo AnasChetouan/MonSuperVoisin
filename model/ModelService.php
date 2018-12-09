@@ -4,25 +4,19 @@ require_once 'Model.php';
 class ModelService extends Model {
 			   
     protected static $object = 'Service';
-    protected static $primary='idService';
-    protected static $name='motClef';
+    protected static $primary= 'idService';
+    protected static $name= 'motClef';
 
     private $idService;
-    private $titre;
     private $description;
     private $tarif;
     private $motClef;
     private $estValide;
-    private $dateDebut;
-    private $dateFin;
-    private $dispo;
+    private $disponibilites;
+    private $idProprio;
     
     public function getIdService() {
         return $this->idService;
-    }
-
-    public function getTitre() {
-        return $this->titre;
     }
 
     public function getDescription() {
@@ -41,24 +35,20 @@ class ModelService extends Model {
         return $this->estValide;
     }
 
-    public function getDateDebut() {
-        return $this->dateDebut;
+    public function getDisponibilites() {
+        return $this->disponibilites;
     }
 
-    public function getDateFin() {
-        return $this->dateFin;
+    public function getIdProprio() {
+        return $this->idProprio;
     }
 
-    public function getDispo() {
-        return $this->dispo;
+    public function setDisponibilites($disponibilites) {
+        $this->disponibilites = $disponibilites;
     }
 
     public function setIdService($idService) {
         $this->idService = $idService;
-    }
-
-    public function setTitre($titre) {
-        $this->titre = $titre;
     }
 
     public function setDescription($description) {
@@ -77,33 +67,61 @@ class ModelService extends Model {
         $this->estValide = $estValide;
     }
 
-    public function setDateDebut($dateDebut) {
-        $this->dateDebut = $dateDebut;
+    public function setIdProprio($idProprio) {
+        $this->idProprio = $idProprio;
     }
 
-    public function setDateFin($dateFin) {
-        $this->dateFin = $dateFin;
-    }
-
-    public function setDispo($dispo) {
-        $this->dispo = $dispo;
-    }
-
-    public function __construct ($titre = NULL, $description = NULL, $tarif = NULL, $motClef = NULL, $estValide = NULL, $dateDebut = NULL, $dateFin = NULL, $dispo = NULL){
-        if(!is_null($titre) && !is_null($description) && !is_null($tarif) && !is_null($motClef) && !is_null($estValide) && !is_null($dateDebut) && !is_null($dateFin) && !is_null($dispo) ) 
+    public function __construct ($description = NULL, $tarif = NULL, $motClef = NULL, $estValide = NULL, $disponibilites = NULL, $idProprio = NULL){
+        if(!is_null($description) && !is_null($tarif) && !is_null($motClef) && !is_null($estValide) && !is_null($disponibilites) && !is_null($idProprio) ) 
         {
-  
-            $this->titre = $titre;
             $this->description = $description;
             $this->tarif = $tarif;
             $this->motClef = $motClef;
             $this->estValide = $estValide;
-            $this->dateDebut = $dateDebut;
-            $this->dateFin = $dateFin;
-            $this->dispo = $dispo;
+            $this->disponibilites = $disponibilites;
+            $this->idProprio = $idProprio;
         }
     }
-                           
-}                 
+
+    public static function compresserDispos($valeurs, $jours){
+        $chaine = "";
+
+        $i = 0;
+
+        foreach ($valeurs as $key=>$value) {
+            if ($i % 2 == 0){
+                $chaine.=$jours[$key]." : De ".$value;
+                $i+= 1;
+            }
+            else{
+                $chaine.="h à ".$value."h\n";
+                $i+= 1;
+            }
+        }
+        return $chaine;
+    }
+
+    public static function validate($idService){ 
+        $sql = "UPDATE Bien SET estValide = 1 WHERE idService=:id_tag";
+        $req_prep = Model::$pdo->prepare($sql);
+        $values = array(
+            "id_tag" => $idService,
+        );
+        $req_prep->execute($values);
+    }
+
+
+    public static function desactiver($idService){ 
+        $sql = "UPDATE Bien SET estValide = 0 WHERE idService=:id_tag";
+        $req_prep = Model::$pdo->prepare($sql);
+        $values = array(
+            "id_tag" => $idService,
+        );
+        $req_prep->execute($values);
+
+    }
+
+}
+
                         
 ?>

@@ -1,22 +1,20 @@
 <?php
 
-$formTitle="Proposer un bien";
-
 $idBien = htmlspecialchars($b->getIdBien());
 $titre = htmlspecialchars($b->getTitre());
-$categorie = htmlspecialchars($b->getMotClef());
+$motClef = htmlspecialchars($b->getMotClef());
 $description = htmlspecialchars($b->getDescription());
 $prixneuf = htmlspecialchars($b->getPrixNeuf());
 
 
 switch ($functionCaller) {
     case "create":
-        $formTitle="Créer";
+        $formTitle="Proposer un bien";
         $hiddenValue="created";
         $attribut = " ";
         break;
     case "update":
-        $formTitle="Modifier";
+        $formTitle="Modifier un bien";
         $hiddenValue="updated";
         $attribut="readonly";
         break;
@@ -25,6 +23,8 @@ switch ($functionCaller) {
     $method = "post";
 }else{
     $method = "get";
+    
+    On ne peut pas le faire ici car la method get ne fonctionne pas pour envoyer un fichier
 }*/
 
 ?>
@@ -42,7 +42,9 @@ switch ($functionCaller) {
                             <!-- CatÃ©gories inspirÃ©es du site "leboncoin" -->
                             <label for="motClef"> Catégorie du bien : </label> 
                             <select name="motClef" id="motClef">
-                                <option  value="<?=$categorie?>"><?php if($functionCaller == "update")echo $categorie; else echo "Choisir une catégorie";?></option>
+                                <?php if($functionCaller == "update"){ echo "<optgroup label ='Votre ancienne catégorie'>"; }?>
+                                <option  value="<?=$motClef?>"><?php if($functionCaller == "update")echo $motClef; else echo "Choisir une catégorie";?></option>
+                                <?php if($functionCaller == "update"){ echo "</optgroup>"; }?>
                                 <optgroup label ="Multimedia">
                                     <option value="informatique">Informatique</option>
                                     <option value="console-jv">Console & Jeux vidÃ©os</option>
