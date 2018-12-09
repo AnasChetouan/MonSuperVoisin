@@ -280,7 +280,7 @@ class ControllerService{
             }
         }
         else{
-            $message = "La catégorie du bien n'a pas été définie !";
+            $message = "La catégorie du service n'a pas été définie !";
             $view = "error";
             $pb = "categorie";
             $pageTitle = "Erreur tarif horaire";
