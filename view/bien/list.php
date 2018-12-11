@@ -1,9 +1,29 @@
 <div class="produits">
     
     <?php
+    if(!empty($_SESSION['login'])){
+        $ville = " pres de ".ModelMembre::getVilleByLogin($_SESSION['login']);
+    }
+    else $ville = "";
+    
+    echo '
+        <form action="index.php" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="controller" value="Bien">
+        <input type="hidden" name="action" value="rechercheBien">
+                 <div id="recherche"> Rechercher un Bien'.$ville.' :
+                      <input type="text" name="nom" required placeholder="Exemple : Souris" />
+                      </br>
+                      Entre : 
+                      <input type="number" name="prix1" min="0" placeholder=0> € et 
+                      <input type="number" name="prix2" min="0" placeholder=100> €
+                      </br>
+                      </br>
+                 <input type="submit" value="Rechercher" />
+                 </div> 
+        </form>  
+        </br>';          
         foreach($tab_b as $b){ 
             $titreHTML = htmlspecialchars($b->getTitre());
-            //$descHTML = htmlspecialchars($b->getDescription());
             $lienPhoto = htmlspecialchars($b->getLienPhoto());
             $idBien = htmlspecialchars($b->getIdBien());
             $loginProprio = htmlspecialchars(ModelMembre::getLoginById(($b->getIdProprio())));
