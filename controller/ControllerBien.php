@@ -28,6 +28,92 @@ class ControllerBien{
         ControllerMembre::gestionAnnonces();
     }
     
+    public static function rechercheBien(){
+        $name = Dispatcher::myGet('nom');
+        $prix1 = Dispatcher::myGet('prix1');
+        $prix2 = Dispatcher::myGet('prix2');
+        if(!empty($name)){
+            if(!empty($prix1) && !empty($prix2)){
+                ControllerBien::rechercheByPrix();
+            }
+            else ControllerBien::rechercheByName();
+        }else {
+                $pb = "errorRead";
+                $view = "error";
+                $message = "Une erreur est survenue lors de la recherche ! ";
+                $pageTitle = "Bien non trouvé";
+                $controller ="bien";
+        }
+        require_once File::build_path(array("view","view.php"));
+    }
+    
+    public static function rechercheByName(){
+        $name = Dispatcher::myGet('nom');
+        if(!empty($name)){
+            if(!empty($_SESSION['login'])){
+                $ville = ModelMembre::getVilleByLogin($_SESSION['login']);
+                $tab_b = ModelBien::rechercheAvecVille($name,$ville);
+            }
+            else $tab_b = ModelBien::recherche($name);
+            if($tab_b != false){
+                $view = "list";
+                $pageTitle = "Listes des biens";
+                $controller ="bien";
+            }
+            else {
+                $pb = "errorRead";
+                $view = "error";
+                $message = "Nous n'avons trouvé aucun bien corespondant a votre recherche ! ";
+                $pageTitle = "Bien non trouvé";
+                $controller ="bien";
+            }
+            
+        }
+        else {
+            $pb = "errorRead";
+                $view = "error";
+                $message = "Une erreur est survenue lors de la recherche ! ";
+                $pageTitle = "Bien non trouvé";
+                $controller ="bien";
+        }
+        require_once File::build_path(array("view","view.php"));
+    }
+    
+    public static function rechercheByPrix(){
+        $prix1 = Dispatcher::myGet('prix1');
+        $prix2 = Dispatcher::myGet('prix2');
+        $name = Dispatcher::myGet('nom');
+        if(!empty($name)){
+            if(!empty($_SESSION['login'])){
+                $ville = ModelMembre::getVilleByLogin($_SESSION['login']);
+                $tab_b = ModelBien::rechercheByPrixAvecVille($prix1,$prix2,$name,$ville);
+            }
+            else $tab_b = ModelBien::rechercheByPrix($prix1,$prix2,$name);
+            if(!empty($tab_b)){
+                print_r($tab_b);
+                $view = "list";
+                $pageTitle = "Listes des biens";
+                $controller ="bien";
+            }
+            else {
+                $pb = "errorRead";
+                $view = "error";
+                $message = "Nous n'avons trouvé aucun bien corespondant a votre recherche ! ";
+                $pageTitle = "Bien non trouvé";
+                $controller ="bien";
+            }
+            
+        }
+        else {
+            $pb = "errorRead";
+                $view = "error";
+                $message = "Une erreur est survenue lors de la recherche ! ";
+                $pageTitle = "Bien non trouvé";
+                $controller ="bien";
+        }
+        require_once File::build_path(array("view","view.php"));
+    }
+    
     public static function read() {
         $b = ModelBien::select(Dispatcher::myGet('idBien'));
         if ($b != false) {
@@ -39,8 +125,8 @@ class ControllerBien{
         else {
             $pb = "errorRead";
             $view = "error";
-            $message = "Une erreur est survenue, le bien n'a pas Ã©tÃ© trouvÃ© ! ";
-            $pageTitle = "Bien non trouvÃ©";
+            $message = "Une erreur est survenue, le bien n'a pas été trouvé ! ";
+            $pageTitle = "Bien non trouvé";
             $controller ="bien";
         }
         require_once File::build_path(array("view","view.php"));
