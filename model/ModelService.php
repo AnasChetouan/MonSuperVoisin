@@ -120,6 +120,97 @@ class ModelService extends Model {
         $req_prep->execute($values);
 
     }
+    
+    public static function rechercheByPrixAvecVille($prix1, $prix2, $name, $ville) {
+                    $name_element = static::$name;
+                try {
+                    $sql = "SELECT * from service INNER JOIN membre ON service.idProprio = membre.idMembre AND ville=:ville_tag AND ".$name_element." LIKE :name_element AND tarif BETWEEN :prix1 AND :prix2";
+                    $req_prep = Model::$pdo->prepare($sql);
+                    $values = array(
+                        "prix1" => $prix1,
+                        "prix2" => $prix2,
+                        "name_element" => '%'.$name.'%',
+                        "ville_tag" => $ville
+                    );
+                    $req_prep->execute($values);
+
+                    $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelService');
+                    $tab= $req_prep->fetchAll();
+
+                    if (empty($tab)){
+                        return false;
+                    }
+                    else return $tab;
+
+                } catch (PDOException $e) {
+                    if (Conf::isDebug()) {
+                        echo $e->getMessage();
+                    } else {
+                    echo 'Une erreur est survenue <a href="index.php"> retour a la page d\'accueil </a>';
+                }
+                die();
+                    }   
+                }
+                
+                public static function rechercheByPrix($prix1, $prix2, $name) {
+                    $name_element = static::$name;
+                try {
+                    $sql = "SELECT * from service WHERE ".$name_element." LIKE :name_element AND tarif BETWEEN :prix1 AND :prix2";
+                    $req_prep = Model::$pdo->prepare($sql);
+                    $values = array(
+                        "prix1" => $prix1,
+                        "prix2" => $prix2,
+                        "name_element" => '%'.$name.'%',
+                    );
+                    $req_prep->execute($values);
+
+                    $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelService');
+                    $tab= $req_prep->fetchAll();
+
+                    if (empty($tab)){
+                        return false;
+                    }
+                    else return $tab;
+
+                } catch (PDOException $e) {
+                    if (Conf::isDebug()) {
+                        echo $e->getMessage();
+                    } else {
+                    echo 'Une erreur est survenue <a href="index.php"> retour a la page d\'accueil </a>';
+                }
+                die();
+                    }   
+                }
+                
+                public static function rechercheAvecVille($name,$ville) {
+
+                    $name_element = static::$name;
+
+                    try {
+                        $sql = "SELECT * from service INNER JOIN membre ON service.idProprio = membre.idMembre AND ville=:ville_tag AND ".$name_element." LIKE :name_element";
+                        $req_prep = Model::$pdo->prepare($sql);
+                        $values = array(
+                        "name_element" => '%'.$name.'%',
+                        "ville_tag" => $ville
+                        );
+                        $req_prep->execute($values);
+
+                        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelService');
+                        $tab= $req_prep->fetchAll();
+
+                        if (empty($tab)){
+                            return false;
+                        }
+                        return $tab;
+                    } catch (PDOException $e) {
+                        if (Conf::isDebug()) {
+                        echo $e->getMessage();
+                        } else {
+                            echo 'Une erreur est survenue <a href="index.php"> retour a la page d\'accueil </a>';
+                        }
+                    die();
+                }
+            }
 
 }
 
