@@ -1,6 +1,8 @@
 <?php
 require_once File::build_path(array("model", "ModelService.php"));
 require_once File::build_path(array("controller", "Dispatcher.php"));
+
+require_once File::build_path(array("model", "ModelMembre.php"));
 require_once File::build_path(array("lib","Security.php"));
 require_once File::build_path(array("lib","Session.php"));
 
@@ -49,7 +51,7 @@ class ControllerService{
 
         ModelService::delete($id);
         
-        //$tab_b = ModelBien::selectAll();
+        //$tab_s = ModelBien::selectAll();
         $view = "deleted";
         $pageTitle = "Service supprimÃ©";
         $controller ="service";
@@ -112,10 +114,10 @@ class ControllerService{
 
                     $controller = 'service';
                     $view = 'created';
-                    $pageTitle = 'Service ajoutÃ©';
+                    $pageTitle = 'Service ajouté';
                 }
                 else{
-                    $message = "Aucun jour n'a Ã©tÃ© choisi !";
+                    $message = "Aucun jour n'a été choisi !";
                     $view = "error";
                     $pb = "dispo";
                     $pageTitle = "Erreur disponibilitÃ©s";
@@ -131,7 +133,7 @@ class ControllerService{
             }
         }
         else{
-            $message = "La catÃ©gorie du bien n'a pas Ã©tÃ© dÃ©finie !";
+            $message = "La catégorie du bien n'a pas été définie !";
             $view = "error";
             $pb = "categorie";
             $pageTitle = "Erreur tarif horaire";
@@ -251,7 +253,7 @@ class ControllerService{
                         $pageTitle = "Service modifiÃ©";
 
                         $idProprio = $s->getIdProprio(); // utile pour savoir qui vient de modifier son service (on s'en sert dans updated)
-                        //$tab_b = ModelBien::selectAll();
+                        //$tab_s = ModelBien::selectAll();
                     
                     } 
                     else {
@@ -297,5 +299,91 @@ class ControllerService{
 	    $controller ="service";
 	    File::build_path(array('view','view.php'));
 	}
+        
+        public static function rechercheService(){
+        $name = Dispatcher::myGet('nom');
+        $prix1 = Dispatcher::myGet('prix1');
+        $prix2 = Dispatcher::myGet('prix2');
+        if(!empty($name)){
+            if(!empty($prix1) && !empty($prix2)){
+                ControllerService::rechercheByPrix();
+            }
+            else ControllerService::rechercheByName();
+        }else {
+                $pb = "errorRead";
+                $view = "error";
+                $message = "Une erreur est survenue lors de la recherche ! ";
+                $pageTitle = "Service non trouvé";
+                $controller ="service";
+        }
+        require_once File::build_path(array("view","view.php"));
+    }
+    
+    public static function rechercheByName(){
+        $name = Dispatcher::myGet('nom');
+        if(!empty($name)){
+            if(!empty($_SESSION['login'])){
+                $ville = ModelMembre::getVilleByLogin($_SESSION['login']);
+                $tab_s = ModelService::rechercheAvecVille($name,$ville);
+            }
+            else $tab_s = ModelService::recherche($name);
+            if($tab_s != false){
+                $view = "list";
+                $pageTitle = "Listes des Services";
+                $controller ="service";
+            }
+            else {
+                $pb = "errorRead";
+                $view = "error";
+                $message = "Nous n'avons trouvé aucun bien corespondant a votre recherche ! ";
+                $pageTitle = "Service non trouvé";
+                $controller ="service";
+            }
+            
+        }
+        else {
+            $pb = "errorRead";
+                $view = "error";
+                $message = "Une erreur est survenue lors de la recherche ! ";
+                $pageTitle = "Serivce non trouvé";
+                $controller ="service";
+        }
+        require_once File::build_path(array("view","view.php"));
+    }
+    
+    public static function rechercheByPrix(){
+        $prix1 = Dispatcher::myGet('prix1');
+        $prix2 = Dispatcher::myGet('prix2');
+        $name = Dispatcher::myGet('nom');
+        if(!empty($name)){
+            if(!empty($_SESSION['login'])){
+                $ville = ModelMembre::getVilleByLogin($_SESSION['login']);
+                $tab_s = ModelService::rechercheByPrixAvecVille($prix1,$prix2,$name,$ville);
+            }
+            else $tab_s = ModelService::rechercheByPrix($prix1,$prix2,$name);
+            if(!empty($tab_s)){
+                print_r($tab_s);
+                $view = "list";
+                $pageTitle = "Listes des Services";
+                $controller ="service";
+            }
+            else {
+                $pb = "errorRead";
+                $view = "error";
+                $message = "Nous n'avons trouvé aucun bien corespondant a votre recherche ! ";
+                $pageTitle = "Service non trouvé";
+                $controller ="service";
+            }
+            
+        }
+        else {
+            $pb = "errorRead";
+                $view = "error";
+                $message = "Une erreur est survenue lors de la recherche ! ";
+                $pageTitle = "Service non trouvé";
+                $controller ="service";
+        }
+        require_once File::build_path(array("view","view.php"));
+    }
         
 }
