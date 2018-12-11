@@ -756,14 +756,17 @@ footer{
 
   
 #bloc_connex{
-  background-color: rgba(64, 175, 253, 0.68);
+	background-color: rgba(64, 175, 253, 0.68);
     border: 2px solid black;
     margin-left:25%;
-  position: relative;
+	position: relative;
     top: 39px;
-
 }
 
+#recherche{
+	border: 2px solid black;
+	padding : 2%;
+}
 
 .bloc_commande{
   display: inline-block;
