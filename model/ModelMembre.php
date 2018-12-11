@@ -263,6 +263,18 @@
             return $tab->getSolde();
         }
         
+         public static function getVilleByLogin($login){ 
+            $sql = "SELECT ville FROM Membre WHERE login=:login";
+            $req_prep = Model::$pdo->prepare($sql);
+            $values = array(
+                "login" => $login,
+            );
+            $req_prep->execute($values);
+            $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelMembre');
+            $tab= $req_prep->fetch();
+            return $tab->getVille();
+        }
+        
         public static function gestionCagnote($solde,$id){
         $sql = "UPDATE Membre SET solde=:solde_tag WHERE idMembre=:id_tag";
             $req_prep = Model::$pdo->prepare($sql);
