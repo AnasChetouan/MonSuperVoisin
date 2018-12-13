@@ -126,5 +126,25 @@
                     return $tab;
                 }
                 
+                public static function deleteAllEmpruntsbyProposant($idMembre){
+                    $sql = "DELETE FROM Emprunt WHERE idProposant =:idMembre_tag  ";
+                    $req_prep = Model::$pdo->prepare($sql);
+                    $values = array(
+                        "idMembre_tag" => $idMembre
+                    );
+                    $req_prep->execute($values);
+                    ModelBien::updateDispo();    
+                }
+                
+                public static function deleteAllEmpruntsbyAcceptant($idMembre){
+                    $sql = "DELETE FROM Emprunt WHERE idAcceptant =:idMembre_tag  ";
+                    $req_prep = Model::$pdo->prepare($sql);
+                    $values = array(
+                        "idMembre_tag" => $idMembre
+                    );
+                    $req_prep->execute($values);
+                    ModelBien::updateDispo();    
+                }
+                
     }
 ?>

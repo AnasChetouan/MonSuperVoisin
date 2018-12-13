@@ -241,6 +241,15 @@
                     die();
                 }
             }
+            
+            public static function deleteAllBiensbyMembre($idMembre){
+                    $sql = "DELETE FROM Bien WHERE idProprio =:idMembre_tag  ";
+                    $req_prep = Model::$pdo->prepare($sql);
+                    $values = array(
+                        "idMembre_tag" => $idMembre
+                    );
+                    $req_prep->execute($values); 
+                }
                 
                 
                 
