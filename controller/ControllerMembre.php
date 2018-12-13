@@ -146,6 +146,10 @@ class ControllerMembre{
      public static function delete() {
         if(Session::is_user(Dispatcher::myGet('login'))||Session::is_admin()){
             
+            
+            ModelEmprunt::deleteAllEmpruntsbyProposant(ModelMembre::getIdByLogin(Dispatcher::myGet('login')));
+            ModelEmprunt::deleteAllEmpruntsbyAcceptant(ModelMembre::getIdByLogin(Dispatcher::myGet('login')));
+            ModelBien::deleteAllBiensbyMembre(ModelMembre::getIdByLogin(Dispatcher::myGet('login')));
             ModelMembre::delete(Dispatcher::myGet('login'));
             $login = htmlspecialchars(Dispatcher::myGet('login'));
             $tab_u = ModelMembre::selectAll();

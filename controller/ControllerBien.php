@@ -184,7 +184,9 @@ class ControllerBien{
                       
                                         $tarif = $prixNeuf/200; // Formule de passage du prix neuf au tarif de location / jour
                                                                 // A modifier si besoin
-                                        
+                                        if ($tarif < 1){
+                                            $tarif = 1;
+                                        }
                                         $b = new ModelBien($titre, $description, $tarif, $motClef, 0, "temp", $prixNeuf, 1, ModelMembre::getIdByLogin($_SESSION['login'])); // ...
                                         $b->save();
                                         move_uploaded_file($_FILES['photo']['tmp_name'], 'uploads/' . basename($b->updateLienPhoto($extension_upload)));

@@ -45,7 +45,6 @@ class ControllerEmprunt {
             $controller="emprunt";
             ModelBien::pasDispo($idP);
             $nouvelleCagnote1 = (intval($cagnote) - intval($tarif));
-            echo $nouvelleCagnote1;
             ModelMembre::gestionCagnote($nouvelleCagnote1,ModelMembre::getIdByLogin($_SESSION['login']));
             ModelMembre::gestionCagnote(intval((ModelMembre::getSoldeByLogin(ModelMembre::getLoginById(Dispatcher::myGet('idmembre')))) + intval($tarif)),Dispatcher::myGet('idmembre'));
             $tab_b = ModelBien::selectAll();
@@ -85,9 +84,6 @@ class ControllerEmprunt {
 	    require_once File::build_path(array('view','view.php'));
         }
         
-        public static function deleteAllEmpruntsbyMembre(){
-            
-        }
 	
 	}
 
