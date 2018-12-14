@@ -118,7 +118,7 @@
                 $sql = "UPDATE Bien SET estDispo = 0 WHERE idBien=:idB_tag";
                 $req_prep = Model::$pdo->prepare($sql);
                 $values = array(
-                "idB_tag" => $idB,
+                    "idB_tag" => $idB,
                 );
                 $req_prep->execute($values);
                 }

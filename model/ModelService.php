@@ -12,7 +12,6 @@ class ModelService extends Model {
     private $tarif;
     private $motClef;
     private $estValide;
-    private $disponibilites;
     private $idProprio;
     
     public function getIdService() {
@@ -35,16 +34,8 @@ class ModelService extends Model {
         return $this->estValide;
     }
 
-    public function getDisponibilites() {
-        return $this->disponibilites;
-    }
-
     public function getIdProprio() {
         return $this->idProprio;
-    }
-
-    public function setDisponibilites($disponibilites) {
-        $this->disponibilites = $disponibilites;
     }
 
     public function setIdService($idService) {
@@ -71,19 +62,18 @@ class ModelService extends Model {
         $this->idProprio = $idProprio;
     }
 
-    public function __construct ($description = NULL, $tarif = NULL, $motClef = NULL, $estValide = NULL, $disponibilites = NULL, $idProprio = NULL){
-        if(!is_null($description) && !is_null($tarif) && !is_null($motClef) && !is_null($estValide) && !is_null($disponibilites) && !is_null($idProprio) ) 
+    public function __construct ($description = NULL, $tarif = NULL, $motClef = NULL, $estValide = NULL, $idProprio = NULL){
+        if(!is_null($description) && !is_null($tarif) && !is_null($motClef) && !is_null($estValide) && !is_null($idProprio) ) 
         {
             $this->description = $description;
             $this->tarif = $tarif;
             $this->motClef = $motClef;
             $this->estValide = $estValide;
-            $this->disponibilites = $disponibilites;
             $this->idProprio = $idProprio;
         }
     }
 
-    public static function compresserDispos($valeurs, $jours){
+    /*public static function compresserDispos($valeurs, $jours){
         $chaine = "";
 
         $i = 0;
@@ -99,13 +89,64 @@ class ModelService extends Model {
             }
         }
         return $chaine;
+    }*/
+    
+    public function updateIdService(){
+        $id = Model::$pdo->lastInsertId();
+        $this->setIdService($id);
+        return $id; // id correspond à l'attribut qu'on séléctionne dans la requête
+    }
+    
+    public function assemblerDispo(){
+        $chaine = "";
+        $tab_creneaux = ModelSeFaitSur::selectCreneaux($this->idService);
+        foreach($tab_creneaux as $t){ 
+            $c = ModelCreneau::select($t['idCreneau']);
+            $heureDebut = $c->getHeureDebut();
+            $heureFin = $c->getHeureFin();
+            $nomJour = $c->getNomJour();
+            $ligne = $nomJour." : De ".$heureDebut."H à ".$heureFin."H";
+            $chaine.=$ligne."\n";
+        }
+        
+        return $chaine;
+    }
+   
+    
+    public function supprimerCreneaux(){
+        $tab_creneaux = ModelSeFaitSur::selectCreneaux($this->idService);
+        foreach($tab_creneaux as $t){
+            $idCreneau = $t['idCreneau'];
+            ModelCreneau::delete($idCreneau);
+        }
+    }
+    
+    public function supprimerSeFaitSur(){
+        $tab_creneaux = ModelSeFaitSur::selectCreneaux($this->idService);
+        foreach($tab_creneaux as $t){
+            $idService = $t['idService'];
+            ModelSeFaitSur::delete($idService);
+        }
+    }
+    
+    public function updateCreneaux($valeurs, $jours){
+        // Pour mettre à jour les créneaux, on supprime les anciens et on re-insère les nouveaux dans la BDD
+        $this->supprimerCreneaux();
+        $listeIDC=ModelCreneau::creerCreneaux($valeurs, $jours);
+        return $listeIDC;
+    }
+    
+    public function updateSeFaitSur($idS, $listeIDC){
+        // Pour mettre à jour les relations service-créneau, on supprime les anciennes et on re-insère les nouvelles dans la BDD
+        $this->supprimerSeFaitSur();
+        ModelSeFaitSur::creerRelations($idS, $listeIDC);
     }
 
     public static function validate($idService){ 
         $sql = "UPDATE Bien SET estValide = 1 WHERE idService=:id_tag";
         $req_prep = Model::$pdo->prepare($sql);
         $values = array(
-            "id_tag" => $idService,
+            "id_tag" => $idService
         );
         $req_prep->execute($values);
     }

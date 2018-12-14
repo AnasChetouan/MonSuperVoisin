@@ -3,6 +3,8 @@ require_once File::build_path(array("model", "ModelService.php"));
 require_once File::build_path(array("controller", "Dispatcher.php"));
 
 require_once File::build_path(array("model", "ModelMembre.php"));
+require_once File::build_path(array("model", "ModelCreneau.php"));
+require_once File::build_path(array("model", "ModelSeFaitSur.php"));
 require_once File::build_path(array("lib","Security.php"));
 require_once File::build_path(array("lib","Session.php"));
 
@@ -98,26 +100,40 @@ class ControllerService{
                 array_push($jours, ucfirst(substr($codes[$i], 0, -2)));
             }
         }
-
+        
         //print_r($values);
         //print_r($jours);
 
-        $disponibilites = ModelService::compresserDispos($values, $jours);
+        //$disponibilites = ModelService::compresserDispos($values, $jours);
         //echo "dispo : ".$disponibilites;
 
         if (!($motClef === "null")){
             if(is_numeric($tarif)){
                 if(!empty($values)){
+                    if(Session::is_admin()){ // Si le membre qui poste est admin, son service est directement valide
+                        $estValide = 1;
+                    }
+                    else{
+                        $estValide = 0;
+                    }
 
-                    $s = new ModelService($description, $tarif, $motClef, 0, $disponibilites, ModelMembre::getIdByLogin($_SESSION['login']));
+                    $s = new ModelService($description, $tarif, $motClef, $estValide, ModelMembre::getIdByLogin($_SESSION['login']));
                     $s->save();
+                    $idService = $s->updateIdService();
+                    //echo "Id service :".$idService;
+                    
+                    $listeIDC = ModelCreneau::creerCreneaux($values, $jours);
+                    //print_r($listeIDC);
+                    
+                    ModelSeFaitSur::creerRelations($idService, $listeIDC);
+                    // On a besoin de remplir la relation qui lie un crÃ©neau et un service dans la BDD
 
                     $controller = 'service';
                     $view = 'created';
-                    $pageTitle = 'Service ajouté';
+                    $pageTitle = 'Service ajoutÃ©';
                 }
                 else{
-                    $message = "Aucun jour n'a été choisi !";
+                    $message = "Aucun jour n'a Ã©tÃ© choisi !";
                     $view = "error";
                     $pb = "dispo";
                     $pageTitle = "Erreur disponibilitÃ©s";
@@ -133,7 +149,7 @@ class ControllerService{
             }
         }
         else{
-            $message = "La catégorie du bien n'a pas été définie !";
+            $message = "La catï¿½gorie du bien n'a pas ï¿½tï¿½ dï¿½finie !";
             $view = "error";
             $pb = "categorie";
             $pageTitle = "Erreur tarif horaire";
@@ -220,14 +236,15 @@ class ControllerService{
         //print_r($values);
         //print_r($jours);
 
-        $disponibilites = ModelService::compresserDispos($values, $jours);
+        //$disponibilites = ModelService::compresserDispos($values, $jours);
         //echo "dispo : ".$disponibilites;
 
         if (!($motClef === "null")){
             if(is_numeric($tarif)){
                 if(!empty($values)){
-
-                    $s = ModelService::select(Dispatcher::myGet('idService'));
+                    
+                    $idService = Dispatcher::myGet('idService');
+                    $s = ModelService::select($idService);
                     if($s != false) {
                         if (Session::is_admin()){ // Si c'est un admin qui modifie, on valide directement
                             $estValide = 1;
@@ -237,16 +254,21 @@ class ControllerService{
                             $estValide = 0;
                         }  
                         $data = array(
-                            "idService" => Dispatcher::myGet('idService'),
+                            "idService" => $idService,
                             "motClef" => Dispatcher::myGet('motClef'),
                             "estValide" => $estValide,
                             "description" => htmlspecialchars(Dispatcher::myGet('description')),
-                            "disponibilites" => $disponibilites,
                             "tarif" => $tarif
                         );
 
                         //print_r($data);  
                         $s->update($data);
+                        
+                        $listeIDC = $s->updateCreneaux($values, $jours);
+                        // On met Ã  jour les nouveaux crÃ©neaux
+                        
+                        $s->updateSeFaitSur($idService, $listeIDC);
+                        // On met Ã  jour la relation entre les crÃ©neaux et le service
                       
                         $controller="service";
                         $view = "updated";
@@ -313,7 +335,7 @@ class ControllerService{
                 $pb = "errorRead";
                 $view = "error";
                 $message = "Une erreur est survenue lors de la recherche ! ";
-                $pageTitle = "Service non trouvé";
+                $pageTitle = "Service non trouvï¿½";
                 $controller ="service";
         }
         require_once File::build_path(array("view","view.php"));
@@ -335,8 +357,8 @@ class ControllerService{
             else {
                 $pb = "errorRead";
                 $view = "error";
-                $message = "Nous n'avons trouvé aucun bien corespondant a votre recherche ! ";
-                $pageTitle = "Service non trouvé";
+                $message = "Nous n'avons trouvï¿½ aucun bien corespondant a votre recherche ! ";
+                $pageTitle = "Service non trouvï¿½";
                 $controller ="service";
             }
             
@@ -345,7 +367,7 @@ class ControllerService{
             $pb = "errorRead";
                 $view = "error";
                 $message = "Une erreur est survenue lors de la recherche ! ";
-                $pageTitle = "Serivce non trouvé";
+                $pageTitle = "Serivce non trouvï¿½";
                 $controller ="service";
         }
         require_once File::build_path(array("view","view.php"));
@@ -370,8 +392,8 @@ class ControllerService{
             else {
                 $pb = "errorRead";
                 $view = "error";
-                $message = "Nous n'avons trouvé aucun bien corespondant a votre recherche ! ";
-                $pageTitle = "Service non trouvé";
+                $message = "Nous n'avons trouvï¿½ aucun bien corespondant a votre recherche ! ";
+                $pageTitle = "Service non trouvï¿½";
                 $controller ="service";
             }
             
@@ -380,7 +402,7 @@ class ControllerService{
             $pb = "errorRead";
                 $view = "error";
                 $message = "Une erreur est survenue lors de la recherche ! ";
-                $pageTitle = "Service non trouvé";
+                $pageTitle = "Service non trouvï¿½";
                 $controller ="service";
         }
         require_once File::build_path(array("view","view.php"));

@@ -20,7 +20,7 @@ class Model {
             if (Conf::getDebug()) {
                 echo $e->getMessage();
             } else {
-                echo "Une erreur est survenue au niveau de la connexion de la base de données !  <a href=''> retour a la page d'accueil </a>";
+                echo "Une erreur est survenue au niveau de la connexion de la base de donnï¿½es !  <a href=''> retour a la page d'accueil </a>";
             }
             die();
         }
@@ -36,7 +36,7 @@ class Model {
                 $rep = Model::$pdo->query("SELECT * FROM ".$table_name.";");
                 $rep->setFetchMode(PDO::FETCH_CLASS, $class_name);
                 $tab = $rep->fetchAll();
-                return $tab; 
+                return $tab;
         }
         
 

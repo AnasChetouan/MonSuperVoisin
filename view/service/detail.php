@@ -1,8 +1,8 @@
 <?php
   $motClef = ($s->getMotClef());
   $descriptionHTML = htmlspecialchars($s->getDescription());
-  $tarif = ($s->getTarif());
-  $dispo = $s->getDisponibilites();
+  $tarif = $s->getTarif();
+  $dispo = $s->assemblerDispo();
   $idService = ($s->getIdService());
   $idProprio = ($s->getIdProprio());
   $loginProprio = htmlspecialchars(ModelMembre::getLoginById(($idProprio)));
@@ -17,7 +17,9 @@
               if (isset($_SESSION['login']) && $_SESSION['login'] != ModelMembre::getLoginById($idProprio) && Session::is_admin()){ // Un admin peut modifier le bien d'un autre membre
                   echo '</br><a href="index.php?controller=service&action=update&idService='.$idService.'"> <button>Modifier ce post</button></a> </br>';
               }
-              echo '</br> Les disponiblités de <b>'.$loginProprio.'</b> pour ce service : </a></br></br>'.$dispo;
+              echo '</br> Les disponiblités de <b>'.$loginProprio.'</b> pour ce service : </a></br></br>'.nl2br($dispo);
+              
+              // nl2br sert à prendre en compte les retours à la ligne
 
 
               echo '</br></br> <a href="index.php?controller=service&action=readAll"> Retour </a>';
