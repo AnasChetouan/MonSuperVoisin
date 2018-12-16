@@ -30,23 +30,10 @@ class ControllerCommentaire {
       //echo empty($tab_c);
     }
     
-    /*public static function getNoteMoyenne(){
-      $loginU = Dispatcher::myGet('idMembre');
-      $tab_c = ModelCommentaire::getNoteMoyenne($loginU);
-      $pageTitle = "Liste des commentaires du client";
-      $controller = "commentaire";
-      require_once File::build_path(array("view","view.php"));
-    }*/
-    
-   
-    
-    
-    
-    
     public static function create() {
         $b = ModelBien::select(Dispatcher::myGet('idProduit'));
         $view = "update";
-        $pageTitle = "CrÃ©ation d'un commentaire";
+        $pageTitle = "Création d'un commentaire";
         $controller="commentaire";
         $c = new ModelCommentaire();
         $functionCaller = "create";
