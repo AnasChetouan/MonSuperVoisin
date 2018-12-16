@@ -2,7 +2,7 @@
      
         echo '<div id="bloc_all_emprunts">';
         if(empty($tab_d)){
-            echo "Vous n'avez encore rien proposé";
+            echo "Vous n'avez encore rien proposï¿½";
         }
         else{
             echo '<div id="bloc_all_propose">';
@@ -18,13 +18,19 @@
                 $dDebut =  htmlspecialchars($d->getDateDebut());
                 $dFin =  htmlspecialchars($d->getDateFin());
                 if($d->getEstBien() == 1){
-                $produit = ModelBien::select($idProduit);
-                $titre = $produit->getTitre();
+                    $produit = ModelBien::select($idProduit);
+                    $titre = $produit->getTitre();
+                     echo $loginAcceptant." vous emprunte votre " .$titre;
+                }
+                else{
+                    $produit = ModelService::select($idProduit);
+                    $motClef = $produit->getMotClef();
+                     echo $loginAcceptant." utilise votre service de " .$motClef;
                 }
                 
                 
                 
-                echo $loginAcceptant." vous emprunte votre " .$titre;
+               
                 echo " du ".$dDebut." au ".$dFin;
                 echo '</br>'.'<a href="index.php?controller=bien&action=read&id='.$idProduit.'"> Detail objet </a>';
                 echo '</div>';
@@ -34,7 +40,7 @@
         }
         
         if(empty($tab_e)){
-            echo "Vous n'avez encore rien emprunté";
+            echo "Vous n'avez encore rien empruntï¿½";
         }
         else{
             echo '<div id="bloc_all_pris">';
@@ -49,14 +55,19 @@
                 
                 $dDebut =  htmlspecialchars($e->getDateDebut());
                 $dFin =  htmlspecialchars($e->getDateFin());
+                
                 if($e->getEstBien() == 1){
-                $produit = ModelBien::select($idProduit);
-                $titre = $produit->getTitre();
+                    $produit = ModelBien::select($idProduit);
+                    $titre = $produit->getTitre();
+                    echo "Vous empruntez a ".$loginAcceptant. " son objet : ".$titre;
                 }
+                else{
+                    $produit = ModelService::select($idProduit);
+                    $motClef = $produit->getMotClef();
+                    echo "Vous utilisez le service de ".$motClef." proposÃ© par ".$loginAcceptant;
+                }
+                  
                 
-                
-                
-                echo "Vous empruntez a ".$loginAcceptant. " son objet : ".$titre;
                 echo " du ".$dDebut." au ".$dFin;
                 echo '</br>'.'<a href="index.php?controller=bien&action=read&id='.$idProduit.'"> Detail objet </a>';
                 echo '</div>';

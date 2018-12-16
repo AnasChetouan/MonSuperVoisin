@@ -15,7 +15,7 @@
              .'<img src='.$lienPhoto.' alt="photo bien" height="25%" width="25%" > <br> <br>'.
               'Description : ' . $descriptionHTML .'<br> <br>
               Montant prix d\'achat neuf : <b> ' . $prixNeuf . '</b> € <br>
-              Prix d\'emprunt a la journ�e: <b>'.$tarif . ' </b> € <br> <br>';
+              Prix d\'emprunt a la journ�e: <b>'.$tarif . ' </b> € <br> <br>';
               if (isset($_SESSION['login']) && $_SESSION['login'] == ModelMembre::getLoginById($idProprio)){
                   echo '</br><a href="index.php?controller=bien&action=update&idBien='.$idBien.'"> <button>Modifier mon post</button> </a> </br>';
                   echo '</br><a href="index.php?controller=bien&action=delete&idBien='.$idBien.'"> <button>Supprimer mon post</button> </a> </br>';
@@ -35,10 +35,15 @@
 
    
 $formTitle="Creer";
-$hiddenValue="created";
+$hiddenValue="createdBien";
 $affId = "hidden";
 $visible = "position:absolute;visibility:hidden;";
-$date = date('Y-m-d');
+
+// On ajoute un jour de + à la date du jour
+$today = getdate();
+$jour=$today['year'].'-'.$today['mon'].'-'.$today['mday'];
+$dateDT = new DateTime($jour.' +1 day');
+$date = $dateDT->format('Y-m-d');
 
 if($estDispo == 1 && (isset($_SESSION['login'])) && ($_SESSION['login'] != ModelMembre::getLoginById($idProprio))){
      $cagnote = ModelMembre::getSoldeByLogin($_SESSION['login']);
@@ -99,7 +104,7 @@ else{
                                         
 					}
 				}else{
-					echo '<p> Les commentaires sont visible seulement si vous etes connect�s </p>';
+					echo '<p> Les commentaires sont visible seulement si vous etes connect�s </p>';
 				}
                                 
 					

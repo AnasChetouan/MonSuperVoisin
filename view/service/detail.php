@@ -1,10 +1,10 @@
 <?php
-  $motClef = ($s->getMotClef());
+  $motClef = $s->getMotClef();
   $descriptionHTML = htmlspecialchars($s->getDescription());
   $tarif = $s->getTarif();
   $dispo = $s->assemblerDispo();
-  $idService = ($s->getIdService());
-  $idProprio = ($s->getIdProprio());
+  $idService = $s->getIdService();
+  $idProprio = $s->getIdProprio();
   $loginProprio = htmlspecialchars(ModelMembre::getLoginById(($idProprio)));
     echo '
            <p><b> Type du service : </b> '.$motClef . '<br> <br>'.
@@ -26,4 +26,45 @@
 
               
            echo '</p>';                         
+   
+$hiddenValue="createdService";
+           
+// On ajoute un jour de + à la date du jour
+$today = getdate();
+$jour=$today['year'].'-'.$today['mon'].'-'.$today['mday'];
+$dateDT = new DateTime($jour.' +1 day');
+$date = $dateDT->format('Y-m-d');
+
+if(isset($_SESSION['login']) && ($_SESSION['login'] != ModelMembre::getLoginById($idProprio))){
+     $cagnotte = ModelMembre::getSoldeByLogin($_SESSION['login']);
+    echo '</br>';
+    echo '<form method="get" action="index.php">
+    <fieldset>
+        <legend>Faire recours à ce service</legend>';
+
+if ((intval($cagnotte) - intval($tarif)) < 0 ){
+    echo "vous n'avez pas assez de Vbucks";
+}
+else{ 
+        echo '<input type="hidden" name="controller" value="emprunt">
+        <input type="hidden" name="action" value="'.$hiddenValue.'">
+        <input type="hidden" name="idProduit" value="'.$idService.'">
+        <input type="hidden" name="idProprio" value="'.$idProprio.'">
+        <input type="hidden" name="cagnotte" value="'.$cagnotte.'">
+        <input type="hidden" name="tarif" value="'.$tarif.'">';
+        
+        echo 'Choisissez une date de réservation pour ce service :
+        <input type="date" name="date" min="'.$date.'" value="'.$date.'" required><br><br>';
+        
+        echo 'Pour : <input type="number" name="nbH" min="1" max="23" value=1 required> H';
+        
+    echo '
+        <p>
+            <input type="submit" value="Reserver" />
+        </p>';
+}
+    echo'</fieldset>
+</form>';
+}
+
 ?>

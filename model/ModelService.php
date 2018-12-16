@@ -111,6 +111,31 @@ class ModelService extends Model {
         
         return $chaine;
     }
+    
+    public function getJoursDispo(){
+       $tab = array();
+       $tab_creneaux = ModelSeFaitSur::selectCreneaux($this->idService);
+       foreach($tab_creneaux as $t){ 
+           $c = ModelCreneau::select($t['idCreneau']);
+           $nomJour = $c->getNomJour();
+           array_push($tab, $nomJour);
+        }
+        
+        return $tab;
+    }
+    
+    public function getNbHeuresByJour($jour){
+       $tab_creneaux = ModelSeFaitSur::selectCreneaux($this->idService);
+       foreach($tab_creneaux as $t){ 
+           $c = ModelCreneau::select($t['idCreneau']);
+           $nomJour = $c->getNomJour();
+           if ($nomJour === $jour){
+               $heureDeb = $c->getHeureDebut();
+               $heureFin = $c->getHeureFin();
+               return $heureFin-$heureDeb;
+           }
+        }
+    }
    
     
     public function supprimerCreneaux(){

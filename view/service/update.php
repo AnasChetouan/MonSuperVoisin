@@ -66,7 +66,7 @@ if(Conf::getDebug()==false){
                                 </optgroup>
                             </select>
                             <br>
-                            Des suggestions à faire pour les catégories ? <a href="#">Dites le nous </a> <!-- Ajouter lien vers 'Contact' -->
+                            Des suggestions à faire pour les catégories ? <a href="index.php?controller=notification&action=create">Dites-le nous!</a>
                             <br>
                         </div>
 

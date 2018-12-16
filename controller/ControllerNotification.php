@@ -21,7 +21,7 @@ class ControllerNotification{
   public static function create() {
         $u = ModelMembre::select(ModelMembre::getIdByLogin($_SESSION['login']));
         $view = "update";
-        $pageTitle = "Envois d'un message";
+        $pageTitle = "Envoi d'un message";
         $controller="notification";
         $n = new ModelNotification();
         $functionCaller = "create";
