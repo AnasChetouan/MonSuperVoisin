@@ -1,5 +1,5 @@
 <?php
-    echo "<p>Message supprimé</p>";;
+    echo "<p>Message supprimÃ©</p>";;
     require_once File::build_path(array("index.php"));
-    echo'<a href="index.php?controller=membre&action=readAll"> Retour </a>';
+    echo'<a href="index.php?controller=notification&action=readAll"> Retour </a>';
 ?>
