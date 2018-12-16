@@ -38,7 +38,7 @@ switch ($functionCaller) {
 
                     
                         <div>
-                            <label for="message">Message : </label><textarea name="message" rows="8" cols="45" required readonly="<?$attribut?>" > <?php if($functionCaller == "reponse")echo $message?></textarea>
+                            <label for="message">Message : </label><textarea name="message" rows="8" cols="45" > <?php if($functionCaller == "reponse")echo $message?></textarea>
                         </div> 
     
                        <?php
