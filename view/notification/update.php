@@ -6,9 +6,10 @@ switch ($functionCaller) {
         $hiddenValue="created";
         $attribut = " ";
         $admin = "idMembre";
+        $idNotif = "";
         break;
     case "reponse":
-        $formTitle="Envoyer une réponse";
+        $formTitle="Envoyer une rÃ©ponse";
         $hiddenValue="repondu";
         $attribut="readonly";
         $admin= "idAdmin";
