@@ -1,4 +1,6 @@
-<p id="text_notif">Commentaire ajoutÃ© sur <?=$objet?> <a href="index.php?controller=<?=$view2?>&action=read&id=<?=$idP?>"><b>d'id <?=$idP?></b></a></p>
+<p id="text_notif">Commentaire ajouté</p>
 <?php
-  require_once File::build_path(array('view',$view2,"list.php"));
+  echo "<p>Votre commentaire a bien été ajouté</p>";;
+    require_once File::build_path(array("index.php"));
+    echo'<a href="index.php?controller=bien&action=readAll"> Retour a la liste des biens </a>';
   ?>
