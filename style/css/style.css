@@ -768,6 +768,12 @@ footer{
 	padding : 2%;
 }
 
+.notification{
+	border: 2px solid black;
+	width : 20%;
+	padding : 2%;
+}
+
 .bloc_commande{
   display: inline-block;
     margin: 10px;
