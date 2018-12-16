@@ -44,10 +44,9 @@ class ControllerCommentaire {
         $c = new ModelCommentaire(Dispatcher::myGet('idmembre'), Dispatcher::myGet('appreciation'), Dispatcher::myGet('etoile'), Dispatcher::myGet('idP'),ModelMembre::getIdByLogin($_SESSION['login']));
         if($c->save()) {
             $idP = Dispatcher::myGet('idP');
-            $view = "detail";
-            $pageTitle = "Bien en detail";
-            $controller ="bien";
-            $b = ModelBien::select($idP);
+            $view = "created";
+            $pageTitle = "Commentaire Supprimé";
+            $controller ="commentaire";
         }
         else {
             $view = "errorCreate";
@@ -56,30 +55,18 @@ class ControllerCommentaire {
         }
         require_once File::build_path(array("view","view.php"));
     }
-    /*
+    
 
     public static function delete() {
-        $c = ModelCommentaire::select(Dispatcher::myGet('idC'));
-        $idP = $c->getIdProduit();
         ModelCommentaire::delete(Dispatcher::myGet('idC'));
-        $id = htmlspecialchars(Dispatcher::myGet('idC'));
-        if(Dispatcher::myGet('sousCategorie')=='Velo'){
-            $tab_v = ModelVelo::selectAll();
-            $view2='velo';
-        }else if(Dispatcher::myGet('sousCategorie')=='Accessoire'){
-            $tab_a = ModelAccessoire::selectAll();
-            $view2='accessoire';
-        }else if(Dispatcher::myGet('sousCategorie')=='PieceDetache'){
-            $tab_p = ModelPieceDetache::selectAll();
-            $view2 = 'pieceDetache';
-        }
         $view = "deleted";
-        $pageTitle = "Commentaire supprimÃ©";
+        $pageTitle = "Commentaire supprimé";
         $controller="commentaire";
         require_once File::build_path(array("view","view.php"));
     }
     
     
+    /*
 	
 	public static function error(){
 	    $view = 'error';
