@@ -31,11 +31,9 @@ class ControllerNotification{
     public static function created() {
         $n = new ModelNotification(Dispatcher::myGet('idMembre'), Dispatcher::myGet('message'),0," ",0);
         if($n->save()) {
-            $idM = Dispatcher::myGet('idMembre');
-            $view = "list";
-            $pageTitle = "Liste des Utilisateurs";
-            $controller = "membre";
-            $tab_u = ModelMembre::selectAll();
+          $view = "created";
+            $pageTitle = "Message envoyé";
+            $controller = "notification";
         }
         else {
             $view = "errorCreate";
@@ -70,7 +68,7 @@ class ControllerNotification{
             $login = htmlspecialchars(Dispatcher::myGet('login'));
             $tab_n = ModelNotification::selectAll();
             $view = "deleted";
-            $pageTitle = "Notification Supprim�";
+            $pageTitle = "Notification Supprimé";
             $controller="notification";
             require_once File::build_path(array("view","view.php"));
         }
