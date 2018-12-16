@@ -15,6 +15,14 @@ class ControllerBien{
         $controller ="bien";
         require_once File::build_path(array("view","view.php"));
     }
+	 public static function readAllByMembre() {
+        $tab_b = ModelBien::selectAll(); // stocke tout
+	ModelEmprunt::actualiserEmprunt();
+        $view = "listByMembre";
+        $pageTitle = "Listes de vos biens";
+        $controller ="bien";
+        require_once File::build_path(array("view","view.php"));
+    }
     
     public static function validate() {
         $idBien = Dispatcher::myGet('idBien');
