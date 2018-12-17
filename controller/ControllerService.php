@@ -17,6 +17,15 @@ class ControllerService{
         require_once File::build_path(array("view","view.php"));
     }
     
+     public static function readAllByMembre() {
+        $tab_s = ModelService::selectAll(); // stocke tout
+	ModelEmprunt::actualiserEmprunt();
+        $view = "listByMembre";
+        $pageTitle = "Listes de vos Services";
+        $controller ="service";
+        require_once File::build_path(array("view","view.php"));
+    }
+    
     public static function read() {
         $s = ModelService::select(Dispatcher::myGet('idService'));
         if ($s != false) {
@@ -38,13 +47,13 @@ class ControllerService{
     public static function validate() {
         $idService = Dispatcher::myGet('idService');
         ModelService::validate($idService);
-        //ControllerMembre::gestionAnnonces();
+        ControllerMembre::gestionAnnonces();
     }
 
     public static function desactiver() {
         $idService = Dispatcher::myGet('idService');
         ModelService::desactiver($idService);
-        //ControllerMembre::gestionAnnonces();
+        ControllerMembre::gestionAnnonces();
     }
 
     public static function delete() {
@@ -53,9 +62,9 @@ class ControllerService{
 
         ModelService::delete($id);
         
-        //$tab_s = ModelBien::selectAll();
+        $tab_s = ModelBien::selectAll();
         $view = "deleted";
-        $pageTitle = "Service supprimÃ©";
+        $pageTitle = "Service supprimé";
         $controller ="service";
         require_once File::build_path(array("view","view.php"));
     }

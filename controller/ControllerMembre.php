@@ -150,6 +150,7 @@ class ControllerMembre{
             ModelEmprunt::deleteAllEmpruntsbyProposant(ModelMembre::getIdByLogin(Dispatcher::myGet('login')));
             ModelEmprunt::deleteAllEmpruntsbyAcceptant(ModelMembre::getIdByLogin(Dispatcher::myGet('login')));
             ModelBien::deleteAllBiensbyMembre(ModelMembre::getIdByLogin(Dispatcher::myGet('login')));
+            ModelService::deleteAllServicesbyMembre(ModelMembre::getIdByLogin(Dispatcher::myGet('login')));
             ModelMembre::delete(Dispatcher::myGet('login'));
             $login = htmlspecialchars(Dispatcher::myGet('login'));
             $tab_u = ModelMembre::selectAll();
@@ -371,6 +372,7 @@ class ControllerMembre{
     
     public static function gestionAnnonces(){
         $tab_b = ModelBien::selectAll();
+        $tab_s = ModelService::selectAll();
         $view = "listAnnonces";
         $pageTitle = "Liste des Annonces";
         $controller="membre";
