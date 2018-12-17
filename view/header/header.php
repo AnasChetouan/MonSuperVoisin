@@ -1,7 +1,8 @@
-<nav id =menu>
-				<ul>
-
-					<li class="menu-biens"><a href="#">Biens</a>
+<nav>
+    <div class="menuprinci" style="padding:1.5%;">
+        <a class="logo" href="index.php"><img class="logo2" src="style/img/v.png" alt="logo"></a>
+        <div>
+        <li class="menu-biens"><a href="#">Biens</a>
 						<ul class="submenu">
 							<li><a href="index.php?controller=bien&action=readAll">Trouver un bien</a></li>
 							<?php
@@ -10,7 +11,8 @@
 							?>		
 						</ul>
 					</li>
-		
+                                        </div>
+		<div>
 					<li class="menu-services"><a href="#">Services</a>
 						<ul class="submenu">
 							<li><a href="index.php?controller=service&action=readAll">Trouver un service</a></li>
@@ -21,17 +23,19 @@
 						</ul>
 					
 					</li>
-
+                                        </div>
+                                        <div>
 					<?php 
 					if((!isset($_SESSION['login']))){
-						echo '<li class="menu-connexion"><a href="index.php?controller=membre&action=connect">S\'identifier</a></li>'
+                                             
+						echo '<li class="menu-connexion"><a href="index.php?controller=membre&action=connect">S\'identifier</a></li></div><div>'
 						 .'<li class ="menu-inscription"><a href="index.php?controller=membre&action=create">S\'inscrire</a></li>';
+                                                 echo '</div>';
+                                                
                                             }
                     else{
                     	echo "<li class='menu-profil'><a href='#'>".$_SESSION['login'];
-                    	if (Session::is_admin()){
-                        	echo ' (Admin)';
-                        }
+                    
                         echo "</a>";
                     	echo "<ul class='submenu'>";
 						echo '<li><a href="index.php?controller=membre&action=read&login='.$_SESSION['login'].'">Mon profil</a></li>';
@@ -45,13 +49,17 @@
                         echo '</ul>';
                     	echo '</li>';
                     }
-                    
+                    echo '</div>';
+                    echo '<div>';
                         if((isset($_SESSION['login'])))
                         echo '<li class="menu-contact"><a href="index.php?controller=notification&action=create">Contact</a></li>
 
 				</ul>';
                     ?>
+        </div>
+    </div>
+    
+</nav>    
 
-</nav>
 
 <br>
