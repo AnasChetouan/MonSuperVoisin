@@ -10,85 +10,6 @@
 }
 /* //////////////////////////////////////////////////////////////////////////////////////////     */
 
-nav
-{
-	z-index:10;
-	display:inline;
-	width:100%;
-}
-
-header
-{
-	display:flex;
-	align-items:flex-end;
-	flex-direction:row;
-	justify-content:flex-end;
-}
-
-.menuprinci div
-{
-	position:relative;
-	border-left : thin solid;
-	height: 80%;
-	width:100%;
-	font-size:1.5vw;
-	padding: 0px 4%;
-}
-
-header nav div:nth-child(2)
-{
-	border-left: thin none;
-}
-
-nav .menuprinci
-{
-	width:80%;
-	height:30px;
-	margin: 1% 10% 0% 10%;
-	display:flex;
-	flex-direction:row;
-	align-items:stretch;
-	justify-content:space-between;
-}
-
-.menuprinci
-{
-	top:10px;
-	background-color : rgb(200,200,200);
-}
-
-.logo
-{
-	padding-left:5%;
-	display:inline;
-	width:100%;
-	left:100%;
-}
-
-.logo2
-{
-	display:inline;
-	width:30%;
-	height:100%;
-}
-
-
-nav div a:hover .puce
-{
-visibility:visible;
-}
-
-.menuprinci div a
-{
-	text-decoration: none ;
-	color:#202020;
-}
-
-a:hover
-{
-	color:#999999;
-}
-
 #bloc_forms{
   display: flex;
 }
@@ -505,8 +426,8 @@ fieldset{
     padding-left: 15px;
 }
 #bloc_connex{
-  width: 40%;
-  height: 10%;
+  width: 30%;
+  height: 123px
 }
 
 #bloc_bienvenue{
