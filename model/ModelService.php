@@ -168,7 +168,7 @@ class ModelService extends Model {
     }
 
     public static function validate($idService){ 
-        $sql = "UPDATE Bien SET estValide = 1 WHERE idService=:id_tag";
+        $sql = "UPDATE Service SET estValide = 1 WHERE idService=:id_tag";
         $req_prep = Model::$pdo->prepare($sql);
         $values = array(
             "id_tag" => $idService
@@ -178,7 +178,7 @@ class ModelService extends Model {
 
 
     public static function desactiver($idService){ 
-        $sql = "UPDATE Bien SET estValide = 0 WHERE idService=:id_tag";
+        $sql = "UPDATE Service SET estValide = 0 WHERE idService=:id_tag";
         $req_prep = Model::$pdo->prepare($sql);
         $values = array(
             "id_tag" => $idService,
