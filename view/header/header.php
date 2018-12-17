@@ -41,6 +41,7 @@
 						echo '<li><a href="index.php?controller=membre&action=read&login='.$_SESSION['login'].'">Mon profil</a></li>';
 						echo '<li><a href="index.php?controller=membre&action=deconnect">Se déconnecter</a></li>';
                                                 echo '<li><a href="index.php?controller=bien&action=readAllByMembre">Mes Biens</a></li>';
+                                                echo '<li><a href="index.php?controller=service&action=readAllByMembre">Mes Services</a></li>';
                                                 if (Session::is_admin()){
                                                 echo '<li><a href="index.php?controller=membre&action=gestionAnnonces">Gestion des Annonces</a></li>';
                                                 echo '<li><a href="index.php?controller=notification&action=readAll">Gestion des Notifications</a></li>';

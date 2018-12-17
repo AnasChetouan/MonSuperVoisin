@@ -2,7 +2,7 @@
      
         echo '<div id="bloc_all_emprunts">';
         if(empty($tab_d)){
-            echo "Vous n'avez encore rien proposï¿½";
+            echo "Vous n'avez encore rien proposé";
         }
         else{
             echo '<div id="bloc_all_propose">';
@@ -21,26 +21,31 @@
                     $produit = ModelBien::select($idProduit);
                     $titre = $produit->getTitre();
                      echo $loginAcceptant." vous emprunte votre " .$titre;
+                     echo " du ".$dDebut." au ".$dFin;
+                    echo '</br>'.'<a href="index.php?controller=bien&action=read&id='.$idProduit.'"> Detail objet </a>';
+                    echo '</div>';
+                    echo '</br>';
                 }
                 else{
                     $produit = ModelService::select($idProduit);
                     $motClef = $produit->getMotClef();
                      echo $loginAcceptant." utilise votre service de " .$motClef;
+                     echo " du ".$dDebut." au ".$dFin;
+                     echo '</br>'.'<a href="index.php?controller=service&action=read&idService='.$idProduit.'"> Detail Service </a>';
+                     echo '</div>';
+                     echo '</br>';
                 }
                 
                 
                 
                
-                echo " du ".$dDebut." au ".$dFin;
-                echo '</br>'.'<a href="index.php?controller=bien&action=read&id='.$idProduit.'"> Detail objet </a>';
-                echo '</div>';
-                echo '</br>';
+                
             }
             echo '</div>';
         }
         
         if(empty($tab_e)){
-            echo "Vous n'avez encore rien empruntï¿½";
+            echo "Vous n'avez encore rien emprunté";
         }
         else{
             echo '<div id="bloc_all_pris">';
@@ -60,18 +65,20 @@
                     $produit = ModelBien::select($idProduit);
                     $titre = $produit->getTitre();
                     echo "Vous empruntez a ".$loginAcceptant. " son objet : ".$titre;
+                    echo " du ".$dDebut." au ".$dFin;
+                    echo '</br>'.'<a href="index.php?controller=bien&action=read&id='.$idProduit.'"> Detail objet </a>';
+                    echo '</div>';
+                    echo '</br>';
                 }
                 else{
                     $produit = ModelService::select($idProduit);
                     $motClef = $produit->getMotClef();
-                    echo "Vous utilisez le service de ".$motClef." proposÃ© par ".$loginAcceptant;
+                    echo "Vous utilisez le service de ".$motClef." proposé par ".$loginAcceptant;
+                    echo " du ".$dDebut." au ".$dFin;
+                    echo '</br>'.'<a href="index.php?controller=service&action=read&idService='.$idProduit.'"> Detail Service </a>';
+                    echo '</div>';
+                    echo '</br>';
                 }
-                  
-                
-                echo " du ".$dDebut." au ".$dFin;
-                echo '</br>'.'<a href="index.php?controller=bien&action=read&id='.$idProduit.'"> Detail objet </a>';
-                echo '</div>';
-                echo '</br>';
             }
             echo '</div>';
         }

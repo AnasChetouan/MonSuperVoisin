@@ -29,6 +29,7 @@
             $tarif = htmlspecialchars($s->getTarif());
             $estValide = htmlspecialchars($s->getEstValide());
             $loginProprio = htmlspecialchars(ModelMembre::getLoginById(($s->getIdProprio())));
+            if($estValide == 1){
             echo '<div class="produit">';
             echo '<br/> <p> <b><img src="style/img/service.png" alt="photo service" height="40%" width="60%" ></b>'.'<br/>  </p>';
             echo '<p>'.'<b>'.$motClef.'</b>'.'<br/>  </p>';
@@ -39,6 +40,7 @@
             echo '<br/>'.'<br/>'.'<a href="index.php?controller=service&action=read&idService='.$idService.'"><button> Plus d\'infos </button></a>';
             echo '</div>';
             echo '</a>';
+            }
         }
     ?>
 </div>

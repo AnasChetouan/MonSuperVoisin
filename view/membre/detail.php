@@ -32,7 +32,7 @@ require_once File::build_path(array("controller","ControllerCommentaire.php"));
     <?php 
     if(ucfirst($loginHTML) == ucfirst($_SESSION['login'])){
         echo '</br>';
-        echo '<a href="index.php?controller=membre&action=update&login='.$loginURL.'" title="Modifier">'.'<button>Mofifier mon profil</button></a>';
+        echo '<a href="index.php?controller=membre&action=update&login='.$loginURL.'" title="Modifier">'.'<button>Modifier mon profil</button></a>';
         echo '</br>';
         echo '<a href="index.php?controller=emprunt&action=listeEmpruntByMembre&login='.$loginURL.'" title="liste emprunts">'.'<button>Voir ma liste d emprunts</button></a>';
     }

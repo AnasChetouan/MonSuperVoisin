@@ -22,6 +22,8 @@
             </p>
             <p>
             <label for="mdp_id">Mot de passe :</label> <input type="password" name="mdp" id="mdp_id" required/> 
+            <br>
+            <br>
             <input type="submit" value="Se connecter" />
             </p>
        
