@@ -2,5 +2,5 @@
 
 ?>
 <p>
-    Erreur : Probleme lors de la lecture  !
+    Erreur : Probleme lors de la lecture !
 </p>

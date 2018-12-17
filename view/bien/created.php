@@ -1,4 +1,7 @@
+  <p id="text_notif">Annonce bien reçue</p>
+
 <?php
+  
     if (!Session::is_admin()){
         echo "<p>Votre demande a bien été prise en compte ! Le bien sera posté lorsqu'un administrateur du site l'aura validé.</p>";
     }

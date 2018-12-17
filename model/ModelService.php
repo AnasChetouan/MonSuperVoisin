@@ -91,6 +91,12 @@ class ModelService extends Model {
         return $chaine;
     }*/
     
+    public function deleteService(){
+        ModelService::supprimerSeFaitSur($this->idService);
+        ModelService::supprimerCreneaux($this->idService);
+        $this->delete($this->idService);
+    }
+    
     public function updateIdService(){
         $id = Model::$pdo->lastInsertId();
         $this->setIdService($id);
@@ -138,33 +144,31 @@ class ModelService extends Model {
     }
    
     
-    public function supprimerCreneaux(){
-        $tab_creneaux = ModelSeFaitSur::selectCreneaux($this->idService);
+    public static function supprimerCreneaux($idService){
+        $tab_creneaux = ModelSeFaitSur::selectCreneaux($idService);
         foreach($tab_creneaux as $t){
             $idCreneau = $t['idCreneau'];
             ModelCreneau::delete($idCreneau);
         }
     }
     
-    public function supprimerSeFaitSur(){
-        $tab_creneaux = ModelSeFaitSur::selectCreneaux($this->idService);
+    public static function supprimerSeFaitSur($idService){
+        $tab_creneaux = ModelSeFaitSur::selectCreneaux($idService);
         foreach($tab_creneaux as $t){
             $idService = $t['idService'];
             ModelSeFaitSur::delete($idService);
         }
     }
-    
-    public function updateCreneaux($valeurs, $jours){
-        // Pour mettre à jour les créneaux, on supprime les anciens et on re-insère les nouveaux dans la BDD
-        $this->supprimerCreneaux();
+
+    public function updateNewCreneaux($valeurs, $jours){
+        // Pour mettre à jour les créneaux, on supprime les anciennes relations et les anciens créneaux puis ont recrée des créneaux et des relations avec les nouvelles valeurs
+        
+        ModelService::supprimerSeFaitSur($this->idService);
+        ModelService::supprimerCreneaux($this->idService);
+        
         $listeIDC=ModelCreneau::creerCreneaux($valeurs, $jours);
-        return $listeIDC;
-    }
-    
-    public function updateSeFaitSur($idS, $listeIDC){
-        // Pour mettre à jour les relations service-créneau, on supprime les anciennes et on re-insère les nouvelles dans la BDD
-        $this->supprimerSeFaitSur();
-        ModelSeFaitSur::creerRelations($idS, $listeIDC);
+        ModelSeFaitSur::creerRelations($this->idService, $listeIDC);
+
     }
 
     public static function validate($idService){ 
@@ -279,15 +283,12 @@ class ModelService extends Model {
             }
             
              public static function deleteAllServicesbyMembre($idMembre){
-                    $sql = "DELETE FROM Service WHERE idProprio =:idMembre_tag  ";
-                    $req_prep = Model::$pdo->prepare($sql);
-                    $values = array(
-                        "idMembre_tag" => $idMembre
-                    );
-                    $req_prep->execute($values); 
-                }
-
+                 $tab_s = ModelService::selectAll();
+                 foreach($tab_s as $s){
+                    if($s->getIdProprio() == $idMembre){
+                        $s->deleteService();
+                    }
+                 }
+             }
 }
-
-                        
 ?>

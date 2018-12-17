@@ -1,6 +1,11 @@
-<p id="text_notif">Commentaire ajouté</p>
+<p id="text_notif">Commentaire ajoutÃ©</p>
 <?php
-  echo "<p>Votre commentaire a bien été ajouté</p>";;
+  echo "<p>Votre commentaire a bien Ã©tÃ© ajoutÃ©</p>";;
     require_once File::build_path(array("index.php"));
-    echo'<a href="index.php?controller=bien&action=readAll"> Retour a la liste des biens </a>';
-  ?>
+    if ($typeProduit === "Bien"){
+         echo'<a href="index.php?controller=bien&action=readAll"> Revenir en arriÃ¨re </a>';
+    }
+    if ($typeProduit === "Service"){
+         echo'<a href="index.php?controller=service&action=readAll"> Revenir en arriÃ¨re </a>';
+    }
+ ?>

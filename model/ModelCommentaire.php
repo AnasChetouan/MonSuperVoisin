@@ -11,6 +11,7 @@
 		private $appreciation;
 		private $etoile;
 		private $idProduit;
+                private $estBien;
 		private $idMembre;
                 
 		///////////////////////////////////////////////
@@ -20,7 +21,16 @@
 	function getIdComm() {
             return $this->idComm;
         }
+        
+        public function getEstBien() {
+            return $this->estBien;
+        }
 
+        public function setEstBien($estBien) {
+            $this->estBien = $estBien;
+        }
+
+        
         function getLoginU() {
             return $this->loginU;
         }
@@ -74,18 +84,24 @@
 					return $tab_Comm;
 			  }*/
 			  
-			  public function __construct($l = NULL, $a = NULL, $e = NULL, $ip = NULL, $im = NULL) {
-				  if (!is_null($l) && !is_null($a) && !is_null($e) && !is_null($ip) && !is_null($im)) {
+			  public function __construct($l = NULL, $a = NULL, $e = NULL, $ip = NULL, $im = NULL, $eb = NULL) {
+				  if (!is_null($l) && !is_null($a) && !is_null($e) && !is_null($ip) && !is_null($im) && !is_null($eb)) {
    					$this->loginU = $l;
     					$this->appreciation = $a;
     					$this->etoile = $e;
     					$this->idProduit = $ip;
                                         $this->idMembre = $im;
+                                        $this->estBien = $eb;
 					}
 			  }
         
-        public static function selectAllCommByIdProduit($idProduit){
-                $sql = "SELECT * FROM Commentaire WHERE idProduit=:produit";
+        public static function selectAllCommByIdProduit($idProduit, $typeProduit){
+                if($typeProduit === "Bien"){
+                    $sql = "SELECT * FROM Commentaire WHERE idProduit=:produit AND estBien = 1";
+                }
+                else{
+                     $sql = "SELECT * FROM Commentaire WHERE idProduit=:produit AND estBien = 0";
+                }
                 $req_prep = Model::$pdo->prepare($sql);
                 $values = array(
                     "produit" => $idProduit
@@ -127,9 +143,15 @@
                 //return $tab;
         }
         
-        public static function getNoteMoyenneByIdProduit($idProduit){
+        public static function getNoteMoyenneByIdProduit($idProduit, $typeProduit){
+            if($typeProduit === "Bien"){
+               $sql = "SELECT AVG(etoile) FROM Commentaire WHERE idProduit=:idProduit AND estBien = 1";
+                }
+            else{
+                $sql = "SELECT AVG(etoile) FROM Commentaire WHERE idProduit=:idProduit AND estBien = 0";
+            }
             
-            $sql = "SELECT AVG(etoile) FROM Commentaire WHERE idProduit=:idProduit";
+
             $req_prep = Model::$pdo->prepare($sql);
                 $values = array(
                     "idProduit" => $idProduit
@@ -142,6 +164,7 @@
                 return $rep[0];
                 //return $tab;
         }
+       
         
     }
 ?>

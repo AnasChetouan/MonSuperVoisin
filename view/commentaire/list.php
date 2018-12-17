@@ -1,7 +1,7 @@
 <div class="produits">
     
     <?php
-        foreach($tab_c as $c){ 
+        foreach($tab_c as $c){
             $idCommHTML = htmlspecialchars($c->getIdComm());
             $idCommURL = rawurlencode($c->getIdComm());
         

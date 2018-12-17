@@ -24,6 +24,14 @@
 					
 					</li>
                                         </div>
+        		<div>
+					<li class="menu-membres"><a href="#">Membres</a>
+						<ul class="submenu">
+							<li><a href="index.php?controller=membre&action=readAll">Trouver un membre</a></li>
+						</ul>
+					
+					</li>
+                                        </div>
                                         <div>
 					<?php 
 					if((!isset($_SESSION['login']))){
@@ -38,15 +46,15 @@
                     
                         echo "</a>";
                     	echo "<ul class='submenu'>";
-						echo '<li><a href="index.php?controller=membre&action=read&login='.$_SESSION['login'].'">Mon profil</a></li>';
-						echo '<li><a href="index.php?controller=membre&action=deconnect">Se déconnecter</a></li>';
-                                                echo '<li><a href="index.php?controller=bien&action=readAllByMembre">Mes Biens</a></li>';
-                                                echo '<li><a href="index.php?controller=service&action=readAllByMembre">Mes Services</a></li>';
+						echo '<li><a href="index.php?controller=membre&action=read&login='.$_SESSION['login'].'">Mes informations personnelles</a></li>';
+                                                echo '<li><a href="index.php?controller=bien&action=readAllByMembre">Mes biens</a></li>';
+                                                echo '<li><a href="index.php?controller=service&action=readAllByMembre">Mes services</a></li>';
                                                 if (Session::is_admin()){
-                                                echo '<li><a href="index.php?controller=membre&action=gestionAnnonces">Gestion des Annonces</a></li>';
-                                                echo '<li><a href="index.php?controller=notification&action=readAll">Gestion des Notifications</a></li>';
+                                                echo '<li><a href="index.php?controller=membre&action=gestionAnnonces">Gestion des annonces</a></li>';
+                                                echo '<li><a href="index.php?controller=notification&action=readAll">Gestion des notifications</a></li>';
                                                 }
-                                                else echo '<li><a href="index.php?controller=notification&action=readAll">Mes Messsages</a></li>';
+                                                else echo '<li><a href="index.php?controller=notification&action=readAll">Messagerie</a></li>';
+                                                echo '<li><a href="index.php?controller=membre&action=deconnect">Se dÃ©connecter</a></li>';
                         echo '</ul>';
                     	echo '</li>';
                     }

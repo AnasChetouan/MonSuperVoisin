@@ -31,9 +31,15 @@ class ControllerCommentaire {
     }
     
     public static function create() {
-        $b = ModelBien::select(Dispatcher::myGet('idProduit'));
+        $typeProduit = Dispatcher::myGet('typeProduit');
+        if($typeProduit === 'Bien'){
+            $p = ModelBien::select(Dispatcher::myGet('idProduit'));
+        }
+        if($typeProduit === 'Service'){
+            $p = ModelService::select(Dispatcher::myGet('idProduit'));
+        }
         $view = "update";
-        $pageTitle = "Création d'un commentaire";
+        $pageTitle = "CrÃ©ation d'un commentaire";
         $controller="commentaire";
         $c = new ModelCommentaire();
         $functionCaller = "create";
@@ -41,11 +47,18 @@ class ControllerCommentaire {
     }
 
     public static function created() {
-        $c = new ModelCommentaire(Dispatcher::myGet('idmembre'), Dispatcher::myGet('appreciation'), Dispatcher::myGet('etoile'), Dispatcher::myGet('idP'),ModelMembre::getIdByLogin($_SESSION['login']));
+        $typeProduit = Dispatcher::myGet('typeProduit');
+        if($typeProduit === 'Bien'){
+            $estBien = 1;
+        }
+        if($typeProduit === 'Service'){
+            $estBien = 0;
+        }
+        $c = new ModelCommentaire(Dispatcher::myGet('idmembre'), Dispatcher::myGet('appreciation'), Dispatcher::myGet('etoile'), Dispatcher::myGet('idP'),ModelMembre::getIdByLogin($_SESSION['login']), $estBien);
         if($c->save()) {
             $idP = Dispatcher::myGet('idP');
             $view = "created";
-            $pageTitle = "Commentaire Supprimé";
+            $pageTitle = "Commentaire ajoutÃ©";
             $controller ="commentaire";
         }
         else {
@@ -60,7 +73,7 @@ class ControllerCommentaire {
     public static function delete() {
         ModelCommentaire::delete(Dispatcher::myGet('idC'));
         $view = "deleted";
-        $pageTitle = "Commentaire supprimé";
+        $pageTitle = "Commentaire supprimÃ©";
         $controller="commentaire";
         require_once File::build_path(array("view","view.php"));
     }

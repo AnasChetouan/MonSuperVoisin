@@ -63,14 +63,13 @@ class ControllerEmprunt {
                 $pageTitle = "Une erreur est survenue lors de la validation de votre emprunt, veuillez contacter un administrateur si le problème persiste.";
                 $controller="emprunt";
             }
-        require_once File::build_path(array("view","view.php"));
         }
         else {
-        $view = "errorCreate";
-        $redirection = "bien";
-        $pageTitle = "Erreur cagnotte";
-        $message = "Votre cagnotte actuelle ne vous permet pas d'utiliser ce service pour ce nombre d'heures !";
-        $controller="service";
+            $view = "errorCreate";
+            $redirection = "bien";
+            $pageTitle = "Erreur cagnotte";
+            $message = "Votre cagnotte actuelle ne vous permet pas d'emprunter ce bien pour ce nombre de jours !";
+            $controller="emprunt";
         }
         require_once File::build_path(array("view","view.php"));
     }

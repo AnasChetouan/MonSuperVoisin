@@ -18,6 +18,7 @@
             $idLoginURL = rawurlencode($u->getLogin());
             $nomHTML = htmlspecialchars($u->getNom());
             $idMembre = htmlspecialchars($u->getIdMembre());
+            $noteMoyenne = intval(ModelCommentaire::getNoteMoyenne($idMembre));
             //$nbrEtoile =  htmlspecialchars($u->getNom());
             echo '<a href="index.php?controller=membre&action=read&login='.$loginHTML.'&idMembre='.$idMembre.'">';
             echo '<div class="produit">';
@@ -32,11 +33,11 @@
             }
             echo '<br/> <p>'.'<b>'.$loginHTML.'</b>'.'<br/>  </p>';
             for ($i = 0; $i< 5 ; $i++) {
-                if($i < intval(ModelCommentaire::getNoteMoyenne($idMembre))){
-                echo' <img src="style/img/star.png" alt="Star" style="width:10%;height:10%">';
+                if($i < $noteMoyenne){
+                    echo' <img src="style/img/star.png" alt="Star" style="width:10%;height:10%">';
                 }
                 else echo' <img src="style/img/star2.png" alt="Star" style="width:10%;height:10%">';
-                }
+            }
             
             echo '</div>';
             echo '</a>';

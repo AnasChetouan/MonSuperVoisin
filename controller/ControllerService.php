@@ -59,12 +59,11 @@ class ControllerService{
     public static function delete() {
         $id = (Dispatcher::myGet('idService'));
         $s = ModelService::select($id);
-
-        ModelService::delete($id);
+        $s->deleteService();
         
         $tab_s = ModelBien::selectAll();
         $view = "deleted";
-        $pageTitle = "Service supprim�";
+        $pageTitle = "Service supprim�";
         $controller ="service";
         require_once File::build_path(array("view","view.php"));
     }
@@ -272,13 +271,7 @@ class ControllerService{
 
                         //print_r($data);  
                         $s->update($data);
-                        
-                        $listeIDC = $s->updateCreneaux($values, $jours);
-                        // On met à jour les nouveaux créneaux
-                        
-                        $s->updateSeFaitSur($idService, $listeIDC);
-                        // On met à jour la relation entre les créneaux et le service
-                      
+                        $s->updateNewCreneaux($values, $jours);
                         $controller="service";
                         $view = "updated";
                         $pageTitle = "Service modifié";

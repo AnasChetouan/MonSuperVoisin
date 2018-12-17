@@ -128,7 +128,7 @@ class ControllerBien{
             $view = "detail";
             $pageTitle = "Bien en detail";
             $controller ="bien";
-            $tab = ModelCommentaire::selectAllCommByIdProduit(Dispatcher::myGet('idBien'));
+            //$tab = ModelCommentaire::selectAllCommByIdProduit(Dispatcher::myGet('idBien'));
         }
         else {
             $pb = "errorRead";

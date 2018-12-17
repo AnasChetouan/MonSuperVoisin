@@ -2,7 +2,7 @@
      
         echo '<div id="bloc_all_emprunts">';
         if(empty($tab_d)){
-            echo "Vous n'avez encore rien proposé";
+            echo "Vous n'avez encore rien proposï¿½";
         }
         else{
             echo '<div id="bloc_all_propose">';
@@ -45,7 +45,7 @@
         }
         
         if(empty($tab_e)){
-            echo "Vous n'avez encore rien emprunté";
+            echo "Vous n'avez encore rien empruntï¿½";
         }
         else{
             echo '<div id="bloc_all_pris">';
@@ -73,7 +73,7 @@
                 else{
                     $produit = ModelService::select($idProduit);
                     $motClef = $produit->getMotClef();
-                    echo "Vous utilisez le service de ".$motClef." proposé par ".$loginAcceptant;
+                    echo "Vous utilisez le service de ".$motClef." proposÃ© par ".$loginAcceptant;
                     echo " du ".$dDebut." au ".$dFin;
                     echo '</br>'.'<a href="index.php?controller=service&action=read&idService='.$idProduit.'"> Detail Service </a>';
                     echo '</div>';

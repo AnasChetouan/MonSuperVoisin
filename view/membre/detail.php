@@ -8,23 +8,24 @@ require_once File::build_path(array("controller","ControllerCommentaire.php"));
   $loginURL = rawurlencode($u->getLogin());
   $emailHTML = htmlspecialchars($u->getmail());
   $adminHTML = htmlspecialchars($u->getAdmin());
-  $cagnotte = $u->getSolde();
+  $solde = $u->getSolde();
   
-  if($u->getAdmin()){
-    $reponse = 'Oui';
-  }
-  else{ 
-    $reponse= 'Non';
-  }
+
  echo '
-        <p>Utilisateur de login <b>'. $loginHTML .'</b><br>
-           Prénom : '.$prenomHTML. '<br>
-           Nom : '.$nomHTML . '<br>
-           Email : ' . $emailHTML .'<br>
-           Administrateur : ' . $reponse .'<br> 
-           Cagnotte : ' . $cagnotte .'<b> </b> <br>
-           <a href="index.php?controller=membre&action=readAll"> Retour </a>
-        </p>';
+        <p>Utilisateur de login <b>'. $loginHTML .'</b><br>';
+           if((isset($_SESSION['login']) && $_SESSION['login'] == $loginHTML) || Session::is_admin()){
+            echo 'PrÃ©nom : '.$prenomHTML. '<br>
+            Nom : '.$nomHTML . '<br>
+            Email : ' . $emailHTML .'<br>';
+            if($u->getAdmin()){
+             echo 'Type de compte : Administrateur<br>';
+            }
+            else{ 
+              echo 'Type de compte : Particulier<br>';
+             }
+            echo 'Solde : ' . $solde .' Voisin-Bucks <b> </b> <br> <br> ';
+           }
+           echo '<a href="index.php?controller=membre&action=readAll"> Retour </a></p>';
  /*<a href="index.php?controller=membre&action=delete&login='.$loginURL.'" title="Supprimer">'.'</a><br>
             <a href="index.php?controller=membre&action=update&login='.$loginURL.'" title="Modifier">'.'</a> */
 ?>
@@ -68,7 +69,7 @@ require_once File::build_path(array("controller","ControllerCommentaire.php"));
                                         
 					}
 				}else{
-					echo '<p> Les commentaires sont visible seulement si vous etes connectés </p>';
+					echo '<p> Les commentaires sont visible seulement si vous etes connectï¿½s </p>';
 				}
                                 }
 					

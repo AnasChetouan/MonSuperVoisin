@@ -2,7 +2,7 @@
     
     <?php
     if(!empty($_SESSION['login'])){
-        $ville = " pres de ".ModelMembre::getVilleByLogin($_SESSION['login']);
+        $ville = " prÃ¨s de ".ModelMembre::getVilleByLogin($_SESSION['login']);
     }
     else $ville = "";
     
@@ -10,12 +10,12 @@
         <form action="index.php" method="post" enctype="multipart/form-data">
         <input type="hidden" name="controller" value="Bien">
         <input type="hidden" name="action" value="rechercheBien">
-                 <div id="recherche"> Rechercher un Bien'.$ville.' :
+                 <div id="recherche"> Rechercher un bien'.$ville.' :
                       <input type="text" name="nom" required placeholder="Exemple : Souris" />
                       </br>
                       Entre : 
-                      <input type="number" name="prix1" min="0" placeholder=0> € et 
-                      <input type="number" name="prix2" min="0" placeholder=100> €
+                      <input type="number" name="prix1" min="0" placeholder=0> Voisin-Bucks et 
+                      <input type="number" name="prix2" min="0" placeholder=100> Voisin-Bucks
                       </br>
                       </br>
                  <input type="submit" value="Rechercher" />
@@ -27,7 +27,7 @@
             $lienPhoto = htmlspecialchars($b->getLienPhoto());
             $idBien = htmlspecialchars($b->getIdBien());
             $loginProprio = htmlspecialchars(ModelMembre::getLoginById(($b->getIdProprio())));
-            $tabNotes = ModelCommentaire::selectAllCommByIdProduit($idBien);
+            $tabNotes = ModelCommentaire::selectAllCommByIdProduit($idBien, "Bien");
             $estDispo = htmlspecialchars($b->getEstDispo());
             $estValide = htmlspecialchars($b->getEstValide());
             if(($estDispo == 1) &&($estValide == 1)){
@@ -36,18 +36,18 @@
             echo '<p>'.'<b>'.$titreHTML.'</b>'.'<br/>  </p>';
             if (!empty($tabNotes)){
 	            for ($i = 0; $i< 5 ; $i++) {
-	                if($i < intval(ModelCommentaire::getNoteMoyenneByIdProduit($idBien))){
+	                if($i < intval(ModelCommentaire::getNoteMoyenneByIdProduit($idBien, "Bien"))){
 	                echo' <img src="style/img/star.png" alt="Star" style="width:10%;height:10%">';
 	                }
 	                else echo' <img src="style/img/star2.png" alt="Star" style="width:10%;height:10%">';
 	                }
             }
             else{
-            	echo '<b>Pas encore noté </b>'.'<br/>'.'<br/>';
+            	echo '<b>Pas encore notÃ© </b>'.'<br/>'.'<br/>';
             }
             
             // <p>'.'<b>'.$descHTML.'</b>'.'<br/>  </p>';
-            echo 'Propriétaire : '.$loginProprio;
+            echo 'PropriÃ©taire : '.$loginProprio;
             echo '<br/>'.'<br/>'.'<a href="index.php?controller=bien&action=read&idBien='.$idBien.'"><button> Detail objet </button></a>';
             echo '</div>';
             echo '</a>';
