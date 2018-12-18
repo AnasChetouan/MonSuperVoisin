@@ -99,7 +99,10 @@ echo '</br><a href="index.php?controller=bien&action=readAll"> Revenir en arriè
 									echo '<b>'.ModelMembre::getLoginById(intval($com->getIdMembre())).'</b> </br></br>';
 									echo 'Note : ' . $com->getEtoile() . '/5<br>';
 									echo 'Commentaire : ' . $com->getAppreciation() . '<br>';
-								echo '</div>';
+                                                                        if(Session::is_admin()){
+                                                                        echo 'Suppression  <a href="index.php?controller=commentaire&action=delete&idC='.$com->getIdComm().'"><img src="style/img/icone_deconnect.png" alt="supression du commentaire"></a>';
+                                                                        }
+                                                                    echo '</div>';
                 					echo '</div>';
 						echo '</fieldset>';
           

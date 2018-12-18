@@ -10,7 +10,7 @@
             $lienPhoto = htmlspecialchars($b->getLienPhoto());
             $idBien = htmlspecialchars($b->getIdBien());
             $loginProprio = htmlspecialchars(ModelMembre::getLoginById(($b->getIdProprio())));
-            $tabNotes = ModelCommentaire::selectAllCommByIdProduit($idBien);
+            $tabNotes = ModelCommentaire::selectAllCommByIdProduit($idBien,"Bien");
             $estDispo = htmlspecialchars($b->getEstDispo());
             $estValide = htmlspecialchars($b->getEstValide());
             
@@ -32,18 +32,18 @@
             echo '<p>'.'<b>'.$titreHTML.'</b>'.'<br/>  </p>';
             if (!empty($tabNotes)){
 	            for ($i = 0; $i< 5 ; $i++) {
-	                if($i < intval(ModelCommentaire::getNoteMoyenneByIdProduit($idBien))){
+	                if($i < intval(ModelCommentaire::getNoteMoyenneByIdProduit($idBien,"Bien"))){
 	                echo' <img src="style/img/star.png" alt="Star" style="width:10%;height:10%">';
 	                }
 	                else echo' <img src="style/img/star2.png" alt="Star" style="width:10%;height:10%">';
 	                }
             }
             else{
-            	echo '<b>Pas encore noté </b>'.'<br/>'.'<br/>';
+            	echo '<b>Pas encore notÃ© </b>'.'<br/>'.'<br/>';
             }
             
             // <p>'.'<b>'.$descHTML.'</b>'.'<br/>  </p>';
-            echo 'Propriétaire : '.$loginProprio;
+            echo 'PropriÃ©taire : '.$loginProprio;
             echo '<br/>'.'<br/>'.'<a href="index.php?controller=bien&action=read&id='.$idBien.'"><button> Detail objet </button></a>';
             echo '</div>';
             echo '</a>';
@@ -70,7 +70,7 @@
             echo '<p>'.'<b>'.$motClef.'</b>'.'<br/>  </p>';
             
             // <p>'.'<b>'.$descHTML.'</b>'.'<br/>  </p>';
-            echo 'Propriétaire : '.$loginProprio;
+            echo 'Propriï¿½taire : '.$loginProprio;
             echo '<br/>'.'<br/>'.'Tarif horaire : '.$tarif." â‚¬";
             echo '<br/>'.'<br/>'.'<a href="index.php?controller=service&action=read&idService='.$idService.'"><button> Plus d\'infos </button></a>';
             echo '</div>';

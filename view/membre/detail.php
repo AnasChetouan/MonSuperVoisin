@@ -59,17 +59,26 @@ require_once File::build_path(array("controller","ControllerCommentaire.php"));
 							echo '<div id="bloc_commentaire">';
 								echo '<div id="bloc_detail_comm">';
 									echo '<b>'.ModelMembre::getLoginById(intval($com->getIdMembre())).'</b> </br></br>';
-									echo 'Note : ' . $com->getEtoile() . '/5<br>';
+									echo 'Note : ' . $com->getEtoile() . '/5  </br> Pour le ';
+                                                                        if($com->getestBien() == 1){
+                                                                            echo "bien : ";
+                                                                            echo '<a href="index.php?controller=bien&action=read&idBien='.$com->getIdProduit().'">'.ModelBien::select($com->getIdProduit())->getTitre().'</a>';
+                                                                            echo "</br>";
+                                                                        }else {
+                                                                            echo "service : ";
+                                                                            echo '<a href="index.php?controller=service&action=read&idService='.$com->getIdProduit().'">'.ModelService::select($com->getIdProduit())->getMotClef().'</a>';
+                                                                            echo "</br>";
+                                                                        }
+                                                                        
 									echo 'Commentaire : ' . $com->getAppreciation() . '<br>';
 								echo '</div>';
                 					echo '</div>';
 						echo '</fieldset>';
           
-					}
-                                        
+					}                                       
 					}
 				}else{
-					echo '<p> Les commentaires sont visible seulement si vous etes connect�s </p>';
+					echo '<p> Les commentaires sont visible seulement si vous etes connectés </p>';
 				}
                                 }
 					
