@@ -1,135 +1,7 @@
-/* POLICE DE LA MARQUE DANS LE HEADER */
-@font-face {
-	font-family: 'Recharge Rg';
-	src: url('../police/RechargeRg-Bold.eot');
-	src: url('../police/RechargeRg-Bold.eot?#iefix') format('embedded-opentype'),
-		url('../police/RechargeRg-Bold.woff') format('woff'),
-		url('../police/RechargeRg-Bold.ttf') format('truetype');
-	font-weight: bold;
-	font-style: normal;
-}
 /* //////////////////////////////////////////////////////////////////////////////////////////     */
-
-nav
-{
-	z-index:10;
-	display:inline;
-	width:100%;
-}
-
-header
-{
-	display:flex;
-	align-items:flex-end;
-	flex-direction:row;
-	justify-content:flex-end;
-}
-
-.menuprinci div
-{
-	position:relative;
-	border-left : thin solid;
-	height: 80%;
-	width:100%;
-	font-size:1.5vw;
-	padding: 0px 4%;
-}
-
-header nav div:nth-child(2)
-{
-	border-left: thin none;
-}
-
-nav .menuprinci
-{
-	width:80%;
-	height:30px;
-	margin: 1% 10% 0% 10%;
-	display:flex;
-	flex-direction:row;
-	align-items:stretch;
-	justify-content:space-between;
-}
-
-.menuprinci
-{
-	top:10px;
-	background-color : rgb(200,200,200);
-}
-
-.logo
-{
-	padding-left:5%;
-	display:inline;
-	width:100%;
-	left:100%;
-}
-
-.logo2
-{
-	display:inline;
-	width:30%;
-	height:100%;
-}
-
-
-nav div a:hover .puce
-{
-visibility:visible;
-}
-
-.menuprinci div a
-{
-	text-decoration: none ;
-	color:#202020;
-}
-
-a:hover
-{
-	color:#999999;
-}
 
 #bloc_forms{
   display: flex;
-}
-nav ul{
-  list-style-type:none;
-  padding:0;
-}
-
-nav > ul{
-  margin: 0px;
-  padding: 0px;
-}
-
-nav > ul::after{
-  content: "";
-  display: block;
-  clear: both;
-}
-
-nav > ul > li{
-  float: left;
-  position: relative;
-}
-
-nav li{
-  list-style-type: none; 
-}
-
-nav{
-  width: 100%;
-  background-color: #424558;
-}
-
-nav a{
-  display: inline-block;
-  text-decoration: none;
-}
-
-nav > ul > li > a{
-  padding: 20px 30px;
-  color: #FFF;
 }
 
 #bloc_all_emprunts{
@@ -152,149 +24,8 @@ nav > ul > li > a{
 	width: 75%;
 }
 
-.submenu{
-  display: none;
-}
 
-nav li:hover .submenu{
-  display: inline-block;
-  position: absolute;
-  top: 100%;
-  left: 0px;
-  padding: 0px;
-  z-index: 100000;
-}
-
-.submenu li{
-  border-bottom : 1px solid #CCC;
-}
-
-.submenu li a{
-  padding: 15px 30px;
-  font-size: 13px;
-  color:#222538;
-  width: 270px;
-}
-
-.menu-biens:hover{
-
-}
-
-.menu-services:hover{
-  
-}
-
-.menu-connexion:hover{
-  
-}
-
-.menu-inscription:hover{
-  
-}
-
-.menu-biens:hover{
-  
-}
-
-.menu-profil:hover{
-  
-}
-
-.menu-biens:hover{
-  
-}
-
-.menu-contact:hover{
-  
-}
-
-.list_menu{
-  text-align:center;
-  display:block;
-  text-decoration:none;
-  background: rgba(255,255,255,1);
-  color: grey;
-  padding:15px 25px;
-  /*-webkit-transition:all .40s ease;*/
-  text-transform:uppercase;
-  font-weight:bolder;
-     /* background: rgba(200,200,200,0.95);
-      color: black;*/
-}
-
-nav li:hover a{
-background:rgb(200,200,200);
-padding: 15px;
-color:black;
-}
-
-nav li ul{
-left:0;
-top:47px;
-position:absolute;
-z-index:1;
-opacity:0;
-visibility:hidden;
-/*-webkit-transition:all .40s ease;*/
-}
-
-main{
-  position: absolute;
-    
-    width: 80%;
-    margin: 136px;
-    margin-top: 101px;
-    background-color: rgba(255,255,255,0.75);
-}
-
-nav li:hover ul{
-visibility:visible;
-opacity:1;
-/*-webkit-transition:all .40s ease;*/
-}
-
-#icone_inscription{
-      width: 55px;
-    margin-top: 9px;
-
-}
-
-nav li ul li{
-width:100%;
-}
-
-nav li ul li a{
-width:100%;
-text-align:left;
-} 
-
-nav li ul a:hover {
-  background:orange;
-}
-
-
-header{
-background:url('famille.jpg');
-margin:0;
-}
-
-#bloc_search_connect{
-  display:flex;
-  width:100%;
-}
-
-
-
-#bloc_menu{
-  height:8%;
-  
-}
-
-.menu{
-  width:20%;
-}
-
-body {
+.myPage {
   font-family: 'Source code pro', Calibri, serif;
   padding: 0px;
   margin: 0px;
@@ -302,130 +33,8 @@ body {
   background-position: center center;
   background-size: cover;
   background-attachment: fixed;
-    
-    
-}
-
-#icone_compte{
-  height: 68px;
-  padding-top: 1px;
-}
-
-#bloc_top{
-  /*background-image: url(../img/bg_top.jpg); */
-   background-color: rgba(71,241,241,0.48);
-    display: flex;
-
-}
-
-
-
-#bloc_slogan{
-  width:30%;
-  display: flex
-}
-
-#list_menu{
-  margin:0;
-  height:48px;
-}
-
-#bloc_marque{
-  height:48px;
-  
-}
-
-#icone_panier{
-  width:55px;
-  margin-top: 9px;
-}
-#marque{
-  font-family: 'Recharge Rg';
-  font-size: 44px;
-    margin-top: 28px;
-    margin-left: 17px;
-    margin-bottom: 0;
-    
-}
-
-
-#bloc_marque a:link , #bloc_marque a:visited{
-  text-decoration: none;
-  color:black;
-}
-
-.image_supprimer_input{
-  background-image: url(../img/loupe_modif.png);
-    height: 28px;
-    width: 25px;
-    /* margin: 0px 5px 15px 0px; */
-    padding: 8px;
-    color: transparent;
-    margin-left: 5px;
-    margin-top: 8px;
-    /* padding-top: 10px; */
-    /* margin-left: 1px; */
-}
-
-
-
-
-#barre_search {
-  height: 30px;
-    width: 100%;
-    padding: 0px 0px 0px 10px;
-    margin: 6px 0px 0px 0px;
-    border: 1px solid #333;
-    background: #fff;
-    border-radius: 0px;
-    outline: none;
-    margin-right: -31px;
-}
-
-#bloc_search{
-  margin-top: 29px;
-  margin-left: 10px;
-  width: 23%;
-  
-}
-
-#bloc-search{
-  display:flex;
-}
-
-
-div#listVelo {
+  height: 100%;
   position: relative;
-  left:50px;
-  
-}
-div#listVelo a {
-  color: black;
-  
-}
-div#listVelo a:hover {
-  color: red;
-}
-
-footer{
-  position: relative;
-  top:550px;
-}
-table{
-   margin:0;
-}
-
-div#listVelo{
- background-color: white;
-  
-}
-#lol{
-  position:relative;
-  
-  width: 100%;
-  padding: 25px;
-  border-radius: 3px;
-  /*border:1px solid black;*/
 }
 
 #img_sinscrire {
@@ -489,11 +98,6 @@ div#listVelo{
 
 }
 
-.prix{
-  color: red;
-  font-weight:bold;
-  margin:0;
-}
 fieldset{
   width: 540px;
 }
@@ -505,104 +109,8 @@ fieldset{
     padding-left: 15px;
 }
 #bloc_connex{
-  width: 40%;
-  height: 10%;
-}
-
-#bloc_bienvenue{
-    background-color: rgba(79, 255, 76, 0.85);
-    height: 54px;
-    /* color: black; */
-    border: 1px solid;
-    /* padding-top: 0px; */
-    /* border-color: turquoise; */
-    margin-top: 28px;
-    /* border-width: 19px; */
-    /* border-left: 9px; */
-}
-
-#bloc_bienvenue p {
-   width: 110px;
-    border: 2px solid;
-    height: 43px;
-    padding-top: 7px;
-    margin-top: 0px;
-  
-}
-
-#bloc_bienvenue_not_admin {
-    background-color: rgba(79, 255, 76, 0.85);
-    height: 54px;
-    /* color: black; */
-    border: 1px solid;
-    /* padding-top: 0px; */
-    /* border-color: turquoise; */
-    margin-top: 28px;
-    position: relative;
-    right: 52px;
-    /* border-width: 19px; */
-    /* border-left: 9px; */
-}
-
-#bloc_bienvenue_not_admin p {
-    width: 110px;
-    border: 2px solid;
-    height: 43px;
-    padding-top: 7px;
-    margin-top: 0px;
-}
-
-#text_bienvenue{
-      font-size: 16px;
-    color: white;
-}
-
-
-
-
-.bloc_icones {
-  font-family: 'Recharge Rg';
-    text-align: center;
-    display: flex;
-    /*margin-top: 23px;*/
-    /* margin-left: 100px; */
-    left: 146px;
-    position: relative;
-    right: 90px;
-}
-
-.bloc_icones a:link{
-  text-decoration: none;
-}
-.bloc_icones .text_icones{
-  color:white;
-  font-size: 11px;
-  width: 118px;
-}
-
-.bloc_icones_admin{
-  font-family: 'Recharge Rg';
-    text-align: center;
-    display: flex;
-    left: 27px;
-    position: relative;
-}
-
-.bloc_icones_admin a:link{
-  text-decoration: none;
-}
-.bloc_icones_admin .text_icones{
-  color:white;
-  font-size: 11px;
-  width: 118px;
-}
-
-/*#bloc_panier{
-  margin-left: 22px;
-} */
-
-#bloc_panier p{
-  margin-top : 11px;
+  width: 30%;
+  height: 123px
 }
 
 #text_icone_compte{
@@ -612,20 +120,13 @@ fieldset{
 #bloc_deconnexion {
   margin-top: 16px;
 }
+
 #image_produit{
     width: 334px;
 }
 
 #bloc_nom_produit{
   text-align:center;
-}
-
-#bloc_droit{
-    margin-left: 52px;
-    border: 2px solid black;
-    border-width: 3px;
-    padding: 10px;
-    background-color: rgba(33, 107, 243, 0.25);
 }
 
 #bloc_produit{
@@ -636,53 +137,10 @@ fieldset{
     padding: 10px;
 }
 
-footer {
-   text-align:center;
-  display:block;
-  text-decoration:none;
-  background-color: rgba(71,241,241,0.48);
-  color: black;
-  padding:15px 25px;
-  /*-webkit-transition:all .40s ease;*/
-  text-transform:uppercase;
-  font-weight:bolder;
-  
-}
-footer a {
-   
-  display:inline-block;
-  text-decoration:none;
-  color: black;
-  padding:15px 25px;
-  /*-webkit-transition:all .40s ease;*/
-  text-transform:uppercase;
-  font-weight:bolder;
-  
-}
-#panierA{
-  text-align: center;
-}
-#velos{
- width: 25%;
-  
-}
-#autre{
-  position: relative;
-  bottom: 150px;
-  left: 350px;
-  width: 75%;
-  
-}
-footer p{
-  width: 85%;
-}
 ul{
   list-style-type: none;
 }
 
-.bloc_ecrire{
-  display: table-caption;
-}
 
 #bloc_add_comm fieldset{
  width: 97%;
@@ -700,27 +158,7 @@ body{
   height: 100%;
   position: relative;
 }
- 
-#wrap{
-  min-height:100%;
-  position: relative;
-}
-header{
-  position: relative;
-}
-main{
-  position: relative;
-  padding-bottom: 100px;
-}
-footer{  
-  width: 100%;
-  height: 150px;
-}
 
-#icone_connexion{
-  width: 55px;
-    margin-top: 9px;
-}
 
 #icone_action {
   width:55px;
@@ -771,25 +209,6 @@ footer{
   position: absolute;
 }
 
-.actions p{
-  text-decoration: none;
-    font-weight: bold;
-    font-size: 21px;
-    margin-top: 36px;
-}
-
-.actions{
-  display:flex;
-}
-
-#bloc_actions a:link{
-  text-decoration: none;
-  
-}
-
-#bloc_actions a:visited {
-  color: blue;
-}
 
 #bloc_erreur_not_admin{
   background-color: rgb(255, 34, 34);
@@ -808,10 +227,6 @@ footer{
     font-size: 20px;
     text-align: center;
     border: 1px solid black;
-}
-.montant{
-  font-size: 25px;
-  text-decoration: underline;
 }
 
 #erreur{
@@ -840,24 +255,4 @@ footer{
     margin-left:25%;
 	position: relative;
     top: 39px;
-}
-
-#recherche{
-	border: 2px solid black;
-	padding : 2%;
-}
-
-.notification{
-	border: 2px solid black;
-	width : 20%;
-	padding : 2%;
-}
-
-.bloc_commande{
-  display: inline-block;
-    margin: 10px;
-    background-color: rgba(251, 251, 251, 0.66);
-    border: 1px solid black;
-    padding: 10px;
-    width: 176px;
 }
