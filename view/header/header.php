@@ -1,74 +1,99 @@
-<nav>
-    <div class="menuprinci" style="padding:1.5%;">
-        <a class="logo" href="index.php"><img class="logo2" src="style/img/v.png" alt="logo"></a>
-        <div>
-        <li class="menu-biens"><a href="#">Biens</a>
-						<ul class="submenu">
-							<li><a href="index.php?controller=bien&action=readAll">Trouver un bien</a></li>
-							<?php
-							if((isset($_SESSION['login'])))
-                                echo '<li><a href="index.php?controller=bien&action=create">Proposer un bien</a></li>';
-							?>		
-						</ul>
-					</li>
-                                        </div>
-		<div>
-					<li class="menu-services"><a href="#">Services</a>
-						<ul class="submenu">
-							<li><a href="index.php?controller=service&action=readAll">Trouver un service</a></li>
-							<?php
-							if((isset($_SESSION['login'])))
-                                echo '<li><a href="index.php?controller=service&action=create">Proposer un service</a></li>';
-							?>	
-						</ul>
-					
-					</li>
-                                        </div>
-        		<div>
-					<li class="menu-membres"><a href="#">Membres</a>
-						<ul class="submenu">
-							<li><a href="index.php?controller=membre&action=readAll">Trouver un membre</a></li>
-						</ul>
-					
-					</li>
-                                        </div>
-                                        <div>
-					<?php 
-					if((!isset($_SESSION['login']))){
-                                             
-						echo '<li class="menu-connexion"><a href="index.php?controller=membre&action=connect">S\'identifier</a></li></div><div>'
-						 .'<li class ="menu-inscription"><a href="index.php?controller=membre&action=create">S\'inscrire</a></li>';
-                                                 echo '</div>';
-                                                
-                                            }
-                    else{
-                    	echo "<li class='menu-profil'><a href='#'>".$_SESSION['login'];
-                    
-                        echo "</a>";
-                    	echo "<ul class='submenu'>";
-						echo '<li><a href="index.php?controller=membre&action=read&login='.$_SESSION['login'].'">Mes informations personnelles</a></li>';
-                                                echo '<li><a href="index.php?controller=bien&action=readAllByMembre">Mes biens</a></li>';
-                                                echo '<li><a href="index.php?controller=service&action=readAllByMembre">Mes services</a></li>';
-                                                if (Session::is_admin()){
-                                                echo '<li><a href="index.php?controller=membre&action=gestionAnnonces">Gestion des annonces</a></li>';
-                                                echo '<li><a href="index.php?controller=notification&action=readAll">Gestion des notifications</a></li>';
-                                                }
-                                                else echo '<li><a href="index.php?controller=notification&action=readAll">Messagerie</a></li>';
-                                                echo '<li><a href="index.php?controller=membre&action=deconnect">Se déconnecter</a></li>';
-                        echo '</ul>';
-                    	echo '</li>';
-                    }
-                    echo '</div>';
-                    echo '<div>';
-                        if((isset($_SESSION['login'])))
-                        echo '<li class="menu-contact"><a href="index.php?controller=notification&action=create">Contact</a></li>
+    <div class="w3-top">
+        <div class="w3-bar w3-theme-d2 w3-left-align">
+            <a href="index.php" class="w3-bar-item w3-button w3-teal"><i class="fa fa-home w3-margin-right"></i>Accueil</a>
 
-				</ul>';
-                    ?>
+            <div class="w3-dropdown-hover w3-hide-small">
+            <button class="w3-button" href="#">Biens <i class="fa fa-caret-down"></i></button>   
+                <div class="w3-dropdown-content w3-card-4 w3-bar-block">  
+                                <a href="index.php?controller=bien&action=readAll" class="w3-bar-item w3-button">Trouver un bien</a>
+    							<?php
+    							if((isset($_SESSION['login'])))
+                                    echo '<a href="index.php?controller=bien&action=create" class="w3-bar-item w3-button">Proposer un bien</a>';
+    							?>
+                </div>
+            </div>
+
+
+            <div class="w3-dropdown-hover w3-hide-small">
+            <button class="w3-button" href="#">Services <i class="fa fa-caret-down"></i></button>  
+                <div class="w3-dropdown-content w3-card-4 w3-bar-block">   
+    			<a href="index.php?controller=service&action=readAll" class="w3-bar-item w3-button">Trouver un service</a>
+    			<?php
+    			if((isset($_SESSION['login'])))
+                    echo '<a href="index.php?controller=service&action=create" class="w3-bar-item w3-button">Proposer un service</a>';
+    		      ?>	
+
+                </div>
+            </div>
+
+
+            <div class="w3-dropdown-hover w3-hide-small">
+            <button class="w3-button" href="#">Membres <i class="fa fa-caret-down"></i></button>  
+                <div class="w3-dropdown-content w3-card-4 w3-bar-block"> 
+    							<a href="index.php?controller=membre&action=readAll" class="w3-bar-item w3-button">Trouver un membre</a>
+
+                </div>
+            </div>
+
+    		<?php 
+    			         if((!isset($_SESSION['login']))){
+                                                 
+    						echo 
+                            '<a href="index.php?controller=membre&action=connect" class="w3-bar-item w3-button">S\'identifier</a>'
+    					    .'<a href="index.php?controller=membre&action=create"class="w3-bar-item w3-button">S\'inscrire</a>';
+                                                    
+                        }
+                        else{
+                        	echo '<div class="w3-dropdown-hover w3-hide-small">
+                                        <button class="w3-button" href="#">'.$_SESSION["login"].'<i class="fa fa-caret-down"></i></button>  
+                                            <div class="w3-dropdown-content w3-card-4 w3-bar-block">';
+
+                    						echo '<a href="index.php?controller=membre&action=read&login='.$_SESSION['login'].'" class="w3-bar-item w3-button" >Mes informations personnelles</a>';
+                                            echo '<a href="index.php?controller=bien&action=readAllByMembre" class="w3-bar-item w3-button">Mes biens</a>';
+                                            echo '<a href="index.php?controller=service&action=readAllByMembre" class="w3-bar-item w3-button">Mes services</a>';
+                                            if (Session::is_admin()){
+                                                echo '<a href="index.php?controller=membre&action=gestionAnnonces" class="w3-bar-item w3-button">Gestion des annonces</a>';
+                                                echo '<a href="index.php?controller=notification&action=readAll" class="w3-bar-item w3-button">Gestion des notifications</a>';
+                                                }
+                                            else 
+                                                echo '<li><a href="index.php?controller=notification&action=readAll" class="w3-bar-item w3-button">Messagerie</a>';
+                                                echo '<a href="index.php?controller=membre&action=deconnect" class="w3-bar-item w3-button">Se déconnecter</a>';
+                                            }
+
+                            echo '</div> </div>';
+
+                            if((isset($_SESSION['login'])))
+                            echo '<a class="w3-bar-item w3-button w3-hide-small w3-hover-white" href="index.php?controller=notification&action=create">Contact</a>';
+                        ?>
+             </div>           
         </div>
-    </div>
-    
-</nav>    
 
 
 <br>
+
+<!--
+Navbar
+<div class="w3-top">
+ <div class="w3-bar w3-theme-d2 w3-left-align">
+  <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-hover-white w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+  <a href="#" class="w3-bar-item w3-button w3-teal"><i class="fa fa-home w3-margin-right"></i>Accueil</a>
+  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Bien</a>
+  <a href="#work" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Services</a>
+  <a href="#pricing" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Membre</a>
+  <a href="#contact" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Contact</a>
+    <div class="w3-dropdown-hover w3-hide-small">
+    <button class="w3-button" title="Notifications">Dropdown <i class="fa fa-caret-down"></i></button>  
+    <div class="w3-dropdown-content w3-card-4 w3-bar-block">
+      <a href="#" class="w3-bar-item w3-button">Link</a>
+      <a href="#" class="w3-bar-item w3-button">Link</a>
+      <a href="#" class="w3-bar-item w3-button">Link</a>
+    </div>
+  </div>
+  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-teal" title="Search"><i class="fa fa-search"></i></a>
+ </div>
+</div>
+
+ Image Header 
+
+
+-->
