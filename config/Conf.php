@@ -8,7 +8,7 @@
 		'login' => 'mdimarino',
 		'password' => 'lemarin347',
 	  );
-	  static private $debug = true; 
+	  static private $debug = false; 
 		
 	  static public function getDebug() {
 		return self::$debug;
