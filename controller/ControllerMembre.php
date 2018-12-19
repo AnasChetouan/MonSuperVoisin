@@ -32,6 +32,12 @@ class ControllerMembre{
         }
   }
   
+   public static function readAllActions(){
+       $view = 'actions';
+       $pageTitle = "Liste des actions possibles";
+       $controller="membre";
+       require_once File::build_path(array("view","view.php"));
+   }
     
     public static function connected(){
         if(!is_null(Dispatcher::myGet('mdp'))&& !is_null(Dispatcher::myGet('login'))){
@@ -87,7 +93,7 @@ class ControllerMembre{
           
            $view = 'deconnected';
            $pageTitle="Deconnect�";
-           $controller="membre";
+          $controller="membre";
             require_once File::build_path(array("view","view.php"));
         } else {
             $message = "Il y a eu une erreur au niveau de la d�connexion veuillez nous en excuser !";

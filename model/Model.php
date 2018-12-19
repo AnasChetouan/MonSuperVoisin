@@ -196,8 +196,15 @@ class Model {
                 return false;
             if (Conf::isDebug()) {
                 echo $e->getMessage();
-            } else {
-                echo 'Une erreur est survenue <a href="index.php"> retour a la page d\'accueil </a>';
+            }
+            else{
+                
+                if ($e->getCode()==45000){
+                    echo 'La réservation à ce jour a déjà été effectuée, impossible de la refaire. <a href="index.php"> Retour a la page d\'accueil </a>';
+                }
+                else{
+                    echo 'Une erreur est survenue <a href="index.php"> Retour a la page d\'accueil </a>';
+                }
             }
             die();
         }

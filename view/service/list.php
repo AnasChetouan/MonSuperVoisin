@@ -22,11 +22,7 @@
                  <input type="submit" value="Rechercher" />
                  </div> 
         </form>  
-        </br>';   
-    
-    if(empty($_SESSION['login'])){
-        echo '<a <button href="index.php?controller=membre&action=create" style="margin-left:35%;" class="w3-button w3-xlarge w3-theme w3-hover-teal" title="S\'inscrire">Inscrivez-vous dès maintenant !</button></a><br>';
-    }
+        </br>';          
         foreach($tab_s as $s){ 
             $idService = htmlspecialchars($s->getIdService());
             $motClef = htmlspecialchars($s->getMotClef());

@@ -12,11 +12,11 @@ $mailHTML = htmlspecialchars($u->getMail());
 $adminHTML = htmlspecialchars($u->getAdmin());
 
 switch($adminHTML){
-    case 1:
+    case true:
         $affichage = '<input type="radio" name="admin" value="oui" checked> Oui<br>
              <input type="radio" name="admin" value="non"> Non<br>';
              break;
-    case 0:
+    case false:
         $affichage = '<input type="radio" name="admin" value="oui"> Oui<br>
              <input type="radio" name="admin" value="non" checked> Non<br>';
              break;
@@ -34,10 +34,13 @@ switch ($functionCaller) {
         $attribut="readonly";
         break;
 }
-
+if($functionCaller!="update"||$admin!="oui"){ //si l'action n'est pas de modifier ou que la personne connecté n'est pas un admin (seul les connectés ont accés à la modification des parametres du profil personnel)
+    $styles = "position: absolute;" //cette variable est appelé par la suite pour ne pas afficher le champ avec le checkbox (case à cocher pour savoir si l'utlisateur est admin)
+    . "visibility: hidden;";
+}
 if(isset($admin)){
     if($admin=="oui"){
-        $formTitle= $formTitle." un client";
+        $formTitle= $formTitle."un client";
     }else if($functionCaller=="update"){
         $formTitle="Modifier son compte";
     }
@@ -45,12 +48,7 @@ if(isset($admin)){
     $formTitle="S'inscrire";
 }
 
-if($functionCaller!="update"||$adminHTML==1){
-    //si l'action n'est pas de modifier ou que la personne connecté n'est pas un admin (seul les connectés ont accés à la modification des parametres du profil personnel)
-    $styles = "position: absolute;" //cette variable est appelé par la suite pour ne pas afficher le champ avec le checkbox (case à cocher pour savoir si l'utlisateur est admin)
-    . "visibility: hidden;";
-}
-else {$styles = "visibility: hidden;";}
+
 
 if(Conf::getDebug()==false){
     $method = "post";

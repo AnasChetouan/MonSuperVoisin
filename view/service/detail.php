@@ -2,9 +2,10 @@
   $motClef = $s->getMotClef();
   $descriptionHTML = htmlspecialchars($s->getDescription());
   $tarif = $s->getTarif();
-  $dispo = $s->assemblerDispo();
+  $tab_d = $s->assemblerDispo();
   $idService = $s->getIdService();
   $idProprio = $s->getIdProprio();
+  $tab_r = $s->getReservations();
   $loginProprio = htmlspecialchars(ModelMembre::getLoginById(($idProprio)));
     echo '
            <p><b> Type du service : </b> '.$motClef . '<br> <br>'.
@@ -17,9 +18,31 @@
               if (isset($_SESSION['login']) && $_SESSION['login'] != ModelMembre::getLoginById($idProprio) && Session::is_admin()){ // Un admin peut modifier le bien d'un autre membre
                   echo '</br><a href="index.php?controller=service&action=update&idService='.$idService.'"> <button>Modifier ce post</button></a> </br>';
               }
-              echo '</br> Les disponiblités de <b>'.$loginProprio.'</b> pour ce service : </a></br></br>'.nl2br($dispo);
               
-              // nl2br sert à prendre en compte les retours à la ligne
+                    echo '<table>
+               <caption>Disponibilités de '.$loginProprio.' pour ce service :</caption>
+               <tr>
+                   <th>Jour</th>
+                   <th>Heure de début</th>
+                   <th>Heure de fin</th>
+               </tr>';
+                foreach($tab_d as $d){
+                    $heureDebut = $d['heureDebut'];
+                    $heureFin = $d['heureFin'];
+                    if ($heureDebut == 0){
+                        $heureDebut = 'Minuit';
+                    }
+                    if ($heureFin == 0){
+                        $heureFin = 'Minuit';
+                    }
+                    echo '<tr>
+                        <td>'.$d['nomJour'].'</td>
+                        <td>'.$heureDebut.'</td>
+                        <td>'.$heureFin.'</td>
+                    </tr>';
+                }
+
+            echo '</table>';
 
               
            echo '</p>';                         
@@ -33,6 +56,34 @@ $dateDT = new DateTime($jour.' +1 day');
 $date = $dateDT->format('Y-m-d');
 
 if(isset($_SESSION['login']) && ($_SESSION['login'] != ModelMembre::getLoginById($idProprio))){
+        if(!empty($tab_r)){
+            echo '<table>
+               <caption>Réservations pour ce service :</caption>
+               <tr>
+                   <th>Réservé par </th>
+                   <th>Date de début</th>
+                   <th>Date de fin</th>
+               </tr>';
+                foreach($tab_r as $r){
+                    $db = $r["dateDebut"];
+                    $dateDT = new DateTime($db);
+                    $dateDeb = $dateDT->format('d-m-Y');
+
+                    $df = $r["dateFin"];
+                    $dateDT = new DateTime($df);
+                    $dateF = $dateDT->format('d-m-Y');
+                    echo '<tr>
+                        <td>'.ModelMembre::getLoginByid($r['idProposant']).'</td>
+                        <td>'.$dateDeb.'</td>
+                        <td>'.$dateF.'</td>
+                    </tr>';
+                }
+
+            echo '</table>';
+        }
+        else{
+            echo 'Ce service n\'a pas encore été utilisé.<br>';
+        }
      $cagnotte = ModelMembre::getSoldeByLogin($_SESSION['login']);
     echo '</br>';
     echo '<form method="get" action="index.php">

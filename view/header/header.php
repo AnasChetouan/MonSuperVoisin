@@ -56,7 +56,7 @@
                                                 echo '<a href="index.php?controller=notification&action=readAll" class="w3-bar-item w3-button">Gestion des notifications</a>';
                                                 }
                                             else 
-                                                echo '<li><a href="index.php?controller=notification&action=readAll" class="w3-bar-item w3-button">Messagerie</a>';
+                                                echo '<a href="index.php?controller=notification&action=readAll" class="w3-bar-item w3-button">Messagerie</a>';
                                                 echo '<a href="index.php?controller=membre&action=deconnect" class="w3-bar-item w3-button">Se déconnecter</a>';
                                             }
 

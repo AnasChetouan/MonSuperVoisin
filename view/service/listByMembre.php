@@ -1,5 +1,5 @@
 <div class="produits">
-    <br>
+    
     <?php           
     $aUnService = false;
         foreach($tab_s as $s){ 

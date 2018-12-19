@@ -1,6 +1,6 @@
 
 <div class="produits">
-    <br>
+    
     <?php
        if(isset($_SESSION['login'])&&isset($_SESSION['admin'])&&Session::is_admin()==true){
             echo '<span class="ajout">

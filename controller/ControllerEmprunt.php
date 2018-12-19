@@ -51,7 +51,7 @@ class ControllerEmprunt {
                 $redirection = 'bien';
                 $pageTitle = "Emprunt ajouté";
                 $controller="emprunt";
-                ModelBien::pasDispo($idP);
+                //ModelBien::pasDispo($idP);
                 $nouvelleCagnote1 = (intval($cagnote) - intval($prixAPayer));
                 ModelMembre::gestionCagnote($nouvelleCagnote1,ModelMembre::getIdByLogin($_SESSION['login']));
                 ModelMembre::gestionCagnote(intval((ModelMembre::getSoldeByLogin(ModelMembre::getLoginById(Dispatcher::myGet('idmembre')))) + intval($prixAPayer)),Dispatcher::myGet('idmembre'));

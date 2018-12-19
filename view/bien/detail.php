@@ -9,7 +9,8 @@
   $prixNeuf = ($b->getPrixNeuf());
   $idBien = ($b->getIdBien());
   $idProprio = ($b->getIdProprio());
-  $estDispo = htmlspecialchars($b->getEstDispo());
+  $tab_r = $b->getReservations();
+  //$estDispo = htmlspecialchars($b->getEstDispo());
     echo '
            <p><b> Titre : </b> '.$titreHTML . '<br> <br>'
              .'<img src='.$lienPhoto.' alt="photo bien" height="25%" width="25%" > <br> <br>'.
@@ -41,9 +42,38 @@ $jour=$today['year'].'-'.$today['mon'].'-'.$today['mday'];
 $dateDT = new DateTime($jour.' +1 day');
 $date = $dateDT->format('Y-m-d');
 
-if($estDispo == 1 && (isset($_SESSION['login'])) && ($_SESSION['login'] != ModelMembre::getLoginById($idProprio))){
+if((isset($_SESSION['login'])) && ($_SESSION['login'] != ModelMembre::getLoginById($idProprio))){
+    if(!empty($tab_r)){
+        echo '<table>
+           <caption>Réservations de ce bien :</caption>
+           <tr>
+               <th>Réservé par </th>
+               <th>Date de début</th>
+               <th>Date de fin</th>
+           </tr>';
+            foreach($tab_r as $r){
+                $db = $r["dateDebut"];
+                $dateDT = new DateTime($db);
+                $dateDeb = $dateDT->format('d-m-Y');
+
+                $df = $r["dateFin"];
+                $dateDT = new DateTime($df);
+                $dateF = $dateDT->format('d-m-Y');
+                echo '<tr>
+                    <td>'.ModelMembre::getLoginByid($r['idAcceptant']).'</td>
+                    <td>'.$dateDeb.'</td>
+                    <td>'.$dateF.'</td>
+                </tr>';
+            }
+
+        echo '</table>';
+    }
+    else{
+        echo 'Ce bien n\'a pas encore été réservé.';
+    }
+
      $cagnote = ModelMembre::getSoldeByLogin($_SESSION['login']);
-    echo '</br>';
+echo '</br>';
 echo '<form method="get" action="index.php">
     <fieldset>
         <legend>Reserver</legend>';

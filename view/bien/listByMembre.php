@@ -1,5 +1,5 @@
 <div class="produits">
-    <br>
+    
     <?php
             $aUnBien = false;
             foreach($tab_b as $b){ 
@@ -8,7 +8,7 @@
                 $idBien = htmlspecialchars($b->getIdBien());
                 $loginProprio = htmlspecialchars(ModelMembre::getLoginById(($b->getIdProprio())));
                 $tabNotes = ModelCommentaire::selectAllCommByIdProduit($idBien, "Bien");
-                $estDispo = htmlspecialchars($b->getEstDispo());
+                //$estDispo = htmlspecialchars($b->getEstDispo());
                 $estValide = htmlspecialchars($b->getEstValide());
                 if(($estValide == 1) && (($b->getIdProprio()) == ModelMembre::getIdByLogin($_SESSION['login']))){
                     $aUnBien = true;

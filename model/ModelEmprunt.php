@@ -97,7 +97,7 @@
                     "now" => $now
                 );
                 $req_prep->execute($values);
-                ModelBien::updateDispo();    
+                //ModelBien::updateDispo();    
                 }
                 
                 public static function readAllBienDonneById($id){
@@ -133,7 +133,7 @@
                         "idMembre_tag" => $idMembre
                     );
                     $req_prep->execute($values);
-                    ModelBien::updateDispo();    
+                    //ModelBien::updateDispo();    
                 }
                 
                 public static function deleteAllEmpruntsbyAcceptant($idMembre){
@@ -143,7 +143,7 @@
                         "idMembre_tag" => $idMembre
                     );
                     $req_prep->execute($values);
-                    ModelBien::updateDispo();    
+                    //ModelBien::updateDispo();    
                 }
                 
     }

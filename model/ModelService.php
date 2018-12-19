@@ -104,18 +104,31 @@ class ModelService extends Model {
     }
     
     public function assemblerDispo(){
-        $chaine = "";
+        $tab = array();
         $tab_creneaux = ModelSeFaitSur::selectCreneaux($this->idService);
         foreach($tab_creneaux as $t){ 
             $c = ModelCreneau::select($t['idCreneau']);
             $heureDebut = $c->getHeureDebut();
             $heureFin = $c->getHeureFin();
             $nomJour = $c->getNomJour();
-            $ligne = $nomJour." : De ".$heureDebut."H à ".$heureFin."H";
-            $chaine.=$ligne."\n";
+            $jour = array(
+                "nomJour" => $nomJour,
+                "heureDebut" => $heureDebut,
+                "heureFin" => $heureFin);
+            array_push($tab, $jour);
         }
         
-        return $chaine;
+        return $tab;
+    }
+    
+    public function getReservations(){
+        $rep = Model::$pdo->query("SELECT * FROM Emprunt WHERE idProduit=".$this->idService." AND estBien = 0;");
+        $tab = $rep->fetchAll();
+
+        if (empty($tab)){
+            return false;
+        }
+        return $tab;
     }
     
     public function getJoursDispo(){

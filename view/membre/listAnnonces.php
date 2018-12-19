@@ -11,14 +11,13 @@
             $idBien = htmlspecialchars($b->getIdBien());
             $loginProprio = htmlspecialchars(ModelMembre::getLoginById(($b->getIdProprio())));
             $tabNotes = ModelCommentaire::selectAllCommByIdProduit($idBien,"Bien");
-            $estDispo = htmlspecialchars($b->getEstDispo());
+            //$estDispo = htmlspecialchars($b->getEstDispo());
             $estValide = htmlspecialchars($b->getEstValide());
             
             echo '<div class="produit">';
-            if(($estDispo == 0)){
-                echo "en cours d'emprunt";
-            }
-            else {
+            //if(($estDispo == 0)){
+            //    echo "en cours d'emprunt";
+            //}
                 echo 'Suppression  <a href="index.php?controller=Bien&action=delete&idBien='.$idBien.'"><img src="style/img/icone_deconnect.png" alt="supression du Bien" style="width:10%;height:10%"></a>';
                 echo '</br>';
                 if($estValide==0){
@@ -26,8 +25,7 @@
                 }
                 else echo 'Validation <a href="index.php?controller=bien&action=desactiver&idBien='.$idBien.'"><img src="style/img/ban.jpg" alt="Bannissement tempo annonce" style="width:10%;height:10%"></a>';
                 
-                
-            }
+               
             echo '<br/> <p> <b><img src='.$lienPhoto.' alt="photo bien" height="50%" width="50%" ></b>'.'<br/>  </p>';
             echo '<p>'.'<b>'.$titreHTML.'</b>'.'<br/>  </p>';
             if (!empty($tabNotes)){

@@ -15,7 +15,6 @@
                 private $estValide;
                 private $lienPhoto;
                 private $prixNeuf;
-                private $estDispo;
                 private $idProprio;
 
 		// ACCESSEURS EN ECRITURE/LECTURE
@@ -43,9 +42,7 @@
                 public function getPrixNeuf() {
                     return $this->prixNeuf;
                 }
-                public function getEstDispo() {
-                    return $this->estDispo;
-                }
+                
                 public function getIdProprio() {
                     return $this->idProprio;
                 }
@@ -73,18 +70,15 @@
                 public function setPrixNeuf($prixNeuf) {
                     $this->prixNeuf = $prixNeuf;
                 }
-                public function setEstDispo($estDispo) {
-                    $this->estDispo = $estDispo;
-                }
                 public function setIdProprio($idProprio) {
                     $this->idProprio = $idProprio;
                 }
                                 
 		// CONSTRUCTEUR(S)
                 
-                public function __construct ($titre = NULL, $description = NULL, $tarif = NULL, $motClef = NULL, $estValide = NULL, $lienPhoto = NULL, $prixNeuf = NULL, $estDispo = NULL, $idProprio = NULL)
+                public function __construct ($titre = NULL, $description = NULL, $tarif = NULL, $motClef = NULL, $estValide = NULL, $lienPhoto = NULL, $prixNeuf = NULL, $idProprio = NULL)
 		{
-                    if(!is_null($titre) && !is_null($description) && !is_null($tarif) && !is_null($motClef) && !is_null($estValide) && !is_null($lienPhoto) && !is_null($prixNeuf) && !is_null($estDispo) && !is_null($idProprio))
+                    if(!is_null($titre) && !is_null($description) && !is_null($tarif) && !is_null($motClef) && !is_null($estValide) && !is_null($lienPhoto) && !is_null($prixNeuf) && !is_null($idProprio))
                         {
                             $this->titre = $titre;
                             $this->description = $description;
@@ -93,7 +87,6 @@
                             $this->estValide = $estValide;
                             $this->lienPhoto = $lienPhoto;
                             $this->prixNeuf = $prixNeuf;
-                            $this->estDispo = $estDispo;
                             $this->idProprio = $idProprio;
                         }
                 }
@@ -113,8 +106,15 @@
                      }
                      return $values["new_lien"];
                 }
+                
+                public function getReservations(){
+                    $rep = Model::$pdo->query("SELECT * FROM Emprunt WHERE idProduit=".$this->idBien." AND estBien = 1;");
+                    $tab = $rep->fetchAll();
+                   
+                    return $tab;
+                }
 		
-		 public static function pasDispo($idB){ 
+		/*public static function pasDispo($idB){ 
                 $sql = "UPDATE Bien SET estDispo = 0 WHERE idBien=:idB_tag";
                 $req_prep = Model::$pdo->prepare($sql);
                 $values = array(
@@ -131,7 +131,7 @@
                     "login_tag" => $login,
                  );
                  $req_prep->execute($values);
-                }
+                }*/
                 
                 public static function validate($idBien){ 
                 $sql = "UPDATE Bien SET estValide = 1 WHERE idBien=:id_tag";

@@ -202,7 +202,7 @@ class ControllerBien{
                                         else{
                                             $estValide = 0;
                                         }
-                                        $b = new ModelBien($titre, $description, $tarif, $motClef, $estValide, "temp", $prixNeuf, 1, ModelMembre::getIdByLogin($_SESSION['login'])); // ...
+                                        $b = new ModelBien($titre, $description, $tarif, $motClef, $estValide, "temp", $prixNeuf, ModelMembre::getIdByLogin($_SESSION['login'])); // ...
                                         $b->save();
                                         move_uploaded_file($_FILES['photo']['tmp_name'], 'uploads/' . basename($b->updateLienPhoto($extension_upload)));
                                         $view = "created";
@@ -312,7 +312,7 @@ class ControllerBien{
 	            // à modifier si besoin       
                     $b = ModelBien::select(Dispatcher::myGet('idBien'));
                     //print_r($b);
-                    $estDispo = $b->getEstDispo();
+                    //$estDispo = $b->getEstDispo();
                     if (Session::is_admin()){ // Si c'est un admin qui modifie, on valide directement
                         $estValide = 1;
                     }
@@ -325,7 +325,6 @@ class ControllerBien{
                                 "idBien" => Dispatcher::myGet('idBien'),
                                 "titre" => Dispatcher::myGet('titre'),
                                 "motClef" => Dispatcher::myGet('motClef'),
-                                "estDispo" => $estDispo,
                                 "estValide" => $estValide,
                                 "description" => htmlspecialchars(Dispatcher::myGet('description')),
                                 "prixNeuf" => Dispatcher::myGet('prixNeuf'),
