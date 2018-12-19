@@ -13,6 +13,7 @@
                  <div id="recherche"> Rechercher un bien'.$ville.' :
                       <input type="text" name="nom" required placeholder="Exemple : Souris" />
                       </br>
+                       </br>
                       Entre : 
                       <input type="number" name="prix1" min="0" placeholder=0> Voisin-Bucks et 
                       <input type="number" name="prix2" min="0" placeholder=100> Voisin-Bucks
@@ -22,6 +23,10 @@
                  </div> 
         </form>  
         </br>';          
+    
+    if(empty($_SESSION['login'])){
+        echo '<a <button href="index.php?controller=membre&action=create" style="margin-left:35%;" class="w3-button w3-xlarge w3-theme w3-hover-teal" title="S\'inscrire">Inscrivez-vous dès maintenant !</button></a><br>';
+    }
         foreach($tab_b as $b){ 
             $titreHTML = htmlspecialchars($b->getTitre());
             $lienPhoto = htmlspecialchars($b->getLienPhoto());
@@ -43,7 +48,7 @@
 	                }
             }
             else{
-            	echo '<b>Pas encore noté </b>'.'<br/>'.'<br/>';
+            	echo '<b>Pas encore noté </b>'.'<br/>';
             }
             
             // <p>'.'<b>'.$descHTML.'</b>'.'<br/>  </p>';

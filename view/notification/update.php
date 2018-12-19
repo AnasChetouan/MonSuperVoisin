@@ -27,7 +27,7 @@ switch ($functionCaller) {
 
 
 <form action="index.php" method="get" enctype="multipart/form-data">
-     <fieldset>
+     <fieldset  id="formulaire">
          <legend><?=$formTitle?></legend>
     <input type='hidden' name='controller' value='Notification'>
     <input type='hidden' name='action' value='<?=$hiddenValue?>'>

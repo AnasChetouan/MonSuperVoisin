@@ -1,5 +1,5 @@
 <div class="produits">
-    
+    <br>
     <?php
             $aUnBien = false;
             foreach($tab_b as $b){ 

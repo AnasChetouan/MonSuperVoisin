@@ -31,9 +31,9 @@ switch ($functionCaller) {
 
 
 
-
-<form action="index.php" method="post" enctype="multipart/form-data">
-     <fieldset>
+<div>
+<form action="index.php" method="post" enctype="multipart/form-data" id="pageUpdateBien" >
+     <fieldset id="formulaire">
          <legend><?=$formTitle?></legend>
     <input type='hidden' name='controller' value='Bien'>
     <input type='hidden' name='action' value='<?=$hiddenValue?>'>
@@ -119,4 +119,5 @@ switch ($functionCaller) {
                 
                     
     </fieldset>
-</form>            
+</form> 
+    </div>

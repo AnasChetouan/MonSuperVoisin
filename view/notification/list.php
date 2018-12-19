@@ -1,5 +1,5 @@
 <div class="produits">
-    
+    <br>
     <?php
         if(!empty($_SESSION['login'])){
             $aUnMessage = false;

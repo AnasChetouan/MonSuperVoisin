@@ -12,31 +12,49 @@ require_once File::build_path(array("controller","ControllerCommentaire.php"));
   
 
  echo '
-        <p>Utilisateur de login <b>'. $loginHTML .'</b><br>';
+        <p> Utilisateur de login <b>'. $loginHTML .'</b><br>';
+            echo'<div id="infos_user">';
+            echo '<b>Informations Utilisateur :</b><br>'
+            . '<br>';
            if((isset($_SESSION['login']) && $_SESSION['login'] == $loginHTML) || Session::is_admin()){
             echo 'Prénom : '.$prenomHTML. '<br>
             Nom : '.$nomHTML . '<br>
             Email : ' . $emailHTML .'<br>';
+            
+             echo'</div>';
+             echo'<div id="infos_user">';
+            echo '<b>Informations du compte :</b><br>'
+            . '<br>';
             if($u->getAdmin()){
              echo 'Type de compte : Administrateur<br>';
             }
             else{ 
               echo 'Type de compte : Particulier<br>';
              }
-            echo 'Solde : ' . $solde .' Voisin-Bucks <b> </b> <br> <br> ';
+            echo 'Solde : ' . $solde .' Voisin-Bucks <b> </b> <img src="style/img/Vbucks.png" alt="photo bien" height="2%" width="2%" > <br> <br> ';
            }
-           echo '<a href="index.php?controller=membre&action=readAll"> Retour </a></p>';
+           echo'</div>'
+           
  /*<a href="index.php?controller=membre&action=delete&login='.$loginURL.'" title="Supprimer">'.'</a><br>
             <a href="index.php?controller=membre&action=update&login='.$loginURL.'" title="Modifier">'.'</a> */
 ?>
 
     <?php 
     if(ucfirst($loginHTML) == ucfirst($_SESSION['login'])){
+        echo '<div id="actions_user">';
         echo '</br>';
         echo '<a href="index.php?controller=membre&action=update&login='.$loginURL.'" title="Modifier">'.'<button>Modifier mon profil</button></a>';
         echo '</br>';
-        echo '<a href="index.php?controller=emprunt&action=listeEmpruntByMembre&login='.$loginURL.'" title="liste emprunts">'.'<button>Voir ma liste d emprunts</button></a>';
+        echo '<a href="index.php?controller=emprunt&action=listeEmpruntByMembre&login='.$loginURL.'" title="liste emprunts">'.'<button>Voir ma liste d\'emprunts</button></a>';
+        echo '</br>';
+        echo '<a href="index.php?controller=bien&action=readAllByMembre&login='.$loginURL.'" title="liste biens">'.'<button>Voir ma liste de Biens</button></a>';
+        echo '</br>';
+        echo '<a href="index.php?controller=service&action=readAllByMembre&login='.$loginURL.'" title="liste services">'.'<button>Voir ma liste de Services</button></a>';
+        
+        echo '</div>';
+        
     }
+     echo '<br><a href="index.php?controller=accueil&action=accueil"> Accueil </a></p>';
             ?>
 
 <div id="bloc_all_comm">

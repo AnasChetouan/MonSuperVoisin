@@ -27,9 +27,9 @@ if(Conf::getDebug()==false){
 ?>
 
 
-<form action="index.php" method="<?=$method?>" enctype="multipart/form-data">
+<form action="index.php" method="<?=$method?>" enctype="multipart/form-data" id="pageUpdateBien">
 
-     <fieldset>
+     <fieldset  id="formulaire">
          <legend><?=$formTitle?></legend>
     <input type='hidden' name='controller' value='Service'>
     <input type='hidden' name='action' value='<?=$hiddenValue?>'>
@@ -115,31 +115,31 @@ if(Conf::getDebug()==false){
 							var jours = [
 							    {
 							        code: "LUN",
-							        nom: "Lundi"
+							        nom: "Lundi "
 							    },
 							    {
 							        code: "MAR",
-							        nom: "Mardi"
+							        nom: "Mardi "
 							    },
 							    {
 							        code: "MER",
-							        nom: "Mercredi"
+							        nom: "Mercredi "
 							    },
 							    {
 							        code: "JEU",
-							        nom: "Jeudi"
+							        nom: "Jeudi "
 							    },
 							   	{
 							        code: "VEN",
-							        nom: "Vendredi"
+							        nom: "Vendredi "
 							    },
 							    {
 							        code: "SAM",
-							        nom: "Samedi"
+							        nom: "Samedi "
 							    },
 							    {
 							        code: "DIM",
-							        nom: "Dimanche"
+							        nom: "Dimanche "
 							    }
 							];
 

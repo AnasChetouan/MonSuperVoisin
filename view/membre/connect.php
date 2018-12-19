@@ -6,7 +6,7 @@
         $method = "get";
     }
 ?>
-<form method="<?$method?>" action="index.php">
+<form method="post" action="index.php">
     <fieldset>
         <?php if(isset($functionCaller)){
                 if($functionCaller=='connect'){
