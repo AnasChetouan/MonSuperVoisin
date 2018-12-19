@@ -6,6 +6,7 @@ class Model {
 
     public static $pdo;
 
+    //initialise la bdd
     public static function Init() {
 
         $hostname = Conf::getHostname();
@@ -28,7 +29,7 @@ class Model {
     }
 
    
-    
+    //recupere tous les tuples d'une table
     public static function selectAll() {
         $table_name = static::$object;
         $class_name = 'Model'.$table_name;
@@ -40,6 +41,7 @@ class Model {
         }
         
 
+        //recupere un tuple d'une table
     public static function select($primary_value) {
 
         $table_name = static::$object;
@@ -72,6 +74,7 @@ class Model {
         }
     }
     
+    //rechercher un tuble selon le nom
     public static function recherche($name) {
 
         $table_name = static::$object;
@@ -162,6 +165,7 @@ class Model {
         return true;
     }
 
+    //sauvegarde en Base de donnée
     public function save() {
 
         $table_name = static::$object;

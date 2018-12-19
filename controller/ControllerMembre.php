@@ -19,6 +19,7 @@ class ControllerMembre{
         require_once File::build_path(array("view","view.php"));
    }
    
+   //permet d'appeller la vue permettant de connecter un membre
     public static function connect(){
        if(!isset($_SESSION['login'])){
             $view = "connect";
@@ -38,7 +39,8 @@ class ControllerMembre{
        $controller="membre";
        require_once File::build_path(array("view","view.php"));
    }
-    
+   
+    //permet de connecter un membre
     public static function connected(){
         if(!is_null(Dispatcher::myGet('mdp'))&& !is_null(Dispatcher::myGet('login'))){
             $mdp_chiffre= Security::chiffrer(htmlspecialchars(Dispatcher::myGet('mdp'))); //Dispatcher::myGet('mdp');
@@ -81,6 +83,8 @@ class ControllerMembre{
         }
     }
     
+    
+    //permet de deconnecter un membre
     public static function deconnect(){
         
         $_SESSION = array();
@@ -246,12 +250,15 @@ class ControllerMembre{
         require_once File::build_path(array("view","view.php"));
     }
     
+    
+    //valide l'inscription d'un membre
     public static function validate() {
         $login = Dispatcher::myGet('login');
         ModelMembre::validate($login);
         ControllerMembre::readAll();
     }
     
+    //permet de bannir temporairement un membre
     public static function banTempo() {
         $login = Dispatcher::myGet('login');
         ModelMembre::banTempo($login);
@@ -370,6 +377,7 @@ class ControllerMembre{
             require_once File::build_path(array("view","view.php"));
     }
     
+    //permet de gerer les annonces pour un admin
     public static function gestionAnnonces(){
         $tab_b = ModelBien::selectAll();
         $tab_s = ModelService::selectAll();

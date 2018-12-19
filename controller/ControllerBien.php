@@ -7,6 +7,10 @@ require_once File::build_path(array("model", "ModelEmprunt.php"));
 require_once File::build_path(array("controller", "Dispatcher.php"));
 
 class ControllerBien{
+    
+     //arguments : void
+     //return : void
+     //Aplle la vue liste des biens avec tab_b un tableau avec tous les biens de la BDD
     public static function readAll() {
         $tab_b = ModelBien::selectAll(); // stocke tout
 	ModelEmprunt::actualiserEmprunt();
@@ -15,6 +19,10 @@ class ControllerBien{
         $controller ="bien";
         require_once File::build_path(array("view","view.php"));
     }
+    
+    //arguments : void
+     //return : void
+     //Aplle la vue liste des biens avec tab_b un tableau avec tous les biens de la BDD d'un utilisateur
 	 public static function readAllByMembre() {
         $tab_b = ModelBien::selectAll(); // stocke tout
 	ModelEmprunt::actualiserEmprunt();
@@ -24,18 +32,27 @@ class ControllerBien{
         require_once File::build_path(array("view","view.php"));
     }
     
+    //arguments : void
+     //return : void
+     //appelle la fonction validant l'annonce d'un bien
     public static function validate() {
         $idBien = Dispatcher::myGet('idBien');
         ModelBien::validate($idBien);
         ControllerMembre::gestionAnnonces();
     }
     
+    //arguments : void
+     //return : void
+     //Appelle la fonction desactivant l'annonce d'un bien
     public static function desactiver() {
         $idBien = Dispatcher::myGet('idBien');
         ModelBien::desactiver($idBien);
         ControllerMembre::gestionAnnonces();
     }
     
+    //arguments : void
+     //return : void
+     //appelle les differentes fonctions de recherche en fonction des arguments(prix présent ou non)
     public static function rechercheBien(){
         $name = Dispatcher::myGet('nom');
         $prix1 = Dispatcher::myGet('prix1');
@@ -55,6 +72,9 @@ class ControllerBien{
         require_once File::build_path(array("view","view.php"));
     }
     
+    //arguments : void
+     //return : void
+     //Recherche un bien en focntion du nom du bien
     public static function rechercheByName(){
         $name = Dispatcher::myGet('nom');
         if(!empty($name)){
@@ -87,6 +107,9 @@ class ControllerBien{
         require_once File::build_path(array("view","view.php"));
     }
     
+    //arguments : void
+     //return : void
+     //Recherche un bien en fonction de son nom et de son prix
     public static function rechercheByPrix(){
         $prix1 = Dispatcher::myGet('prix1');
         $prix2 = Dispatcher::myGet('prix2');
@@ -122,6 +145,9 @@ class ControllerBien{
         require_once File::build_path(array("view","view.php"));
     }
     
+    //arguments : void
+     //return : void
+     //Appelle la vue detail d'un bien avec $b le tuple correspondant au bien
     public static function read() {
         $b = ModelBien::select(Dispatcher::myGet('idBien'));
         if ($b != false) {
@@ -140,6 +166,10 @@ class ControllerBien{
         require_once File::build_path(array("view","view.php"));
     
     }
+    
+    //arguments : void
+     //return : void
+     //supprime un bien en fonction de son ID
     public static function delete() {
     	$id = (Dispatcher::myGet('idBien'));
     	$b = ModelBien::select($id);
@@ -161,6 +191,9 @@ class ControllerBien{
 	    require_once File::build_path(array('view','view.php'));
 	}
 
+       //arguments : void
+     //return : void
+     //Aplle la vue qui va creer un bien
     public static function create(){
     	$view = 'update';
     	$pageTitle = 'Proposer un bien';
@@ -169,6 +202,10 @@ class ControllerBien{
     	$controller = 'bien';
     	require_once File::build_path(array('view','view.php'));
     }
+    
+    //arguments : void
+     //return : void
+     //verifications pour l'ajout dans la BDD d'un bien
     public static function created(){
         $motClef = htmlspecialchars(Dispatcher::myGet('motClef'));
         $titre = htmlspecialchars(Dispatcher::myGet('titre'));
@@ -265,6 +302,10 @@ class ControllerBien{
         require_once File::build_path(array("view","view.php"));
     }
     
+    
+    //arguments : void
+     //return : void
+     //Aplle la vue permetant l'update d'un bien
     public static function update(){
         if(isset($_SESSION['login'])){
             $idBien = Dispatcher::myGet('idBien');
@@ -305,6 +346,9 @@ class ControllerBien{
 
     }
     
+    //arguments : void
+     //return : void
+     //verifications avant l'update d'un bien en bdd
     public static function updated() {
         if (Dispatcher::myGet('motClef') != "null"){
             if(is_numeric(Dispatcher::myGet('prixNeuf'))){

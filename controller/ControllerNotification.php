@@ -43,6 +43,7 @@ class ControllerNotification{
         require_once File::build_path(array("view","view.php"));
     }
     
+    //appelle la vue permettant de repondre
     public static function reponse() {
         if(Session::is_admin()){
         $view = "update";
@@ -54,6 +55,7 @@ class ControllerNotification{
         }
     }
     
+    //implemente la réponse
     public static function repondu() {
         ModelNotification::reponse(Dispatcher::myGet('idNotif') ,Dispatcher::myGet('idAdmin'), Dispatcher::myGet('reponse'));
         $view = "repondu";

@@ -12,7 +12,9 @@ class ControllerCommentaire {
     
 	protected static $controller="commentaire";
 	
-      
+      //arguments : void
+     //return : void
+     //Aplle la vue liste des comms avec tab un tableau avec tous les biens de la BDD
     public static function readAllCommProduit(){
       $idProduit = Dispatcher::myGet('idProduit');
       $tab = ModelCommentaire::selectAllCommByIdProduit($idProduit);
@@ -21,15 +23,18 @@ class ControllerCommentaire {
       require_once File::build_path(array("view","view.php"));
     }
     
+    //arguments : void
+     //return : void
+     //Appelle la vue liste des commentaires d'un client
     public static function readAllCommClient(){
       $loginU = Dispatcher::myGet('idMembre');
       echo $loginU;
       $tab = ModelCommentaire::selectAllCommByLoginU($loginU);
-      //print_r ($tab);
-      //print array($tab);
-      //echo empty($tab_c);
     }
     
+    //arguments : void
+     //return : void
+     //Appelle la vue creation d'un commentaire
     public static function create() {
         $typeProduit = Dispatcher::myGet('typeProduit');
         if($typeProduit === 'Bien'){
@@ -46,6 +51,9 @@ class ControllerCommentaire {
         require_once File::build_path(array("view","view.php"));
     }
 
+    //arguments : void
+     //return : void
+    //verifie les arguments avant l'implementation dans la BDD
     public static function created() {
         $typeProduit = Dispatcher::myGet('typeProduit');
         if($typeProduit === 'Bien'){
@@ -70,6 +78,8 @@ class ControllerCommentaire {
     }
     
 
+    
+    //suprime un commentaire en BDD
     public static function delete() {
         ModelCommentaire::delete(Dispatcher::myGet('idC'));
         $view = "deleted";
