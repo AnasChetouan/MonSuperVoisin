@@ -3,12 +3,12 @@
 	class Conf {
 	   
 	  static private $databases = array(
-		'hostname' => 'localhost',
+		'hostname' => 'prodpeda-venus',
 		'database' => 'mdimarino',
-		'login' => 'root',
-		'password' => '',
+		'login' => 'mdimarino',
+		'password' => 'lemarin347',
 	  );
-	  static private $debug = true; 
+	  static private $debug = false; 
 		
 	  static public function getDebug() {
 		return self::$debug;
