@@ -154,7 +154,7 @@
                 public static function rechercheByPrixAvecVille($prix1, $prix2, $name, $ville) {
                     $name_element = static::$name;
                 try {
-                    $sql = "SELECT * from bien INNER JOIN membre ON bien.idProprio = membre.idMembre AND ville=:ville_tag AND ".$name_element." LIKE :name_element AND tarif BETWEEN :prix1 AND :prix2";
+                    $sql = "SELECT * from Bien INNER JOIN Membre ON bien.idProprio = Membre.idMembre AND ville=:ville_tag AND ".$name_element." LIKE :name_element AND tarif BETWEEN :prix1 AND :prix2";
                     $req_prep = Model::$pdo->prepare($sql);
                     $values = array(
                         "prix1" => $prix1,
@@ -217,7 +217,7 @@
                     $name_element = static::$name;
 
                     try {
-                        $sql = "SELECT * from bien INNER JOIN membre ON bien.idProprio = membre.idMembre AND ville=:ville_tag AND ".$name_element." LIKE :name_element";
+                        $sql = "SELECT * from Bien INNER JOIN Membre ON Bien.idProprio = Membre.idMembre AND ville=:ville_tag AND ".$name_element." LIKE :name_element";
                         $req_prep = Model::$pdo->prepare($sql);
                         $values = array(
                         "name_element" => '%'.$name.'%',
