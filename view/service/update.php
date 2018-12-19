@@ -29,7 +29,7 @@ if(Conf::getDebug()==false){
 
 <form action="index.php" method="<?=$method?>" enctype="multipart/form-data">
 
-     <fieldset>
+     <fieldset  id="formulaire">
          <legend><?=$formTitle?></legend>
     <input type='hidden' name='controller' value='Service'>
     <input type='hidden' name='action' value='<?=$hiddenValue?>'>

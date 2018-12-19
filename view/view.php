@@ -15,7 +15,7 @@
                         require $nav; ?>
 		</head>
 	<body>	
-		<main>
+		<main style= "margin: 2%">
 	<?php
 
 $filepath = File::build_path(array('view', $controller, $view.'.php')); //static::$controller est la variable $controller déclarée au debut de chaque classe
@@ -24,7 +24,5 @@ require $filepath;
 
                 </main>
 	
-    </body>
  
-   
 </html>

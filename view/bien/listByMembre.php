@@ -24,17 +24,15 @@
                                     }
                         }
                         else{
-                            echo '<b>Pas encore notÃ© </b>'.'<br/>'.'<br/>';
+                            echo '<b>Pas encore noté </b>'.'<br/>'.'<br/>';
                         }
-
                     echo '<br/>'.'<br/>'.'<a href="index.php?controller=bien&action=read&idBien='.$idBien.'"><button> Detail objet </button></a>';
                     echo '</div>';
                     echo '</a>';
                 }
-
             }
            if(!$aUnBien){
-            echo '<p> Vous n\'avez pas encore postÃ© de bien ou alors il n\'a pas encore Ã©tÃ© validÃ© par un administrateur !</p>';
+            echo '<p> Vous n\'avez pas encore posté de bien ou alors il n\'a pas encore été validé par un administrateur !</p>';
            }
     ?>
 </div>

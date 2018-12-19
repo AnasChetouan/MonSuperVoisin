@@ -7,10 +7,11 @@
   $idProprio = $s->getIdProprio();
   $tab_r = $s->getReservations();
   $loginProprio = htmlspecialchars(ModelMembre::getLoginById(($idProprio)));
-    echo '
+    echo '<div id="detailBien">
+            <div id="detailBien1">
            <p><b> Type du service : </b> '.$motClef . '<br> <br>'.
               'Description : </br></br>' . $descriptionHTML .'<br> <br>
-              Tarif horaire: <b>'.$tarif . ' </b> € <br> <br>';
+              Tarif horaire: <b>'.$tarif . ' </b> Voisins-bucks <img src="style/img/Vbucks.png" alt="photo bien" height="2%" width="2%" ><br> <br>';
               if (isset($_SESSION['login']) && $_SESSION['login'] == ModelMembre::getLoginById($idProprio)){
                   echo '</br><a href="index.php?controller=service&action=update&idService='.$idService.'"> <button>Modifier mon post</button> </a> </br>';
                   echo '</br><a href="index.php?controller=service&action=delete&idService='.$idService.'"> <button>Supprimer mon post</button> </a> </br>';
@@ -20,7 +21,7 @@
               }
               
                     echo '<table>
-               <caption>Disponibilités de '.$loginProprio.' pour ce service :</caption>
+               <caption>Disponibilités de '.$loginProprio.' pour ce service</caption>
                <tr>
                    <th>Jour</th>
                    <th>Heure de début</th>
@@ -45,7 +46,7 @@
             echo '</table>';
 
               
-           echo '</p>';                         
+           echo '</p> </div>';                         
    
 $hiddenValue="createdService";
            
@@ -54,7 +55,7 @@ $today = getdate();
 $jour=$today['year'].'-'.$today['mon'].'-'.$today['mday'];
 $dateDT = new DateTime($jour.' +1 day');
 $date = $dateDT->format('Y-m-d');
-
+    echo '<div id="detailBien1">';
 if(isset($_SESSION['login']) && ($_SESSION['login'] != ModelMembre::getLoginById($idProprio))){
         if(!empty($tab_r)){
             echo '<table>
@@ -111,7 +112,7 @@ else{
 }
 
               echo '</br></br> <a href="index.php?controller=service&action=readAll"> Revenir en arrière </a>';
-
+ echo '</div>';       
 ?>
 
 <div id="bloc_all_comm">
@@ -151,6 +152,6 @@ else{
                                         echo '</br><a href="index.php?controller=commentaire&action=create&typeProduit=Service&idProduit='.$idService.'"> <button>Ajouter un commentaire</button> </a> </br>';
     }  
                                 
-					
+				 echo '</div>';       	
         ?>
 			</div>

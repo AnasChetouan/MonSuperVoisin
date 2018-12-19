@@ -1,12 +1,9 @@
 <?php
-
 $idBien = htmlspecialchars($b->getIdBien());
 $titre = htmlspecialchars($b->getTitre());
 $motClef = htmlspecialchars($b->getMotClef());
 $description = htmlspecialchars($b->getDescription());
 $prixneuf = htmlspecialchars($b->getPrixNeuf());
-
-
 switch ($functionCaller) {
     case "create":
         $formTitle="Proposer un bien";
@@ -26,14 +23,13 @@ switch ($functionCaller) {
     
     On ne peut pas le faire ici car la method get ne fonctionne pas pour envoyer un fichier
 }*/
-
 ?>
 
 
 
-
-<form action="index.php" method="post" enctype="multipart/form-data">
-     <fieldset>
+<div>
+<form action="index.php" method="post" enctype="multipart/form-data" id="pageUpdateBien">
+     <fieldset id="formulaire">
          <legend><?=$formTitle?></legend>
     <input type='hidden' name='controller' value='Bien'>
     <input type='hidden' name='action' value='<?=$hiddenValue?>'>
@@ -119,4 +115,4 @@ switch ($functionCaller) {
                 
                     
     </fieldset>
-</form>            
+</form></div> 

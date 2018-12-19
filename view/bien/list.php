@@ -2,7 +2,7 @@
     
     <?php
     if(!empty($_SESSION['login'])){
-        $ville = " pr√®s de ".ModelMembre::getVilleByLogin($_SESSION['login']);
+        $ville = " prËs de ".ModelMembre::getVilleByLogin($_SESSION['login']);
     }
     else $ville = "";
     
@@ -13,6 +13,7 @@
                  <div id="recherche"> Rechercher un bien'.$ville.' :
                       <input type="text" name="nom" required placeholder="Exemple : Souris" />
                       </br>
+                       </br>
                       Entre : 
                       <input type="number" name="prix1" min="0" placeholder=0> Voisin-Bucks et 
                       <input type="number" name="prix2" min="0" placeholder=100> Voisin-Bucks
@@ -21,7 +22,10 @@
                  <input type="submit" value="Rechercher" />
                  </div> 
         </form>  
-        </br>';          
+        </br>';  
+    if(empty($_SESSION['login'])){
+        echo '<a <button href="index.php?controller=membre&action=create" style="margin-left:35%;" class="w3-button w3-xlarge w3-theme w3-hover-teal" title="S\'inscrire">Inscrivez-vous d√®s maintenant !</button></a><br>';
+    }
         foreach($tab_b as $b){ 
             $titreHTML = htmlspecialchars($b->getTitre());
             $lienPhoto = htmlspecialchars($b->getLienPhoto());
@@ -43,11 +47,11 @@
 	                }
             }
             else{
-            	echo '<b>Pas encore not√© </b>'.'<br/>'.'<br/>';
+            	echo '<b>Pas encore notÈ </b>'.'<br/>'.'<br/>';
             }
             
             // <p>'.'<b>'.$descHTML.'</b>'.'<br/>  </p>';
-            echo 'Propri√©taire : '.$loginProprio;
+            echo 'PropriÈtaire : '.$loginProprio;
             echo '<br/>'.'<br/>'.'<a href="index.php?controller=bien&action=read&idBien='.$idBien.'"><button> Detail objet </button></a>';
             echo '</div>';
             echo '</a>';

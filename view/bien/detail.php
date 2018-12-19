@@ -1,5 +1,4 @@
 <?php
-
     
 
   $descriptionHTML = htmlspecialchars($b->getDescription());
@@ -11,51 +10,50 @@
   $idProprio = ($b->getIdProprio());
   $tab_r = $b->getReservations();
   //$estDispo = htmlspecialchars($b->getEstDispo());
-    echo '
-           <p><b> Titre : </b> '.$titreHTML . '<br> <br>'
+    echo ' <div id="detailBien">
+            <div id="detailBien1">
+           <p><b> Titre : </b> '.$titreHTML . ' <br> ProposÈ par '.ModelMembre::getLoginById($idProprio).' <br>  <br>'
              .'<img src='.$lienPhoto.' alt="photo bien" height="25%" width="25%" > <br> <br>'.
               'Description : <br><br>' . $descriptionHTML .'<br> <br>
-              Montant prix d\'achat neuf : <b> ' . $prixNeuf . ' ‚Ç¨ </b> <br>
-              Prix d\'emprunt a la journ√©e : <b> '.$tarif . ' Voisin-Bucks </b> <br> <br>';
+              Montant prix d\'achat neuf : <b> ' . $prixNeuf . ' Ä </b> <br>
+              Prix d\'emprunt a la journÈe : <b> '.$tarif . ' Voisin-Bucks </b> <img src="style/img/Vbucks.png" alt="photo bien" height="2%" width="2%" > <br> <br>';
               if (isset($_SESSION['login']) && $_SESSION['login'] == ModelMembre::getLoginById($idProprio)){
-                  echo '</br><a href="index.php?controller=bien&action=update&idBien='.$idBien.'"> <button>Modifier mon post</button> </a> </br>';
-                  echo '</br><a href="index.php?controller=bien&action=delete&idBien='.$idBien.'"> <button>Supprimer mon post</button> </a> </br>';
+                  echo '</br><a href="index.php?controller=bien&action=update&idBien='.$idBien.'"> <button>Modifier mon post</button> </a> <br>';
+                  echo '</br><a href="index.php?controller=bien&action=delete&idBien='.$idBien.'"> <button>Supprimer mon post</button> </a> <br>';
               }
               if (isset($_SESSION['login']) && $_SESSION['login'] != ModelMembre::getLoginById($idProprio) && Session::is_admin()){ // Un admin peut modifier le bien d'un autre membre
                   echo '</br><a href="index.php?controller=bien&action=update&idBien='.$idBien.'"> <button>Modifier ce post</button></a> </br>';
               }
+              
           
-           echo '</p>';                             
+           echo '</p></div>';                             
    ?>
 
 <?php
-
+echo '<div id="detailBien1">';
    
 $formTitle="Creer";
 $hiddenValue="createdBien";
 $affId = "hidden";
 $visible = "position:absolute;visibility:hidden;";
-
-// On ajoute un jour de + √† la date du jour
+// On ajoute un jour de + ‡ la date du jour
 $today = getdate();
 $jour=$today['year'].'-'.$today['mon'].'-'.$today['mday'];
 $dateDT = new DateTime($jour.' +1 day');
 $date = $dateDT->format('Y-m-d');
-
 if((isset($_SESSION['login'])) && ($_SESSION['login'] != ModelMembre::getLoginById($idProprio))){
     if(!empty($tab_r)){
         echo '<table>
-           <caption>R√©servations de ce bien :</caption>
+           <caption>RÈservations de ce bien :</caption>
            <tr>
-               <th>R√©serv√© par </th>
-               <th>Date de d√©but</th>
+               <th>RÈservÈ par </th>
+               <th>Date de dÈbut</th>
                <th>Date de fin</th>
            </tr>';
             foreach($tab_r as $r){
                 $db = $r["dateDebut"];
                 $dateDT = new DateTime($db);
                 $dateDeb = $dateDT->format('d-m-Y');
-
                 $df = $r["dateFin"];
                 $dateDT = new DateTime($df);
                 $dateF = $dateDT->format('d-m-Y');
@@ -65,21 +63,18 @@ if((isset($_SESSION['login'])) && ($_SESSION['login'] != ModelMembre::getLoginBy
                     <td>'.$dateF.'</td>
                 </tr>';
             }
-
         echo '</table>';
     }
     else{
-        echo 'Ce bien n\'a pas encore √©t√© r√©serv√©.';
+        echo 'Ce bien n\'a pas encore ÈtÈ rÈservÈ.';
     }
-
      $cagnote = ModelMembre::getSoldeByLogin($_SESSION['login']);
 echo '</br>';
-echo '<form method="get" action="index.php">
+echo '<form method="get" action="index.php" style="width : 50%;">
     <fieldset>
         <legend>Reserver</legend>';
-
 if ((intval($cagnote) - intval($tarif)) < 0 ){
-    echo "Vous n'avez pas assez de Voisin-Bucks pour r√©server ce bien";
+    echo "Vous n'avez pas assez de Voisin-Bucks pour rÈserver ce bien";
 }
 else{
     echo' 
@@ -103,10 +98,9 @@ else{
     echo'</fieldset>
 </form>';
     
-     
+     echo '</div>';
 }
 
-echo '</br><a href="index.php?controller=bien&action=readAll"> Revenir en arri√®re </a>';
 ?>
 <div id="bloc_all_comm">
     
@@ -119,7 +113,7 @@ echo '</br><a href="index.php?controller=bien&action=readAll"> Revenir en arri√®
                                     $tab = ModelCommentaire::selectAllCommByIdProduit($idBien, "Bien");
 					if (empty($tab)){
                                             
-						echo '<h3> Il n\'y a pas de commentaires pour ce Membre </h3>';
+						echo '<h3> Il n\'y a pas de commentaires pour ce Produit </h3>';
 					}else{
                                     
 					foreach($tab as $com){
@@ -135,13 +129,14 @@ echo '</br><a href="index.php?controller=bien&action=readAll"> Revenir en arri√®
                                                                     echo '</div>';
                 					echo '</div>';
 						echo '</fieldset>';
+                                                
           
 					}
                                         
                                         
 					}
 				}else{
-					echo '<p> Les commentaires sont visibles seulement si vous etes connect√© </p>';
+					echo '<p> Les commentaires sont visibles seulement si vous etes connectÈ </p>';
 				}
                                 
                                     if((isset($_SESSION['login'])) && ($_SESSION['login'] != ModelMembre::getLoginById($idProprio))){
@@ -150,4 +145,5 @@ echo '</br><a href="index.php?controller=bien&action=readAll"> Revenir en arri√®
                                 
 					
         ?>
+                            </div>
 			</div>
