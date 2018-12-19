@@ -69,7 +69,7 @@ if(isset($_SESSION['login']) && ($_SESSION['login'] != ModelMembre::getLoginById
                     $dateDeb = $dateDT->format('d-m-Y');
                     
                     echo '<tr>
-                        <td>'.ModelMembre::getLoginByid($r['idProposant']).'</td>
+                        <td>'.ModelMembre::getLoginByid($r['idAcceptant']).'</td>
                         <td>'.$dateDeb.'</td>
                     </tr>';
                 }
