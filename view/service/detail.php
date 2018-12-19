@@ -61,21 +61,16 @@ if(isset($_SESSION['login']) && ($_SESSION['login'] != ModelMembre::getLoginById
                <caption>Réservations pour ce service :</caption>
                <tr>
                    <th>Réservé par </th>
-                   <th>Date de début</th>
-                   <th>Date de fin</th>
+                   <th>Date de réservation</th>
                </tr>';
                 foreach($tab_r as $r){
                     $db = $r["dateDebut"];
                     $dateDT = new DateTime($db);
                     $dateDeb = $dateDT->format('d-m-Y');
-
-                    $df = $r["dateFin"];
-                    $dateDT = new DateTime($df);
-                    $dateF = $dateDT->format('d-m-Y');
+                    
                     echo '<tr>
                         <td>'.ModelMembre::getLoginByid($r['idProposant']).'</td>
                         <td>'.$dateDeb.'</td>
-                        <td>'.$dateF.'</td>
                     </tr>';
                 }
 
