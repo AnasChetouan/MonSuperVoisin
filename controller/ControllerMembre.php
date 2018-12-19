@@ -54,15 +54,15 @@ class ControllerMembre{
                     self::read();
                 }else{
                     $view = "error";
-                    $message = 'Compte non confirm�, nos administrateurs sont sur le coup ! '; // $message est une variable qu'on transmet a error.php pour gerer les erreurs
+                    $message = 'Compte non confirmé, nos administrateurs sont sur le coup ! '; // $message est une variable qu'on transmet a error.php pour gerer les erreurs
                     $controller="membre";
-                    $pageTitle="Compte non confirm�";
+                    $pageTitle="Compte non confirmé";
                     $pb = "connexion";// $pb est une variable qui permet de gerer le retour en arièrre (sur la view error.php)
                     require_once File::build_path(array("view","view.php"));
                 }
             
             }else{
-                    $message = "Votre compte n'existe pas ! Veuillez r�essayer !";
+                    $message = "Votre compte n'existe pas ! Veuillez réessayer !";
                     $view="error";
                     $controller="membre";
                     $pageTitle="Compte inexistant";
@@ -92,13 +92,13 @@ class ControllerMembre{
         if(!isset($_SESSION['login'])){
           
            $view = 'deconnected';
-           $pageTitle="Deconnect�";
+           $pageTitle="Deconnecté";
           $controller="membre";
             require_once File::build_path(array("view","view.php"));
         } else {
-            $message = "Il y a eu une erreur au niveau de la d�connexion veuillez nous en excuser !";
+            $message = "Il y a eu une erreur au niveau de la déconnexion veuillez nous en excuser !";
             $view = 'error';
-            $pageTitle="Deconnect�";
+            $pageTitle="Deconnecté";
             $controller="membre";
             $pb = "connexion";
             require_once File::build_path(array("view","view.php"));
@@ -122,7 +122,7 @@ class ControllerMembre{
                 
             }
             else {
-                $message = "Nous n'avons pas r�ussi a trouver le d�tail de votre compte !";
+                $message = "Nous n'avons pas réussi a trouver le détail de votre compte !";
                 $view = "error";
                 $pageTitle = "Erreur";
                 $controller="membre";
@@ -133,7 +133,7 @@ class ControllerMembre{
         else
         {
           
-            $message = "Cette page n'est accessible qu'aux utilisateurs connect�s";
+            $message = "Cette page n'est accessible qu'aux utilisateurs connectés";
             $view = "error";
             $pageTitle = "Erreur";
             $controller="membre";
@@ -212,12 +212,12 @@ class ControllerMembre{
                         
                     if($u->save()) {
                             $view = "created";
-                            $pageTitle = "Membre ajout�";
+                            $pageTitle = "Membre ajouté";
                             $controller="membre";
                             $tab_u = ModelMembre::selectAll();
                     }
                     else {
-                        $message = "Ce login est d�ja� utilis� par un de nos membres";
+                        $message = "Ce login est déjaé utilisé par un de nos membres";
                         $view = "error";
                         $pb = "mdp";
                         $pageTitle = "Erreur Doublon";
@@ -226,16 +226,16 @@ class ControllerMembre{
                 }
                 }
                 else{
-                    $message = "Vos mots de passe ne sont pas les m�mes";
+                    $message = "Vos mots de passe ne sont pas les mémes";
                     $view = "error";
                     $pb = "mdp";
-                    $pageTitle = "Erreur cr�ation membre(mdp)";
+                    $pageTitle = "Erreur création membre(mdp)";
                     $controller = "membre";
                   
                 }
             }
             else{
-                $message = "Votre mot de passe est inferieur a 6 caract�res";
+                $message = "Votre mot de passe est inferieur a 6 caractéres";
                 $view = "error";
                 $pageTitle = "mdp<6";
                 $pb = "mdp";
@@ -338,12 +338,12 @@ class ControllerMembre{
                         $login = htmlspecialchars(Dispatcher::myGet('login'));
                         $tab_u = ModelMembre::selectAll();
                         $view = "updated";
-                        $pageTitle = "Membre Modifi�";
+                        $pageTitle = "Membre Modifié";
                         $controller="membre";
                     }
                     else {
                     $view = "error";
-                    $message= "Nous avons eu une erreur lors de la cr�ation ou la modification du compte";
+                    $message= "Nous avons eu une erreur lors de la création ou la modification du compte";
                     $pageTitle = "Erreur update";
                     $controller="membre";
                     $pb ="update";
@@ -352,16 +352,16 @@ class ControllerMembre{
                 }
             }
                 else{
-                    $message = "Vos mots de passe ne sont pas les m�mes";
+                    $message = "Vos mots de passe ne sont pas les mémes";
                     $view = "error";
                     $pb = "mdp";
-                    $pageTitle = "Erreur cr�ation membre(mdp)";
+                    $pageTitle = "Erreur création membre(mdp)";
                     $controller = "membre";
                   
                 }
         }
             else{
-                $message = "Votre mot de passe est inferieur a 6 caract�res";
+                $message = "Votre mot de passe est inferieur a 6 caractéres";
                 $view = "error";
                 $pageTitle = "mdp<6";
                 $pb = "mdp";

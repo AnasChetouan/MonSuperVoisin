@@ -29,7 +29,7 @@ if(Conf::getDebug()==false){
 
 <form action="index.php" method="<?=$method?>" enctype="multipart/form-data">
 
-     <fieldset  id="formulaire">
+     <fieldset id="formulaire">
          <legend><?=$formTitle?></legend>
     <input type='hidden' name='controller' value='Service'>
     <input type='hidden' name='action' value='<?=$hiddenValue?>'>
@@ -46,7 +46,7 @@ if(Conf::getDebug()==false){
                                     <option value="Garde d'animaux">Garde d'animaux</option>
                                 </optgroup>
                                 <optgroup label ="Réparation / Bricolage">
-                                    <option value="Réparation d'appareils électroniques">Réparation d'appareils électroniques</option>
+                                    <option value="Réparation">Réparation</option>
                                     <option value="Plomberie">Plomberie</option>
                                     <option value="Montage">Montage</option>
                                 </optgroup>
@@ -76,7 +76,7 @@ if(Conf::getDebug()==false){
                         
                         <div>
                             Tarif horaire :
-                            <input type="text" name="tarif" value="<?=$tarif?>" required /> €
+                            <input type="text" name="tarif" value="<?=$tarif?>" required /> Voisin-Bucks <img src="style/img/VBucks.png" alt="vbuck" height="4%" width="4%">
                         </div> 
 
                         <br>

@@ -1,4 +1,4 @@
-<div id="bloc_connex">
+<div>
     <?php 
         if(Conf::getDebug()==false){
         $method = "post";
@@ -7,7 +7,7 @@
     }
 ?>
 <form method="<?$method?>" action="index.php">
-    <fieldset>
+    <fieldset id ="formulaire_connex">
         <?php if(isset($functionCaller)){
                 if($functionCaller=='connect'){
                     echo '<legend><b>Se connecter : </b></legend>';

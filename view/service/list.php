@@ -15,8 +15,8 @@
                       <input type="text" name="nom" required placeholder="Exemple : Babysitting" />
                       </br>
                       Entre : 
-                      <input type="number" name="prix1" min="0" placeholder=0> Voisin-Bucks et 
-                      <input type="number" name="prix2" min="0" placeholder=100> Voisin-Bucks / heure
+                      <input type="number" name="prix1" min="0" placeholder=0> Voisin-Bucks <img src="style/img/VBucks.png" alt="vbuck" height="2%" width="2%"> et 
+                      <input type="number" name="prix2" min="0" placeholder=100> Voisin-Bucks <img src="style/img/VBucks.png" alt="vbuck" height="2%" width="2%"> / heure
                       </br>
                       </br>
                  <input type="submit" value="Rechercher" />
@@ -53,7 +53,8 @@
             
             // <p>'.'<b>'.$descHTML.'</b>'.'<br/>  </p>';
             
-            echo '<br/>'.'Tarif horaire : '.$tarif." €";
+            echo "<br/>".
+                    "Tarif horaire : <br> ".$tarif.' <img src="style/img/VBucks.png" alt="vbuck" height="20%" width="20%"> ';
             echo '<br/>'.'<br/>'.'<a href="index.php?controller=service&action=read&idService='.$idService.'"><button> Plus d\'infos </button></a>';
             echo '</div>';
             echo '</a>';

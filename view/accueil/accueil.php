@@ -4,7 +4,7 @@
 <body id="myPage">
 
 
-<!-- Modal -->
+<!-- Image bg -->
 
 	        <div class="w3-display-container w3-animate-opacity">
           <img src="style/img/montpellier.jpg" alt="bg" style="width:100%;min-height:350px;max-height:600px;">
@@ -13,7 +13,7 @@
           </div>
         </div>
 
-<!-- Denières annoces -->
+<!-- Dernières annoces -->
 
 <div class="w3-container w3-padding-64 w3-center" id="team">
 <h2>Les dernières annonces</h2>

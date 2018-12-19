@@ -1,4 +1,5 @@
 <p id="text_notif">Commentaire ajouté</p>
+<div id="cadre_centre">
 <?php
   echo "<p>Votre commentaire a bien été ajouté</p>";;
     require_once File::build_path(array("index.php"));
@@ -9,3 +10,5 @@
          echo'<a href="index.php?controller=service&action=readAll"> Revenir en arrière </a>';
     }
  ?>
+
+</div>

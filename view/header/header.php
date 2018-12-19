@@ -48,7 +48,7 @@
                                         <button class="w3-button" href="#">'.$_SESSION["login"].'<i class="fa fa-caret-down"></i></button>  
                                             <div class="w3-dropdown-content w3-card-4 w3-bar-block">';
 
-                    						echo '<a href="index.php?controller=membre&action=read&login='.$_SESSION['login'].'" class="w3-bar-item w3-button" >Mes informations personnelles</a>';
+                    						echo '<a href="index.php?controller=membre&action=read&login='.$_SESSION['login'].'" class="w3-bar-item w3-button" >Mon profil</a>';
                                             echo '<a href="index.php?controller=bien&action=readAllByMembre" class="w3-bar-item w3-button">Mes biens</a>';
                                             echo '<a href="index.php?controller=service&action=readAllByMembre" class="w3-bar-item w3-button">Mes services</a>';
                                             if (Session::is_admin()){

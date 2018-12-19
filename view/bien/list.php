@@ -2,7 +2,7 @@
     
     <?php
     if(!empty($_SESSION['login'])){
-        $ville = " près de ".ModelMembre::getVilleByLogin($_SESSION['login']);
+        $ville = " prÃ¨s de ".ModelMembre::getVilleByLogin($_SESSION['login']);
     }
     else $ville = "";
     
@@ -15,8 +15,8 @@
                       </br>
                        </br>
                       Entre : 
-                      <input type="number" name="prix1" min="0" placeholder=0> Voisin-Bucks et 
-                      <input type="number" name="prix2" min="0" placeholder=100> Voisin-Bucks
+                      <input type="number" name="prix1" min="0" placeholder=0> Voisin-Bucks <img src="style/img/VBucks.png" alt="vbuck" height="2%" width="2%"> et 
+                      <input type="number" name="prix2" min="0" placeholder=100> Voisin-Bucks <img src="style/img/VBucks.png" alt="vbuck" height="2%" width="2%">
                       </br>
                       </br>
                  <input type="submit" value="Rechercher" />
@@ -36,7 +36,7 @@
             $estValide = htmlspecialchars($b->getEstValide());
             if(($estValide == 1)){
             echo '<div class="produit">';
-            echo '<br/> <p> <b><img src='.$lienPhoto.' alt="photo bien" height="50%" width="50%" ></b>'.'<br/>  </p>';
+            echo '<br/> <p> <b><img src='.$lienPhoto.' id="image_produit" alt="photo bien" height="50%" width="50%" ></b>'.'<br/>  </p>';
             echo '<p>'.'<b>'.$titreHTML.'</b>'.'<br/>  </p>';
             if (!empty($tabNotes)){
 	            for ($i = 0; $i< 5 ; $i++) {
@@ -47,11 +47,11 @@
 	                }
             }
             else{
-            	echo '<b>Pas encore noté </b>'.'<br/>'.'<br/>';
+            	echo '<b>Pas encore notÃ© </b>'.'<br/>';
             }
             
             // <p>'.'<b>'.$descHTML.'</b>'.'<br/>  </p>';
-            echo 'Propriétaire : '.$loginProprio;
+            echo 'PropriÃ©taire : '.$loginProprio;
             echo '<br/>'.'<br/>'.'<a href="index.php?controller=bien&action=read&idBien='.$idBien.'"><button> Detail objet </button></a>';
             echo '</div>';
             echo '</a>';

@@ -36,53 +36,53 @@ switch ($functionCaller) {
     <input type='hidden' name='idBien' value='<?=$idBien?>'>
                       <div> 
                             <!-- Catégories inspirées du site "leboncoin" -->
-                            <label for="motClef"> Cat�gorie du bien : </label> 
+                            <label for="motClef"> Catégorie du bien : </label> 
                             <select name="motClef" id="motClef">
-                                <?php if($functionCaller == "update"){ echo "<optgroup label ='Votre ancienne cat�gorie'>"; }?>
-                                <option  value="<?=$motClef?>"><?php if($functionCaller == "update")echo $motClef; else echo "Choisir une cat�gorie";?></option>
+                                <?php if($functionCaller == "update"){ echo "<optgroup label ='Votre ancienne catégorie'>"; }?>
+                                <option  value="<?=$motClef?>"><?php if($functionCaller == "update")echo $motClef; else echo "Choisir une catégorie";?></option>
                                 <?php if($functionCaller == "update"){ echo "</optgroup>"; }?>
                                 <optgroup label ="Multimedia">
-                                    <option value="informatique">Informatique</option>
-                                    <option value="console-jv">Console & Jeux vidéos</option>
-                                    <option value="image-son">Image & Son</option>
-                                    <option value="telephonie">Téléphonie</option>
+                                    <option value="Informatique">Informatique</option>
+                                    <option value="Console & Jeux vidéos">Console & Jeux vidéos</option>
+                                    <option value="Image & Son">Image & Son</option>
+                                    <option value="Téléphonie">Téléphonie</option>
                                 </optgroup>
                                 <optgroup label ="Maison">
-                                    <option value="ameublement">Ameublement</option>
-                                    <option value="electromenager">Electroménager</option>
-                                    <option value="arts-table">Arts de la table</option>
-                                    <option value="decoration">Décoration</option>
-                                    <option value="linge-maison">Linge de maison</option>
-                                    <option value="bricolage">Bricolage</option>
-                                    <option value="jardinage">Jardinage</option>
-                                    <option value="vetements">Vêtements</option>
-                                    <option value="chaussures">Chaussures</option>
-                                    <option value="accessoires-bagagerie">Accessoires & Bagagerie</option>
-                                    <option value="montres-bijoux">Montres & Bijoux</option>
-                                    <option value="equipement-bebe">Equipement bébé</option>
-                                    <option value="vetements-bebe">Vêtements bébé</option>
+                                    <option value="Ameublement">Ameublement</option>
+                                    <option value="Electroménager">Electroménager</option>
+                                    <option value="Arts de la table">Arts de la table</option>
+                                    <option value="Décoration">Décoration</option>
+                                    <option value="Linge de maison">Linge de maison</option>
+                                    <option value="Bricolage">Bricolage</option>
+                                    <option value="Jardinage">Jardinage</option>
+                                    <option value="Vêtements">Vêtements</option>
+                                    <option value="Chaussures">Chaussures</option>
+                                    <option value="Accessoires & Bagagerie">Accessoires & Bagagerie</option>
+                                    <option value="Montres & Bijoux">Montres & Bijoux</option>
+                                    <option value="Equipement bébé">Equipement bébé</option>
+                                    <option value="Vêtements bébé">Vêtements bébé</option>
                                 </optgroup>
                                 <optgroup label ="Loisirs">
-                                    <option value="dvd-films">DVD / Films</option>
-                                    <option value="cd-musique">CD / Musique</option>
-                                    <option value="livres">Livres</option>
-                                    <option value="animaux">Animaux</option>
-                                    <option value="velos">Vélos</option>
-                                    <option value="sports-hobbies">Sports & Hobbies</option>
-                                    <option value="instruments">Instruments de musique</option>
-                                    <option value="collection">Collection</option>
-                                    <option value="jeux-jouets">Jeux & Jouets</option>
+                                    <option value="DVD / Films">DVD / Films</option>
+                                    <option value="CD / Musique">CD / Musique</option>
+                                    <option value="Livres">Livres</option>
+                                    <option value="Animaux">Animaux</option>
+                                    <option value="Vélos">Vélos</option>
+                                    <option value="Sports & Hobbies">Sports & Hobbies</option>
+                                    <option value="Instruments de musique">Instruments de musique</option>
+                                    <option value="Collection">Collection</option>
+                                    <option value="Jeux & Jouets">Jeux & Jouets</option>
                                 </optgroup>
                                 <optgroup label ="Matériel professionnel">
-                                    <option value="materiel-agricole">Matériel agricole</option>
-                                    <option value="transport-manutention">Transport - Manutention</option>
-                                    <option value="btp-groschantier">BTP-Chantier Gros-oeuvre</option>
-                                    <option value="outillage-materiaux">Outillage - Matériaux 2nd-oeuvre </option>
-                                    <option value="equipement-industriel">Equipements Industriels</option>
-                                    <option value="restauration-hotellerie">Restauration - Hôtellerie</option>
-                                    <option value="fournitures-bureau">Fournitures de Bureau</option>
-                                    <option value="commerces-marches">Commerces & Marchés</option>
-                                    <option value="materiel-medical">Matériel Médical</option>
+                                    <option value="Matériel agricole">Matériel agricole</option>
+                                    <option value="Transport - Manutention">Transport - Manutention</option>
+                                    <option value="BTP-Chantier Gros-oeuvre">BTP-Chantier Gros-oeuvre</option>
+                                    <option value="Outillage - Matériaux 2nd-oeuvre">Outillage - Matériaux 2nd-oeuvre </option>
+                                    <option value="Equipements Industriels">Equipements Industriels</option>
+                                    <option value="Restauration - Hôtellerie">Restauration - Hôtellerie</option>
+                                    <option value="Fournitures de Bureau">Fournitures de Bureau</option>
+                                    <option value="Commerces & Marchés">Commerces & Marchés</option>
+                                    <option value="Matériel Médical">Matériel Médical</option>
                                 </optgroup>
                                 <optgroup label ="Autres">
                                     <option value="autres">Autres</option>
@@ -100,7 +100,7 @@ switch ($functionCaller) {
                         
                         <div>
                             Prix neuf :
-                            <input type="text" name="prixNeuf" value="<?=$prixneuf?>" required /> �
+                            <input type="text" name="prixNeuf" value="<?=$prixneuf?>" required /> €
                         </div> 
 
                 <?php if($functionCaller == "create"){

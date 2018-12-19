@@ -1,4 +1,7 @@
 <?php
+  echo '<div id="cadre_centre">';
   echo 'Vous n\'êtes pas connecté';
-  echo '<a href="index.php?controller=membre&action=readAll"> Retour </a>';
+  echo '<br>';
+  echo '<a href="index.php"> Retour à l\'accueil </a>';
+  echo '</div>';
   ?>

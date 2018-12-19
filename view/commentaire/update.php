@@ -26,7 +26,7 @@ switch ($functionCaller) {
 ?>
 
 <form method="get" action="index.php">
-    <fieldset>
+    <fieldset id="formulaire">
         <legend><?=$formTitle?> Commentaire :</legend>
         <input type="hidden" name="controller" value="<?=static::$controller?>">
         <input type="hidden" name="action" value="<?=$hiddenValue?>">

@@ -16,12 +16,13 @@ require_once File::build_path(array("controller","ControllerCommentaire.php"));
             echo'<div id="infos_user">';
             echo '<b>Informations Utilisateur :</b><br>'
             . '<br>';
-           if((isset($_SESSION['login']) && $_SESSION['login'] == $loginHTML) || Session::is_admin()){
+
             echo 'Prénom : '.$prenomHTML. '<br>
             Nom : '.$nomHTML . '<br>
             Email : ' . $emailHTML .'<br>';
             
              echo'</div>';
+            if((isset($_SESSION['login']) && $_SESSION['login'] == $loginHTML) || Session::is_admin()){
              echo'<div id="infos_user">';
             echo '<b>Informations du compte :</b><br>'
             . '<br>';
@@ -31,7 +32,7 @@ require_once File::build_path(array("controller","ControllerCommentaire.php"));
             else{ 
               echo 'Type de compte : Particulier<br>';
              }
-            echo 'Solde : ' . $solde .' Voisin-Bucks <b> </b> <img src="style/img/Vbucks.png" alt="photo bien" height="2%" width="2%" > <br> <br> ';
+            echo 'Solde : ' . $solde .' Voisin-Bucks <b> </b> <img src="style/img/VBucks.png" alt="vbucks" height="2%" width="2%" > <br> <br> ';
            }
            echo'</div>'
            

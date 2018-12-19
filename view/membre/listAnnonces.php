@@ -68,7 +68,7 @@
             echo '<p>'.'<b>'.$motClef.'</b>'.'<br/>  </p>';
             
             // <p>'.'<b>'.$descHTML.'</b>'.'<br/>  </p>';
-            echo 'Propri�taire : '.$loginProprio;
+            echo 'Propriétaire : '.$loginProprio;
             echo '<br/>'.'<br/>'.'Tarif horaire : '.$tarif." €";
             echo '<br/>'.'<br/>'.'<a href="index.php?controller=service&action=read&idService='.$idService.'"><button> Plus d\'infos </button></a>';
             echo '</div>';

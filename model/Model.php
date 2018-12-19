@@ -20,7 +20,7 @@ class Model {
             if (Conf::getDebug()) {
                 echo $e->getMessage();
             } else {
-                echo "Une erreur est survenue au niveau de la connexion de la base de donn�es !  <a href=''> retour a la page d'accueil </a>";
+                echo "Une erreur est survenue au niveau de la connexion de la base de données !  <a href=''> retour a la page d'accueil </a>";
             }
             die();
         }

@@ -36,7 +36,7 @@
                 
             }
             if (!$aUnMessage){
-                echo '<p> Vous n\'avez reçu aucun message.</p>';
+                echo '<div id="cadre_centre"> <p> Vous n\'avez reçu aucun message.</p> </div>';
             }
         }
     ?>

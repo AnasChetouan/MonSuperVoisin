@@ -24,5 +24,7 @@ require $filepath;
 
                 </main>
 	
+            			<?php $foot = File::build_path(array('view','footer', 'footer.php'));
+                        require $foot; ?>
  
 </html>

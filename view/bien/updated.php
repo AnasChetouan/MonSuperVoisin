@@ -1,3 +1,6 @@
+  <p id="text_notif">Demande de mise à jour reçue</p>
+  <div id="cadre_centre">
+
 <?php
     if (!Session::is_admin()){
         echo "<p>Votre demande de mise à jour a bien été prise en compte ! <br> Votre annonce ne sera plus visible sur le site jusqu'à ce qu'un administrateur valide sa modification.</p>";
@@ -13,3 +16,5 @@
     require_once File::build_path(array("index.php"));
     echo'<a href="index.php?controller=bien&action=readAll"> Retour </a>';
 ?>
+
+  </div>

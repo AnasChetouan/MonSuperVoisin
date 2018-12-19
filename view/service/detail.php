@@ -11,7 +11,7 @@
             <div id="detailBien1">
            <p><b> Type du service : </b> '.$motClef . '<br> <br>'.
               'Description : </br></br>' . $descriptionHTML .'<br> <br>
-              Tarif horaire: <b>'.$tarif . ' </b> Voisins-bucks <img src="style/img/Vbucks.png" alt="photo bien" height="2%" width="2%" ><br> <br>';
+              Tarif horaire: <b>'.$tarif . ' </b> Voisins-bucks <img src="style/img/VBucks.png" alt="photo bien" height="2%" width="2%" ><br> <br>';
               if (isset($_SESSION['login']) && $_SESSION['login'] == ModelMembre::getLoginById($idProprio)){
                   echo '</br><a href="index.php?controller=service&action=update&idService='.$idService.'"> <button>Modifier mon post</button> </a> </br>';
                   echo '</br><a href="index.php?controller=service&action=delete&idService='.$idService.'"> <button>Supprimer mon post</button> </a> </br>';
@@ -136,6 +136,9 @@ else{
 									echo '<b>'.ModelMembre::getLoginById(intval($com->getIdMembre())).'</b> </br></br>';
 									echo 'Note : ' . $com->getEtoile() . '/5<br>';
 									echo 'Commentaire : ' . $com->getAppreciation() . '<br>';
+                                                                         if(Session::is_admin()){
+                                                                        echo 'Supprimer <a href="index.php?controller=commentaire&action=delete&idC='.$com->getIdComm().'"><img src="style/img/icone_deconnect.png" alt="supression du commentaire"></a>';
+                                                                        }
 								echo '</div>';
                 					echo '</div>';
 						echo '</fieldset>';

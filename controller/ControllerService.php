@@ -63,7 +63,7 @@ class ControllerService{
         
         $tab_s = ModelBien::selectAll();
         $view = "deleted";
-        $pageTitle = "Service supprim�";
+        $pageTitle = "Service supprimé";
         $controller ="service";
         require_once File::build_path(array("view","view.php"));
     }
@@ -157,7 +157,7 @@ class ControllerService{
             }
         }
         else{
-            $message = "La cat�gorie du bien n'a pas �t� d�finie !";
+            $message = "La catégorie du bien n'a pas été définie !";
             $view = "error";
             $pb = "categorie";
             $pageTitle = "Erreur tarif horaire";
@@ -337,7 +337,7 @@ class ControllerService{
                 $pb = "errorRead";
                 $view = "error";
                 $message = "Une erreur est survenue lors de la recherche ! ";
-                $pageTitle = "Service non trouv�";
+                $pageTitle = "Service non trouvé";
                 $controller ="service";
         }
         require_once File::build_path(array("view","view.php"));
@@ -359,8 +359,8 @@ class ControllerService{
             else {
                 $pb = "errorRead";
                 $view = "error";
-                $message = "Nous n'avons trouv� aucun bien corespondant a votre recherche ! ";
-                $pageTitle = "Service non trouv�";
+                $message = "Nous n'avons trouvé aucun bien corespondant a votre recherche ! ";
+                $pageTitle = "Service non trouvé";
                 $controller ="service";
             }
             
@@ -369,7 +369,7 @@ class ControllerService{
             $pb = "errorRead";
                 $view = "error";
                 $message = "Une erreur est survenue lors de la recherche ! ";
-                $pageTitle = "Serivce non trouv�";
+                $pageTitle = "Serivce non trouvé";
                 $controller ="service";
         }
         require_once File::build_path(array("view","view.php"));
@@ -394,8 +394,8 @@ class ControllerService{
             else {
                 $pb = "errorRead";
                 $view = "error";
-                $message = "Nous n'avons trouv� aucun bien corespondant a votre recherche ! ";
-                $pageTitle = "Service non trouv�";
+                $message = "Nous n'avons trouvé aucun bien corespondant a votre recherche ! ";
+                $pageTitle = "Service non trouvé";
                 $controller ="service";
             }
             
@@ -404,7 +404,7 @@ class ControllerService{
             $pb = "errorRead";
                 $view = "error";
                 $message = "Une erreur est survenue lors de la recherche ! ";
-                $pageTitle = "Service non trouv�";
+                $pageTitle = "Service non trouvé";
                 $controller ="service";
         }
         require_once File::build_path(array("view","view.php"));

@@ -24,7 +24,7 @@ switch($adminHTML){
 
 switch ($functionCaller) {
     case "create":
-        $formTitle="Créer";
+        $formTitle="CrÃ©er";
         $hiddenValue="created";
         $attribut = " ";
         break;
@@ -35,10 +35,11 @@ switch ($functionCaller) {
         break;
 }
 
-if(isset($admin)){
-    if($admin=="oui"){
+
+if(Session::is_admin()){
+    if($functionCaller=="create")
         $formTitle= $formTitle." un client";
-    }else if($functionCaller=="update"){
+    else if($functionCaller=="update"){
         $formTitle="Modifier son compte";
     }
 }else{
@@ -60,9 +61,9 @@ if(Conf::getDebug()==false){
 
 
 ?>
-<div id="bloc_form_create_update">
+<div>
     <form method="<?=$method?>" action="index.php">
-    <fieldset>
+    <fieldset id="formulaire">
         <legend><?=$formTitle?></legend>
         
         <input type="hidden" name="controller" value="Membre">
@@ -78,7 +79,7 @@ if(Conf::getDebug()==false){
             <input type="password" name="mdp" id="mdp_id"  required />
         </p>
         <p>
-            <label for="mdp2_id">Validation du mot de passe (retaper le):</label> <span>*</span>
+            <label for="mdp2_id">Validation du mot de passe (retapez le):</label> <span>*</span>
             <input type="password" name="mdp2" id="mdp2_id"  required />
         </p>
         
@@ -87,8 +88,8 @@ if(Conf::getDebug()==false){
             <input type="text" name="nom" id="name_id" pattern="[a-zA-Z\ ]*" value="<?=$nomHTML?>" placeholder="Votre nom" required/>
         </p>
         <p>
-            <label for="prenom_id">Prénom :</label> <span>*</span>
-            <input type="text" name="prenom" id="prenom_id" pattern="[a-zA-Z\ ]*" value="<?=$prenomHTML?>" placeholder="Votre prénom" required/>
+            <label for="prenom_id">PrÃ©nom :</label> <span>*</span>
+            <input type="text" name="prenom" id="prenom_id" pattern="[a-zA-Z\ ]*" value="<?=$prenomHTML?>" placeholder="Votre prÃ©nom" required/>
         </p>
         
         <?php if($functionCaller=="update"){ $typeInput="mail";}else{$typeInput="text";} ?>
@@ -106,7 +107,7 @@ if(Conf::getDebug()==false){
         </p>
         <p>
             <label for="ville_id">Ville :</label> <span>*</span>
-            <input type="text" name="ville" id="prenom_id" value="<?=$villeHTML?>" placeholder="Sete" required/>
+            <input type="text" name="ville" id="prenom_id" value="<?=$villeHTML?>" placeholder="SÃ¨te" required/>
         </p>
         <p>
             <label for="codePostal_id">Code Postal :</label> <span>*</span>

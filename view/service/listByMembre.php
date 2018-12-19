@@ -28,7 +28,7 @@
             }
         }
         if(!$aUnService){
-            echo '<p> Vous n\'avez pas encore posté de service ou alors il n\'a pas encore été validé par un administrateur !</p>';
+            echo '<div id="cadre_centre"> <p> Vous n\'avez pas encore posté de service ou alors il n\'a pas encore été validé par un administrateur !</p> </div>';
         }
     ?>
 </div>

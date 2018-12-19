@@ -49,7 +49,7 @@ class ControllerBien{
                 $pb = "errorRead";
                 $view = "error";
                 $message = "Une erreur est survenue lors de la recherche ! ";
-                $pageTitle = "Bien non trouv�";
+                $pageTitle = "Bien non trouvé";
                 $controller ="bien";
         }
         require_once File::build_path(array("view","view.php"));
@@ -71,8 +71,8 @@ class ControllerBien{
             else {
                 $pb = "errorRead";
                 $view = "error";
-                $message = "Nous n'avons trouv� aucun bien corespondant a votre recherche ! ";
-                $pageTitle = "Bien non trouv�";
+                $message = "Nous n'avons trouvé aucun bien corespondant a votre recherche ! ";
+                $pageTitle = "Bien non trouvé";
                 $controller ="bien";
             }
             
@@ -81,7 +81,7 @@ class ControllerBien{
             $pb = "errorRead";
                 $view = "error";
                 $message = "Une erreur est survenue lors de la recherche ! ";
-                $pageTitle = "Bien non trouv�";
+                $pageTitle = "Bien non trouvé";
                 $controller ="bien";
         }
         require_once File::build_path(array("view","view.php"));
@@ -106,8 +106,8 @@ class ControllerBien{
             else {
                 $pb = "errorRead";
                 $view = "error";
-                $message = "Nous n'avons trouv� aucun bien corespondant a votre recherche ! ";
-                $pageTitle = "Bien non trouv�";
+                $message = "Nous n'avons trouvé aucun bien corespondant a votre recherche ! ";
+                $pageTitle = "Bien non trouvé";
                 $controller ="bien";
             }
             
@@ -116,7 +116,7 @@ class ControllerBien{
             $pb = "errorRead";
                 $view = "error";
                 $message = "Une erreur est survenue lors de la recherche ! ";
-                $pageTitle = "Bien non trouv�";
+                $pageTitle = "Bien non trouvé";
                 $controller ="bien";
         }
         require_once File::build_path(array("view","view.php"));
@@ -133,8 +133,8 @@ class ControllerBien{
         else {
             $pb = "errorRead";
             $view = "error";
-            $message = "Une erreur est survenue, le bien n'a pas �t� trouv� ! ";
-            $pageTitle = "Bien non trouv�";
+            $message = "Une erreur est survenue, le bien n'a pas été trouvé ! ";
+            $pageTitle = "Bien non trouvé";
             $controller ="bien";
         }
         require_once File::build_path(array("view","view.php"));
@@ -149,7 +149,7 @@ class ControllerBien{
         
         $tab_b = ModelBien::selectAll();
         $view = "deleted";
-        $pageTitle = "Bien supprim�";
+        $pageTitle = "Bien supprimé";
         $controller ="bien";
         require_once File::build_path(array("view","view.php"));
     }
@@ -176,7 +176,7 @@ class ControllerBien{
         $prixNeuf = htmlspecialchars(Dispatcher::myGet('prixNeuf'));
         if (!($motClef === "null")){
             if(is_numeric($prixNeuf)){
-                // Testons si le fichier a bien �r� envoy� et s'il n'y a pas d'erreur
+                // Testons si le fichier a bien éré envoyé et s'il n'y a pas d'erreur
                 if (isset($_FILES['photo']) AND $_FILES['photo']['error'] == 0)
                 {
                     // Testons si le fichier n'est pas trop gros
@@ -206,12 +206,12 @@ class ControllerBien{
                                         $b->save();
                                         move_uploaded_file($_FILES['photo']['tmp_name'], 'uploads/' . basename($b->updateLienPhoto($extension_upload)));
                                         $view = "created";
-                                        $pageTitle = "Bien ajout�";
+                                        $pageTitle = "Bien ajouté";
                                         $controller="bien";
                                         $tab_b = ModelBien::selectAll();
                                 }
                                 else{
-                                    $message = "L'extension du fichier que vous avez envoyé n'est pas autoris�e ! \n (Rappel, les extensions autorisées sont : jpg, jpeg, gif, png)";
+                                    $message = "L'extension du fichier que vous avez envoyé n'est pas autorisée ! \n (Rappel, les extensions autorisées sont : jpg, jpeg, gif, png)";
                                             $view = "error";
                                             $pb = "extension";
                                             $pageTitle = "Erreur extension fichier";
@@ -227,7 +227,7 @@ class ControllerBien{
                             }
                     }
                     else{
-                        $message = "L'image que vous avez envoyée est trop volumineuse ! (Maximum autoris� : 1.5Mo)";
+                        $message = "L'image que vous avez envoyée est trop volumineuse ! (Maximum autorisé : 1.5Mo)";
                                 $view = "error";
                                 $pb = "taille";
                                 $pageTitle = "Erreur taille fichier";
@@ -248,7 +248,7 @@ class ControllerBien{
                 }
             }
             else{
-            $message = "Le prix a �t� mal d�fini !";
+            $message = "Le prix a été mal défini !";
             $view = "error";
             $pb = "prix";
             $pageTitle = "Erreur prix bien";
@@ -256,10 +256,10 @@ class ControllerBien{
             }
         }
         else{
-            $message = "La cat�gorie du bien n'a pas �t� d�finie !";
+            $message = "La catégorie du bien n'a pas été définie !";
             $view = "error";
             $pb = "categorie";
-            $pageTitle = "Erreur cat�gorie bien";
+            $pageTitle = "Erreur catégorie bien";
             $controller = "bien";
         }
         require_once File::build_path(array("view","view.php"));
@@ -273,7 +273,7 @@ class ControllerBien{
             $idProprio = $b->getIdProprio(); // A FINIR
                 if($idProprio == ModelMembre::getIdByLogin($_SESSION['login']) || Session::is_admin()){
                     // Si l'id du proprio du bien est la même que celle du membre connecté
-                    // Donc on v�rifie que c'est bien le proprio qui veut modifier son bien
+                    // Donc on vérifie que c'est bien le proprio qui veut modifier son bien
                     $functionCaller = "update";
                     $view = "update";
                     $pageTitle = "Modification";
@@ -281,7 +281,7 @@ class ControllerBien{
                 }
                 else{
                     $view = "error";
-                    $message = "Vous n'�tes pas autoris� �modifier ce bien !";
+                    $message = "Vous n'étes pas autorisé émodifier ce bien !";
                     $pageTitle = "Erreur modificaiton";
                     $controller="bien";
                     $pb = "autorisation";
@@ -335,7 +335,7 @@ class ControllerBien{
                   
 	                $controller="bien";
 	                $view = "updated";
-	                $pageTitle = "Bien modifi�";
+	                $pageTitle = "Bien modifié";
 	                $idProprio = $b->getIdProprio();
 	                $tab_b = ModelBien::selectAll();
 	                

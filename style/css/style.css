@@ -1,5 +1,24 @@
 /* //////////////////////////////////////////////////////////////////////////////////////////     */
 
+
+table
+{
+    border-collapse: collapse;
+}
+
+td, th /* Mettre une bordure sur les td ET les th */
+{
+    border: 1px solid black;
+}
+
+#cadre_centre {
+        text-align: center;
+	margin:5%;
+	border: 3px solid black;
+	padding : 2%;
+}
+
+
 #bloc_forms{
   display: flex;
 }
@@ -53,9 +72,9 @@
     display: inline-block;
     margin-left: 17px;
     /* margin-top: 18px; */
-    height: 147px;
-    /*position: relative;
-    bottom: 47px;*/
+    height: 80px;
+    position: relative;
+    bottom:60px;
     width: 189px;
     background-color: rgba(46, 216, 137, 0.61);
 }
@@ -77,14 +96,10 @@
 }
 
 .ajout img {
-    width: 112px;
+    width: 100px;
     padding-left: 39px
 }
 
-.produit img {
-  height: 100px;
-
-}
 
 fieldset{
   width: 540px;
@@ -100,7 +115,7 @@ fieldset{
 }
 
 #image_produit{
-    width: 334px;
+    width: 80px;
 }
 
 #bloc_nom_produit{
@@ -133,7 +148,6 @@ html{
 }
 
 body{
-	
   height: 100%;
   position: relative;
 }
@@ -148,7 +162,7 @@ body{
 }
 .commentaire{
   background-color: rgba(62, 201, 232, 0.55);
-  width: 97%;
+  width: 50%;
 }
 
 #bloc_commentaire{
@@ -202,10 +216,10 @@ body{
 
 #text_notif{
   background-color: rgb(51, 187, 17);
-    height: 22px;
-    font-size: 20px;
+    height: 32px;
+    font-size: 18px;
     text-align: center;
-    border: 1px solid black;
+    border: 2px solid black;
 }
 
 #erreur{
@@ -227,25 +241,15 @@ body{
 
 }
 
-  
-#bloc_connex{
-	background-color: rgba(0, 150, 136, 0.6);
-      border: 2px solid black;
-    margin-left:25%;
-	position: relative;
-    top: 39px;
+#formulaire_connex{
+	margin : 5% 25%;
+	width:50%;
+	padding : 2%;
+        background-color: rgba(0, 150, 136, 0.6);
+        border: 2px solid black;
 }
 
-#bloc_connex fieldset {
-  width:100%;
-  border:none;
-      padding: 0;
-    padding-left: 15px;
-}
-#bloc_connex{
-  width: 30%;
-  height: 123px
-}
+
 
 /* /////////////rajouts marco//// */
 
@@ -260,6 +264,7 @@ body{
 	margin : 5% 25%;
 	width:50%;
 	padding : 2%;
+        
 }
  
 #formulaire div{
