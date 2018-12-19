@@ -1,4 +1,5 @@
- <div id="cadre_centre">
+<p id="text_notif">Message envoyé</p>
+<div id="cadre_centre">
 
 <?php
     echo "<p>Merci pour votre retour, nous y repondrons des que possible</p>";;

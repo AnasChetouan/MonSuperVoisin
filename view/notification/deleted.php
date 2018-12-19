@@ -1,5 +1,10 @@
+<p id="text_notif">Message supprimé</p>
+<div id="cadre_centre">
+
 <?php
-    echo "<p>Message supprimé</p>";;
+    echo "<p>Ce message a été supprimé.</p>";;
     require_once File::build_path(array("index.php"));
     echo'<a href="index.php?controller=notification&action=readAll"> Retour </a>';
 ?>
+
+</div>

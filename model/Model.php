@@ -198,13 +198,15 @@ class Model {
                 echo $e->getMessage();
             }
             else{
-                
+                echo $e->getCode();
+                $message = 'Une erreur est survenue lors de la requête à la base de données';
                 if ($e->getCode()==45000){
-                    echo 'La réservation à ce jour a déjà été effectuée, impossible de la refaire. <a href="index.php"> Retour a la page d\'accueil </a>';
+                    $message = 'La réservation à ce jour a déjà été effectuée, impossible de la refaire.';
                 }
-                else{
-                    echo 'Une erreur est survenue <a href="index.php"> Retour a la page d\'accueil </a>';
+                else if($e->getCode()==45001){
+                    $message =  'Vous avez trop d\'emprunts en cours et pas assez de biens/services proposés';
                 }
+                return $message;
             }
             die();
         }

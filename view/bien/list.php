@@ -12,7 +12,7 @@
         <input type="hidden" name="action" value="rechercheBien">
                  <div id="recherche"> Rechercher un bien'.$ville.' :
                       <input type="text" name="nom" required placeholder="Exemple : Souris" />
-                      </br>
+
                        </br>
                       Entre : 
                       <input type="number" name="prix1" min="0" placeholder=0> Voisin-Bucks <img src="style/img/VBucks.png" alt="vbuck" height="2%" width="2%"> et 

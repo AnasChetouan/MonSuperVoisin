@@ -1,10 +1,10 @@
 <!--<img class ="centrer" src='style/img/v.png' alt="logo" height="10%" width="10%" >
 <p id="nom_site">MonSuperVoisin </p> -->
 
-<body id="myPage">
-
 
 <!-- Image bg -->
+<p id='titre'> MonSuperVoisin</p>
+<p id='sous-titre'> Un site collaboratif entre voisins</p>
 
 	        <div class="w3-display-container w3-animate-opacity">
           <img src="style/img/montpellier.jpg" alt="bg" style="width:100%;min-height:350px;max-height:600px;">

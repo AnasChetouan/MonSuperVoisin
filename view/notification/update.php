@@ -16,8 +16,8 @@ switch ($functionCaller) {
                 $idNotif = htmlspecialchars($n->getIdNotif());
                 $idMembre = htmlspecialchars($n->getIdMembre());
                 echo 'Message de  : '.ModelMembre::getLoginById($idMembre);
-                $message = htmlspecialchars($n->getMessage()); 
-                $idAdmin = htmlspecialchars($n->getIdAdmin()); 
+                $message = htmlspecialchars($n->getMessage());
+                $idAdmin = htmlspecialchars($n->getIdAdmin());
                 $reponse = htmlspecialchars($n->getReponse());
                 $estRegle = htmlspecialchars($n->getEstRegle());
         break;

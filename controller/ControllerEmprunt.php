@@ -46,7 +46,8 @@ class ControllerEmprunt {
         if ((intval($cagnote) - intval($prixAPayer)) > 0 ){
             
             $c = new ModelEmprunt(Dispatcher::myGet('idmembre'),ModelMembre::getIdByLogin($_SESSION['login']),$idP,Dispatcher::myGet('estBien'),Dispatcher::myGet('dateDebut'),Dispatcher::myGet('dateFin'));
-            if($c->save()) {
+            $retour = $c->save();
+            if(gettype($retour) != "string") {
                 $view = "created";
                 $redirection = 'bien';
                 $pageTitle = "Emprunt ajouté";
@@ -59,8 +60,9 @@ class ControllerEmprunt {
             }
             else {
                 $view = "errorCreate";
+                $message = $retour;
                 $redirection = "bien";
-                $pageTitle = "Une erreur est survenue lors de la validation de votre emprunt, veuillez contacter un administrateur si le problème persiste.";
+                $pageTitle = "Erreur réservation";
                 $controller="emprunt";
             }
         }
@@ -128,7 +130,8 @@ class ControllerEmprunt {
                             $dateChoisie,
                             $dateFin
                             );
-                    if($e->save()){
+                    $retour = $e->save();
+                    if(gettype($retour) != "string") {
                         $nouvelleCagnotte = (intval($cagnotte) - intval($prixAPayer));
                         ModelMembre::gestionCagnote($nouvelleCagnotte,ModelMembre::getIdByLogin($_SESSION['login']));
                         $view = "created";
@@ -136,10 +139,11 @@ class ControllerEmprunt {
                         $pageTitle = "Emprunt ajouté";
                         $controller="emprunt";
                     }
-                    else{ // Erreur de BDD dans le save
+                    else{ // Erreur
                         $view = "errorCreate";
                         $redirection = "service";
-                        $pageTitle = "Une erreur est survenue lors de la validation de votre emprunt, veuillez contacter un administrateur si le problème persiste.";
+                        $message = $retour;
+                        $pageTitle = "Erreur réservation";
                         $controller="emprunt";
                     }
                 }

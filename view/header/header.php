@@ -40,7 +40,7 @@
                                                  
     						echo 
                             '<a href="index.php?controller=membre&action=connect" class="w3-bar-item w3-button">S\'identifier</a>'
-    					    .'<a href="index.php?controller=membre&action=create"class="w3-bar-item w3-button">S\'inscrire</a>';
+    					    .'<a href="index.php?controller=membre&action=create"class="w3-bar-item w3-button">S\'inscrire </a>';
                                                     
                         }
                         else{
@@ -48,9 +48,7 @@
                                         <button class="w3-button" href="#">'.$_SESSION["login"].'<i class="fa fa-caret-down"></i></button>  
                                             <div class="w3-dropdown-content w3-card-4 w3-bar-block">';
 
-                    						echo '<a href="index.php?controller=membre&action=read&login='.$_SESSION['login'].'" class="w3-bar-item w3-button" >Mon profil</a>';
-                                            echo '<a href="index.php?controller=bien&action=readAllByMembre" class="w3-bar-item w3-button">Mes biens</a>';
-                                            echo '<a href="index.php?controller=service&action=readAllByMembre" class="w3-bar-item w3-button">Mes services</a>';
+                    						echo '<a href="index.php?controller=membre&action=read&login='.$_SESSION['login'].'" class="w3-bar-item w3-button">Mon profil </a>';
                                             if (Session::is_admin()){
                                                 echo '<a href="index.php?controller=membre&action=gestionAnnonces" class="w3-bar-item w3-button">Gestion des annonces</a>';
                                                 echo '<a href="index.php?controller=notification&action=readAll" class="w3-bar-item w3-button">Gestion des notifications</a>';

@@ -1,6 +1,9 @@
+<p id="text_notif">Demande d'inscription reÃ§ue</p>
+<div id="cadre_centre">
+
 <?php
   if(Session::is_admin()){
-    echo "<p>L'utilisateur a bien été crée !</p>";
+    echo "<p>L'utilisateur a bien Ã©tÃ© crÃ©e !</p>";
     require_once File::build_path(array("view","membre","list.php"));
   }else{
     ControllerMembre::deconnect();
@@ -9,3 +12,5 @@
   }
   
 ?>
+
+</div>

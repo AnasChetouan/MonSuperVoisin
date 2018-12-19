@@ -48,7 +48,7 @@ td, th /* Mettre une bordure sur les td ET les th */
   font-family: 'Source code pro', Calibri, serif;
   padding: 0px;
   margin: 0px;
-  background-image: url('../img/voisins.jpg');
+  background-image: url('../img/bg_top.jpg');
   background-position: center center;
   background-size: cover;
   background-attachment: fixed;
@@ -145,11 +145,37 @@ ul{
 
 html{
   height: 100%;
+  
+}
+
+#titre{
+    text-align:center;
+    font-size: 35px;
+    font-family: 'Indie Flower', cursive;
+    
+}
+
+#sous-titre{
+    text-align:center;
+    font-family: 'Indie Flower', cursive;
+    font-size: 25px;
+    
+}
+
+#global { 
+	position:relative; /* obligatoire */
+	min-height:100%; 
 }
 
 body{
-  height: 100%;
-  position: relative;
+position:relative; margin:0; padding:0; width:100%; height:100%;
+  
+}
+
+footer{
+	position:relative; /* position par rapport à #global */
+	bottom:0; /* positionné en bas de #global */
+	width:100%;
 }
 
 
